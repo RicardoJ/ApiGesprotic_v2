@@ -49,5 +49,12 @@ class ActaConfiguracion extends Model
                             'procedimiento_de_auditoria_en_la_gestion_de_la_configuracion',
                             'documento_adjunto',
                             'descripcion',
+                            'project_id'
                             ];
+
+
+    public function project(){
+        return $this->BelongsTo('App\project', 'project_id');
+        
+    }
 }

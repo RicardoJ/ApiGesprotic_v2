@@ -60,5 +60,11 @@ class ActaConstitucion extends Model
                             'capacidad_tecnica_de_desicion',
                             'volumen_de_contratacion',
                             'persona_nivel_superior_de_desicion',
+                            'project_id'
                             ];
+                            
+    public function project(){
+        return $this->BelongsTo('App\project', 'project_id');
+        
+    }
 }

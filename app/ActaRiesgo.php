@@ -32,6 +32,13 @@ class ActaRiesgo extends Model
                             'protocolo_de_control_riesgos',
                             'protocolo_de_conmunicacion_riesgos',
                             'protocolo_de_auditoria_riesgos',
+                            'project_id'
                             
                             ];
+                            
+    public function project(){
+        return $this->BelongsTo('App\project', 'project_id');
+        
+    }
+                            
 }

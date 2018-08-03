@@ -10,16 +10,31 @@ class Project extends Model
     public $timestamps = false;
     protected $fillable = ['director','nombre','plan'];
     
-    public function acta(){
-        return hasOne('App\Acta');
+    public function actaconfiguracion(){
+        return hasOne('App\ActaConfiguracion');
     }
-    public function riesgo(){
-        return hasOne('App\Acta');
+    public function actariesgo(){
+        return hasOne('App\ActaRiesgo');
     }
-    public function configuracion(){
-        return hasOne('App\Acta');
+    public function actaconstitucion(){
+        return hasOne('App\ActaConstitucion');
     }
-    public function cambio(){
-        return hasOne('App\Acta');
+    public function planDirector(){
+        return hasOne('App\ActaPlanDirector');
+    }
+    public function change(){
+        return hasMany('App\Change');
+    }
+
+    public function lessonLearned(){
+        return hasOne('App\LessonLearned');
+    }
+
+    public function project_team(){
+        return hasOne('App\Project_team');
+    }
+
+    public function resource(){
+        return hasMany('App\Resource');
     }
 }

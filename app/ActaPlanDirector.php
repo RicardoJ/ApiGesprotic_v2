@@ -48,5 +48,11 @@ class ActaPlanDirector extends Model
                             'proceso_de_revision_del_planDelDirector', 
                             'documento_adjuntos',
                             'descripcion_documento', 
+                            'project_id'
                             ];
+                            
+    public function project(){
+        return $this->BelongsTo('App\project', 'project_id');
+        
+    }
 }

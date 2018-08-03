@@ -19,11 +19,12 @@ Route::prefix('project')->name('project.')->group(function(){
     Route::post('/', 'ProjectController@store')->name('store');
     Route::put('/{project}', 'ProjectController@update')->name('update');
     Route::delete('/{project}', 'ProjectController@destroy')->name('delete');
-    
+  /*  
     Route::post('/{project}/acta', 'ProjectController@acta')->name('acta');
     Route::post('/{project}/acta/riesgo', 'ProjectController@actaRiesgo')->name('acta');
     Route::post('/{project}/acta/cambio', 'ProjectController@actaCambio')->name('acta');
     Route::post('/{project}/acta/configuracio', 'ProjectController@actaConfig')->name('acta');
+    */
 });
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
@@ -41,13 +42,46 @@ Route::prefix('lessonLearned')->group(function(){
     Route::delete('/{lessonLearned}', 'LessonLearnedController@destroy')->name('delete');
     
 });
-Route::prefix('acta')->group(function(){
+    Route::prefix('acta')->group(function(){
     Route::get('/', 'ActaController@index')->name('index');
     Route::get('/{acta}', 'ActaController@show')->name('show');
     Route::post('/', 'ActaController@store')->name('store');
     Route::put('/{acta}', 'ActaController@update')->name('update');
     Route::delete('/{acta}', 'ActaController@destroy')->name('delete');
 });
+
+Route::prefix('actaConstitucion')->group(function(){
+    Route::get('/', 'ActaConstitucionController@index')->name('index');
+    Route::get('/{actaConstitucion}', 'ActaConstitucionController@show')->name('show');
+    Route::post('/', 'ActaConstitucionController@store')->name('store');
+    Route::put('/{actaConstitucion}', 'ActaConstitucionController@update')->name('update');
+    Route::delete('/{actaConstitucion}', 'ActaConstitucionController@destroy')->name('delete');
+});
+
+Route::prefix('actaConfiguracion')->group(function(){
+    Route::get('/', 'ActaConfiguracionController@index')->name('index');
+    Route::get('/{acta}', 'ActaConfiguracionController@show')->name('show');
+    Route::post('/', 'ActaConfiguracionController@store')->name('store');
+    Route::put('/{actaConfiguracion}', 'ActaConfiguracionController@update')->name('update');
+    Route::delete('/{actaConfiguracion}', 'ActaConfiguracionController@destroy')->name('delete');
+});
+
+Route::prefix('actaPlanDirector')->group(function(){
+    Route::get('/', 'ActaPlanDirectorController@index')->name('index');
+    Route::get('/{acta}', 'ActaPlanDirectorController@show')->name('show');
+    Route::post('/', 'ActaPlanDirectorController@store')->name('store');
+    Route::put('/{actaPlanDirector}', 'ActaPlanDirectorController@update')->name('update');
+    Route::delete('/{actaPlanDirector}', 'ActaPlanDirectorController@destroy')->name('delete');
+});
+
+Route::prefix('actaRiesgo')->group(function(){
+    Route::get('/', 'ActaRiesgoController@index')->name('index');
+    Route::get('/{acta}', 'ActaRiesgoController@show')->name('show');
+    Route::post('/', 'ActaRiesgoController@store')->name('store');
+    Route::put('/{actaRiesgo}', 'ActaRiesgoController@update')->name('update');
+    Route::delete('/{actaRiesgo}', 'ActaRiesgoController@destroy')->name('delete');
+});
+
 Route::prefix('change')->group(function(){
     Route::get('/', 'ChangeController@index')->name('index');
     Route::get('/{change}', 'ChangeController@show')->name('show');

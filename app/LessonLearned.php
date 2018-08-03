@@ -10,4 +10,9 @@ class LessonLearned extends Model
     public $timestamps = false;
     protected $fillable = ['nombre','descripcion','objetivo','informe','project_id'];
     
+    public function project(){
+        return $this->BelongsTo('App\project', 'project_id');
+        
+    }
+    
 }
