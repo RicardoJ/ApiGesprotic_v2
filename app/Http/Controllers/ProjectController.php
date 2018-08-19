@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Project;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 class ProjectController extends Controller
 {
     /**
@@ -28,10 +30,11 @@ class ProjectController extends Controller
     {
         //
         $this->validate($request, [
-            'director' => 'required|',
+            'director' => 'required',
             'nombre' => 'required|',
-            'plan' => 'required|'
+            'plan' => 'required'
         ]);
+
         $project = new Project;
         $project->create(
             $request->only(['director', 'nombre', 'plan'])

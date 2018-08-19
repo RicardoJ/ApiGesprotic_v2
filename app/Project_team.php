@@ -8,7 +8,7 @@ class Project_team extends Model
 {
     protected $table = 'project_team';
     public $timestamps = false;
-    protected $fillable = ['nombre','project_id'];
+    protected $fillable = ['nombre','image','project_id'];
     
     public function project(){
         return $this->BelongsTo('App\project', 'project_id');
@@ -17,5 +17,10 @@ class Project_team extends Model
 
     public function people(){
         return hasMany('App\People');
+    }
+
+    
+    public function activities(){
+        return hasMany('App\Activities');
     }
 }

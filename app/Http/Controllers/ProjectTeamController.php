@@ -29,8 +29,20 @@ class ProjectTeamController extends Controller
     {
         $this->validate($request, [
             'nombre' => 'required',
+            'image' => 'required|image'
  
         ]);
+
+        /**
+         * si tenemos un archivo 'file' en el campo 'file'
+         * Luego se guarda en el disco en public en una carpeta llamada image y ahi se va guardar
+         * la imagen en el campo file
+         * Luego se actualiza el post
+         */
+        if($request->file('image')){
+            $path = Storage::disk('public')->put('image',  $request->file('image'));
+            $project_team->fill(['file' => asset($path)])->save();
+        }
         $project_team = new Project_team;
         $project_team->create(
         $request->only(['nombre'])
@@ -61,9 +73,22 @@ class ProjectTeamController extends Controller
     {
         $this->validate($request, [
             'nombre' => 'required',
+            'image' => 'required|image'
  
         ]);
+          /**
+         * si tenemos un archivo 'file' en el campo 'file'
+         * Luego se guarda en el disco en public en una carpeta llamada image y ahi se va guardar
+         * la imagen en el campo file
+         * Luego se actualiza el post
+         */
+
+        if($request->file('image')){
+            $path = Storage::disk('public')->put('image',  $request->file('image'));
+            $project_team->fill(['file' => asset($path)])->save();
+        }
         $project_team->nombre = $request->nombre;
+        $project_team->image = $request->image;
        
         $project_team->save();
         return response()->json($project_team);

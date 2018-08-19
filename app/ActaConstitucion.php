@@ -11,7 +11,6 @@ class ActaConstitucion extends Model
     protected $fillable = ['nombre',
                             'fecha',
                             'cliente', 
-                            'cliente',
                             'codigo_identificacion',
                             'pendiente_asignacion',
                             'contrato',
