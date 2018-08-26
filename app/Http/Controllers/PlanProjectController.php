@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Activities;
+use App\PlanProject;
 use Illuminate\Http\Request;
 
-class ActivitiesController extends Controller
+class PlanProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        return response()->json(Activities::all());
+        return response()->json(PlanProject::all());
     }
 
     /**
@@ -35,36 +35,36 @@ class ActivitiesController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'nombre' => 'required',
             'porcentaje' => 'required',
+            'descripcion' => 'required',
             'completed' => 'required'
            
         ]);
-        $activities = new Activities();
-        $activities->fill($request->all());
-        $activities->save();
+        $planProject = new PlanProject();
+        $planProject->fill($request->all());
+        $planProject->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Activities  $activities
+     * @param  \App\planProject  $planProject
      * @return \Illuminate\Http\Response
      */
-    public function show(Activities $activities)
+    public function show(planProject $planProject)
     {
-        return response()->json($activities);
+        return response()->json($planProject);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Activities  $activities
+     * @param  \App\planProject  $planProject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Activities $activities)
+    public function edit(planProject $planProject)
     {
         //
     }
@@ -73,48 +73,51 @@ class ActivitiesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Activities  $activities
+     * @param  \App\planProject  $planProject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Activities $activities)
+    public function update(Request $request, planProject $planProject)
     {
         $this->validate($request, [
             'nombre' => 'required',
             'nombre' => 'required',
+            'descripcion' => 'required',
             'completed' => 'required'
            
         ]);
 
-        $activities->nombre = $request->nombre;
-        $activities->porcentaje = $request->porcentaje;
-        $activities ->completed =$request->completed;
-        $activities->save();
-        return response()->json($activities);
+        $planProject->nombre = $request->nombre;
+        $planProject->porcentaje = $request->porcentaje;
+        $planProject->descripcion = $request->descripcion;
+        $planProject ->completed =$request->completed;
+        $planProject->save();
+        return response()->json($planProject);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Activities  $activities
+     * @param  \App\planProject  $planProject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activities $activities)
+    public function destroy(planProject $planProject)
     {
-        $activities->delete();
+        $planProject->delete();
         return response()->json(['success' => 'borrado correctamente']);
     }
 
 
-    public function completed(Project_team $project_team , Activities $activities){
-
-        if($activities->completed==false){
     
-            $activities->completed = true;
-            $activities->update(['completed'=> $activities->completed]);
+    public function completed(Project_team $projec , PlanProject $planProject){
+
+        if($planProject->completed==false){
+    
+            $planProject->completed = true;
+            $planProject->update(['completed'=> $planProject->completed]);
     
         }else{
-            $activities->completed = false;
-            $activities->update(['completed'=> $activities->completed]);
+            $planProject->completed = false;
+            $planProject->update(['completed'=> $planProject->completed]);
         }
     
        }

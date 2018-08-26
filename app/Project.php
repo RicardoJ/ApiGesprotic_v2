@@ -8,7 +8,7 @@ class Project extends Model
 {
     protected $table = 'project';
     public $timestamps = false;
-    protected $fillable = ['director','nombre','plan'];
+    protected $fillable = ['director','nombre','plan','completed'];
     
     public function actaconfiguracion(){
         return hasOne('App\ActaConfiguracion');
@@ -37,4 +37,8 @@ class Project extends Model
     public function resource(){
         return hasMany('App\Resource');
     }
+    public function planProject(){
+        return hasMany('App\PlanProject');
+    }
+    
 }

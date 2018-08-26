@@ -19,6 +19,7 @@ Route::prefix('project')->name('project.')->group(function(){
     Route::post('/', 'ProjectController@store')->name('store');
     Route::put('/{project}', 'ProjectController@update')->name('update');
     Route::delete('/{project}', 'ProjectController@destroy')->name('delete');
+    Route::patch('/{project}/completed', 'ProjectController@completed')->name('completed');
   /*  
     Route::post('/{project}/acta', 'ProjectController@acta')->name('acta');
     Route::post('/{project}/acta/riesgo', 'ProjectController@actaRiesgo')->name('acta');
@@ -116,4 +117,25 @@ Route::prefix('agreement')->group(function(){
     Route::post('/', 'ProjectTeamController@store')->name('store');
     Route::put('/{agreement}', 'AgreementController@update')->name('update');
     Route::delete('/{agreement}', 'AgreementController@destroy')->name('delete');
+});
+
+
+Route::prefix('activities')->group(function(){
+    Route::get('/', 'ActivitiesController@index')->name('index');
+    Route::get('/{activities}', 'ActivitiesController@show')->name('show');
+    Route::post('/', 'ActivitiesController@store')->name('store');
+    Route::put('/{activities}', 'ActivitiesController@update')->name('update');
+    Route::delete('/{activities}', 'ActivitiesController@destroy')->name('delete');
+    Route::patch('project_team/{project_team}/activities/{activities}/completed', 'ActivitiesController@completed')->name('completed');
+
+});
+
+Route::prefix('planProject')->group(function(){
+    Route::get('/', 'PlanProject@index')->name('index');
+    Route::get('/{planProject}', 'PlanProject@show')->name('show');
+    Route::post('/', 'PlanProject@store')->name('store');
+    Route::put('/{planProject}', 'PlanProject@update')->name('update');
+    Route::delete('/{planProject}', 'PlanProject@destroy')->name('delete');
+    Route::patch('project_team/{project_team}/planProject/{planProject}/completed', 'PlanProject@completed')->name('completed');
+
 });

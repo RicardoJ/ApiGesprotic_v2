@@ -31,13 +31,14 @@ class ProjectController extends Controller
         //
         $this->validate($request, [
             'director' => 'required',
-            'nombre' => 'required|',
-            'plan' => 'required'
+            'nombre' => 'required',
+            'plan' => 'required',
+            'completed' => 'required'
         ]);
 
         $project = new Project;
         $project->create(
-            $request->only(['director', 'nombre', 'plan'])
+            $request->only(['director', 'nombre','completed', 'plan'])
         );
         return response()->json($project);
     }
@@ -67,11 +68,13 @@ class ProjectController extends Controller
         $this->validate($request, [
             'director' => 'required|',
             'nombre' => 'required|',
-            'plan' => 'required|'
+            'plan' => 'required|',
+            'completed' => 'required'
         ]);
         $project->director = $request->director;
         $project->nombre = $request->nombre;
         $project->plan = $request->plan;
+        $activities -> completed =$request->completed;
         $project->save();
         return response()->json($project);
     }
@@ -89,30 +92,19 @@ class ProjectController extends Controller
         return response()->json(['success' => 'borrado correctamente']);
     }
 
-    /*
-    public function acta(Project $project, Request $request){
-        $project->acta()->create([
-            'nombre' => $request->nombre,
-            'tipo' => 'proyecto'
-        ]);
+   public function completed(Project $project){
+
+    if($project->completed==false){
+
+        $project->completed = true;
+        $project->update(['completed'=> $project->completed]);
+
+    }else{
+        $project->completed = false;
+        $project->update(['completed'=> $project->completed]);
     }
-    public function actaRiesgo(Project $project, Request $request){
-        $project->acta()->create([
-            'nombre' => $request->nombre,
-            'tipo' => 'riesgo'
-        ]);
-    }
-    public function actaCambio(Project $project, Request $request){
-        $project->acta()->create([
-            'nombre' => $request->nombre,
-            'tipo' => 'proyecto'
-        ]);
-    }
-    public function actaConfiguracion(Project $project, Request $request){
-        $project->acta()->create([
-            'nombre' => $request->nombre,
-            'tipo' => 'proyecto'
-        ]);
-    }
-    */
+
+   }
+
+   
 }
