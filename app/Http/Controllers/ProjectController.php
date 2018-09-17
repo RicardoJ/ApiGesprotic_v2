@@ -16,8 +16,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
-        return response()->json(Project::all());
+ 
+
+      $project = Project::all()->toArray();
+      return response()->json($project);
+        //return response()->json(Project::all());
+       // return response('INDEX',200);
     }
 
     /**
@@ -28,7 +32,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
         $this->validate($request, [
             'director' => 'required',
             'nombre' => 'required',
@@ -41,6 +45,8 @@ class ProjectController extends Controller
             $request->only(['director', 'nombre','completed', 'plan'])
         );
         return response()->json($project);
+        
+       
     }
 
     /**

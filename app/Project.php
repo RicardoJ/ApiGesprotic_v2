@@ -37,6 +37,9 @@ class Project extends Model
     public function resource(){
         return hasMany('App\Resource');
     }
+    public function acquisition(){
+        return hasMany('App\Acquisition');
+    }
     public function planProject(){
         return hasMany('App\PlanProject');
     }

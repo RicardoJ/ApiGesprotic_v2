@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Resource extends Model
+class Acquisition extends Model
 {
-    protected $table = 'resource';
+    protected $table = 'acquisition';
     public $timestamps = false;
     protected $fillable = ['descripcion','fecha_Inicial','fecha_Final','nombre','origen','relevancia','tipo','unidades','project_id','provider_id'];
 
@@ -16,5 +16,8 @@ class Resource extends Model
         
     }
 
-    
+    public function provider(){
+        return $this->BelongsTo('App\Provider', 'provider_id');
+        
+    }
 }

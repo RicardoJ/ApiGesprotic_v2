@@ -10,8 +10,8 @@ class Provider extends Model
     public $timestamps = false;
     protected $fillable = ['empresa','contacto','telefono','direccion','email','provider_id','project_id'];
 
-    public function resource(){
-        return hasMany('App\Resource');
+    public function acquisition(){
+        return hasMany('App\Acquisition');
     }
 
     public function agreement(){
