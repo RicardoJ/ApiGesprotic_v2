@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ActaPlanDirector;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ActaPlanDirectorController extends Controller
@@ -25,12 +26,12 @@ class ActaPlanDirectorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $project_id)
     {
         $this->validate($request, [
                             'nombre'=> 'required',
                             'director_del_proyecto'=> 'required',
-                            'persona_revision'=> 'required', 
+                           /* 'persona_revision'=> 'required', 
                             'persona_aprobacion'=> 'required',
                             'fases'=> 'required', 
                             'procesos'=> 'required',
@@ -67,11 +68,27 @@ class ActaPlanDirectorController extends Controller
                             'aspectos_claves_y_decisiones_pendientes'=> 'required',
                             'proceso_de_revision_del_planDelDirector'=> 'required', 
                             'documento_adjuntos'=> 'required',
-                            'descripcion_documento'=> 'required'
+                            'descripcion_documento'=> 'required' */
             
                                             ]);
-$actaPlanDirector = new ActaPlanDirector;
-$actaPlanDirector->create(
+ $project=Project::find($project_id);
+ if (!$project) {
+    return response()->json(['No existe proyecto'],404);
+}else{
+    $actaPlanDirector = $project->actaPlanDirector;
+    if ($actaPlanDirector) {
+        return response()->json(['ya tiene acta de plan de Director  este proyecto'],404);
+    } else {
+$actaPlanDirector = new ActaPlanDirector([
+    'nombre' =>$request->input('nombre'),
+    'director_del_proyecto'=>$request->input('director_del_proyecto'),
+    'project_id'=>$project_id
+]);
+$actaPlanDirector->save();
+return response()->json($actaPlanDirector);
+    }
+}
+/*$actaPlanDirector->create(
 $request->only([
     'nombre',
                             'director_del_proyecto',
@@ -117,6 +134,7 @@ $request->only([
 ])
 );
 return response()->json($actaPlanDirector);
+*/
     }
 
     /**
@@ -130,7 +148,15 @@ return response()->json($actaPlanDirector);
         return response()->json($actaPlanDirector);
     }
 
-
+    public function listaActaPlanDirectorPorProyecto($project_id){
+        $project =Project::find($project_id);
+       
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $actaPlanDirector = $project->actaPlanDirector;
+        return response()->json(['Acta de Riesgo del proyecto'=>$actaPlanDirector],202);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -144,7 +170,7 @@ return response()->json($actaPlanDirector);
         $this->validate($request, [
             'nombre',
             'director_del_proyecto',
-            'persona_revision', 
+           /* 'persona_revision', 
             'persona_aprobacion',
             'fases', 
             'procesos',
@@ -182,12 +208,12 @@ return response()->json($actaPlanDirector);
             'proceso_de_revision_del_planDelDirector', 
             'documento_adjuntos',
             'descripcion_documento'
-                    
+                    */
                 ]);
         
                 $actaPlanDirector->nombre = $request->nombre;
                 $actaPlanDirector->director_del_proyecto = $request->director_del_proyecto;
-                $actaPlanDirector->persona_revision = $request->persona_revision;
+             /*   $actaPlanDirector->persona_revision = $request->persona_revision;
                 $actaPlanDirector->persona_aprobacion = $request->persona_aprobacion;
                 $actaPlanDirector->fases = $request->fases;
                 $actaPlanDirector->procesos = $request->procesos;
@@ -225,7 +251,7 @@ return response()->json($actaPlanDirector);
                 $actaPlanDirector->proceso_de_revision_del_planDelDirector = $request->proceso_de_revision_del_planDelDirector;
                 $actaPlanDirector->documento_adjuntos = $request->documento_adjuntos;
                 $actaPlanDirector->descripcion_documento = $request->descripcion_documento;
-
+*/
                 $actaPlanDirector->save();
                 return response()->json($actaPlanDirector);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Resource;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
@@ -19,7 +20,15 @@ class ResourceController extends Controller
 
         
     }
-
+    public function listarRecursoPorProyecto($project_id){
+        $project =Project::find($project_id);
+       
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $resource = $project->resource;
+        return response()->json(['Recurso del proyecto'=>$resource],202);
+    }
 
 
     /**
@@ -28,7 +37,7 @@ class ResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $project_id)
     {
         $this->validate($request, [
             'descripcion' => 'required',
@@ -41,12 +50,25 @@ class ResourceController extends Controller
             'unidades'=>'required' 
 
         ]);
-        $resource = new Resource;
-        $resource->create(
-        $request->only(['descripcion', 'fecha_Inicial', 'fecha_Final','nombre','origen','relevancia','tipo','unidades'])
-        );
+        $project=Project::find($project_id);
+            if (!$project) {
+                return response()->json(['No existe proyecto'],404);
+            }else{
+        $resource = new Resource([
+            'descripcion' => $request->input('descripcion'),
+            'fecha_Inicial' => $request->input('fecha_Inicial'),
+            'fecha_Final' => $request->input('fecha_Final'),
+            'nombre' =>$request->input('nombre'),
+            'origen' =>$request->input('origen'),
+            'relevancia'=>$request->input('relevancia'),
+            'tipo'=>$request->input('tipo'),
+            'unidades'=>$request->input('unidades'),
+            'project_id'=>$project_id
+        ]);
+         $resource->save();
         return response()->json($resource);
     }
+}
 
     /**
      * Display the specified resource.

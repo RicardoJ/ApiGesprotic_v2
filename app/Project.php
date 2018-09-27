@@ -11,37 +11,37 @@ class Project extends Model
     protected $fillable = ['director','nombre','plan','completed'];
     
     public function actaconfiguracion(){
-        return hasOne('App\ActaConfiguracion');
+        return $this->hasOne('App\ActaConfiguracion');
     }
     public function actariesgo(){
-        return hasOne('App\ActaRiesgo');
+        return $this->hasOne('App\ActaRiesgo');
     }
     public function actaconstitucion(){
-        return hasOne('App\ActaConstitucion');
+        return $this->hasOne('App\ActaConstitucion');
     }
     public function planDirector(){
-        return hasOne('App\ActaPlanDirector');
+        return $this->hasOne('App\ActaPlanDirector');
     }
     public function change(){
-        return hasMany('App\Change');
+        return $this->hasMany('App\Change');
     }
 
     public function lessonLearned(){
-        return hasOne('App\LessonLearned');
+        return $this->hasOne('App\LessonLearned');
     }
 
     public function project_team(){
-        return hasOne('App\Project_team');
+        return $this->hasOne('App\Project_team');
     }
 
     public function resource(){
-        return hasMany('App\Resource');
+        return $this->hasMany('App\Resource');
     }
     public function acquisition(){
-        return hasMany('App\Acquisition');
+        return  $this->hasMany('App\Acquisition');
     }
     public function planProject(){
-        return hasMany('App\PlanProject');
+        return $this->hasOne('App\PlanProject');
     }
     
 }

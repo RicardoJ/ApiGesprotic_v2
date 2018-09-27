@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ActaConstitucion;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ActaConstitucionController extends Controller
@@ -24,12 +25,12 @@ class ActaConstitucionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$project_id)
     {
         $this->validate($request, [
                             'nombre' => 'required',
                             'fecha' => 'required',
-                            'cliente' => 'required', 
+                          /*  'cliente' => 'required', 
                             'patrocinador' => 'required',
                             'codigo_identificacion' => 'required',
                             'pendiente_asignacion' => 'required',
@@ -77,67 +78,91 @@ class ActaConstitucionController extends Controller
                             'maxima_desviacion_sobre_presupuesto'=> 'required',
                             'umbral_de_riesgo_aceptable'=> 'required',
                             'capacidad_tecnica_de_desicion'=> 'required',
-                            'volumen_de_contratacion'=> 'required',
+                            'volumen_de_contratacion'=> 'required', 
                             'persona_nivel_superior_de_desicion'=> 'required'
-
+*/
 
         ]);
-        $actaConstitucion = new ActaConstitucion;
-        $actaConstitucion->create(
-        $request->only(['nombre',
-        'fecha',
-        'cliente', 
-        'patrocinador',
-        'codigo_identificacion',
-        'pendiente_asignacion',
-        'contrato',
-        'caso_de_negocio',
-        'enunciado_trabajo',
-        'vision_estrategica',
-        'descripcion_del_proyecto',
-        'analisis_de_viabilidad',
-        'requisitos_generales',
-        'objetivos_alcance',
-        'metrica_alcance',
-        'aprobacion_persona_alcance',
-        'obejtivos_plazo',
-        'metrica_plazo',
-        'aprobacion_persona_plazo',
-        'obejtivos_presupuesto',
-        'metrica_presupuesto',
-        'aprobacion_persona_presupuesto',
-        'obejtivos_calidad',
-        'metrica_calidad',
-        'aprobacion_persona_calidad',
-        'obejtivos_otros',
-        'metrica_otros',
-        'aprobacion_persona_otros',
-        'fase',
-        'hitoFase',
-        'duracion',
-        'hito',
-        'entregable',
-        'fecha',
-        'nombre_principalesImplicados',
-        'cargo',
-        'limitacion',
-        'afecta_a',
-        'valoracionLimitacion',
-        'riesgo',
-        'probabilidad',
-        'impacta_sobre',
-        'valoracionRiesgo',
-        'departamentos_implicados',
-        'normativa_aplicable',
-        'factores_criticos_de_exito',
-        'observaciones',
-        'maxima_desviacion_sobre_presupuesto',
-        'umbral_de_riesgo_aceptable',
-        'capacidad_tecnica_de_desicion',
-        'volumen_de_contratacion',
-        'persona_nivel_superior_de_desicion'])
-        );
-        return response()->json($actaConstitucion);
+        $project=Project::find($project_id);
+            if (!$project) {
+                return response()->json(['No existe proyecto'],404);
+            }else{
+                $actaConstitucion = $project->actaConstitucion;
+                if ($actaConstitucion) {
+                    return response()->json(['ya tiene acta de constitucion  este proyecto'],404);
+                } else {
+                $actaConstitucion = new ActaConstitucion([
+                    'nombre' =>$request->input('nombre'),
+                    'fecha'=>$request->input('fecha'),
+                    'project_id'=>$project_id
+                ]);
+                $actaConstitucion->save();
+                return response()->json($actaConstitucion);
+           /*     
+                $actaConstitucion->create(
+                $request->only(['nombre',
+                'fecha',
+                'cliente', 
+                'patrocinador',
+                'codigo_identificacion',
+                'pendiente_asignacion',
+                'contrato',
+                'caso_de_negocio',
+                'enunciado_trabajo',
+                'vision_estrategica',
+                'descripcion_del_proyecto',
+                'analisis_de_viabilidad',
+                'requisitos_generales',
+                'objetivos_alcance',
+                'metrica_alcance',
+                'aprobacion_persona_alcance',
+                'obejtivos_plazo',
+                'metrica_plazo',
+                'aprobacion_persona_plazo',
+                'obejtivos_presupuesto',
+                'metrica_presupuesto',
+                'aprobacion_persona_presupuesto',
+                'obejtivos_calidad',
+                'metrica_calidad',
+                'aprobacion_persona_calidad',
+                'obejtivos_otros',
+                'metrica_otros',
+                'aprobacion_persona_otros',
+                'fase',
+                'hitoFase',
+                'duracion',
+                'hito',
+                'entregable',
+                'fecha',
+                'nombre_principalesImplicados',
+                'cargo',
+                'limitacion',
+                'afecta_a',
+                'valoracionLimitacion',
+                'riesgo',
+                'probabilidad',
+                'impacta_sobre',
+                'valoracionRiesgo',
+                'departamentos_implicados',
+                'normativa_aplicable',
+                'factores_criticos_de_exito',
+                'observaciones',
+                'maxima_desviacion_sobre_presupuesto',
+                'umbral_de_riesgo_aceptable',
+                'capacidad_tecnica_de_desicion',
+                'volumen_de_contratacion',
+                'persona_nivel_superior_de_desicion'])
+                );
+                
+                return response()->json($actaConstitucion);
+*/
+
+
+            }
+
+        }
+
+       
     }
 
     /**
@@ -149,8 +174,17 @@ class ActaConstitucionController extends Controller
     public function show(ActaConstitucion $actaConstitucion)
     {
         return response()->json($actaConstitucion);
-    }
+    }  
 
+    public function listaActaConstitucionPorProyecto($project_id){
+        $project =Project::find($project_id);
+
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $actaConstitucion = $project->actaConstitucion;
+        return response()->json(['Acta de Constitucion del proyecto'=>$actaConstitucion],202);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -162,64 +196,64 @@ class ActaConstitucionController extends Controller
     public function update(Request $request, ActaConstitucion $actaConstitucion)
     {
         $this->validate($request, [
-            'nombre',
-        'fecha',
-        'cliente', 
-        'patrocinador',
-        'codigo_identificacion',
-        'pendiente_asignacion',
-        'contrato',
-        'caso_de_negocio',
-        'enunciado_trabajo',
-        'vision_estrategica',
-        'descripcion_del_proyecto',
-        'analisis_de_viabilidad',
-        'requisitos_generales',
-        'objetivos_alcance',
-        'metrica_alcance',
-        'aprobacion_persona_alcance',
-        'obejtivos_plazo',
-        'metrica_plazo',
-        'aprobacion_persona_plazo',
-        'obejtivos_presupuesto',
-        'metrica_presupuesto',
-        'aprobacion_persona_presupuesto',
-        'obejtivos_calidad',
-        'metrica_calidad',
-        'aprobacion_persona_calidad',
-        'obejtivos_otros',
-        'metrica_otros',
-        'aprobacion_persona_otros',
-        'fase',
-        'hitoFase',
-        'duracion',
-        'hito',
-        'entregable',
-        'fecha',
-        'nombre_principalesImplicados',
-        'cargo',
-        'limitacion',
-        'afecta_a',
-        'valoracionLimitacion',
-        'riesgo',
-        'probabilidad',
-        'impacta_sobre',
-        'valoracionRiesgo',
-        'departamentos_implicados',
-        'normativa_aplicable',
-        'factores_criticos_de_exito',
-        'observaciones',
-        'maxima_desviacion_sobre_presupuesto',
-        'umbral_de_riesgo_aceptable',
-        'capacidad_tecnica_de_desicion',
-        'volumen_de_contratacion',
-        'persona_nivel_superior_de_desicion'
+            'nombre'=>'required',
+        'fecha'=>'required',
+     /*   'cliente'=>'required', 
+        'patrocinador'=>'required',
+        'codigo_identificacion'=>'required',
+        'pendiente_asignacion'=>'required',
+        'contrato'=>'required',
+        'caso_de_negocio'=>'required',
+        'enunciado_trabajo'=>'required',
+        'vision_estrategica'=>'required',
+        'descripcion_del_proyecto'=>'required',
+        'analisis_de_viabilidad'=>'required',
+        'requisitos_generales'=>'required',
+        'objetivos_alcance'=>'required',
+        'metrica_alcance'=>'required',
+        'aprobacion_persona_alcance'=>'required',
+        'obejtivos_plazo'=>'required',
+        'metrica_plazo'=>'required',
+        'aprobacion_persona_plazo'=>'required',
+        'obejtivos_presupuesto'=>'required',
+        'metrica_presupuesto'=>'required',
+        'aprobacion_persona_presupuesto'=>'required',
+        'obejtivos_calidad'=>'required',
+        'metrica_calidad'=>'required',
+        'aprobacion_persona_calidad'=>'required',
+        'obejtivos_otros'=>'required',
+        'metrica_otros'=>'required',
+        'aprobacion_persona_otros'=>'required',
+        'fase'=>'required',
+        'hitoFase'=>'required',
+        'duracion'=>'required',
+        'hito'=>'required',
+        'entregable'=>'required',
+        'fecha'=>'required',
+        'nombre_principalesImplicados'=>'required',
+        'cargo'=>'required',
+        'limitacion'=>'required',
+        'afecta_a'=>'required',
+        'valoracionLimitacion'=>'required',
+        'riesgo'=>'required',
+        'probabilidad'=>'required',
+        'impacta_sobre'=>'required',
+        'valoracionRiesgo'=>'required',
+        'departamentos_implicados'=>'required',
+        'normativa_aplicable'=>'required',
+        'factores_criticos_de_exito'=>'required',
+        'observaciones'=>'required',
+        'maxima_desviacion_sobre_presupuesto'=>'required',
+        'umbral_de_riesgo_aceptable'=>'required',
+        'capacidad_tecnica_de_desicion'=>'required',
+        'volumen_de_contratacion'=>'required',
+        'persona_nivel_superior_de_desicion'=>'required' */
         ]);
 
         $actaConstitucion->nombre = $request->nombre;
         $actaConstitucion->fecha = $request->fecha;
-        $actaConstitucion->cliente = $request->cliente;
-        
+        /*
+        $actaConstitucion->cliente = $request->cliente; 
         $actaConstitucion->codigo_identificacion = $request->codigo_identificacion;
         $actaConstitucion->pendiente_asignacion = $request->pendiente_asignacion;
         $actaConstitucion->contrato = $request->contrato;
@@ -268,7 +302,7 @@ class ActaConstitucionController extends Controller
         $actaConstitucion->capacidad_tecnica_de_desicion = $request->capacidad_tecnica_de_desicion;
         $actaConstitucion->volumen_de_contratacion = $request->volumen_de_contratacion;
         $actaConstitucion->persona_nivel_superior_de_desicion = $request->persona_nivel_superior_de_desicion;
-
+*/
         $actaConstitucion->save();
         return response()->json($actaConstitucion);
     }

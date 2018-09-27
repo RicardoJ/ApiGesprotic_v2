@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ActaRiesgo;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ActaRiesgoController extends Controller
@@ -25,12 +26,12 @@ class ActaRiesgoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $project_id)
     {
         $this->validate($request, [
                             'nombre'=> 'required',
                             'director'=> 'required',
-                            'version'=> 'required',
+                           /* 'version'=> 'required',
                             'edicion_revisada'=> 'required',
                             'fecha_edicion_revisada'=> 'required',
                             'fecha_revision'=> 'required',
@@ -52,9 +53,27 @@ class ActaRiesgoController extends Controller
                             'protocolo_de_control_riesgos'=> 'required',
                             'protocolo_de_conmunicacion_riesgos'=> 'required',
                             'protocolo_de_auditoria_riesgos'=> 'required',
-            
+            */
                                             ]);
-$actaRiesgo = new ActaRiesgo;
+$project=Project::find($project_id);
+if (!$project) {
+    return response()->json(['No existe proyecto'],404);
+}else{
+    $actaRiesgo = $project->actaRiesgo;
+    if ($actaRiesgo) {
+        return response()->json(['ya tiene acta de riesgo este proyecto'],404);
+    } else {
+        $actaRiesgo = new ActaRiesgo([
+            'nombre' =>$request->input('nombre'),
+            'director'=>$request->input('director'),
+            'project_id'=>$project_id
+        ]);
+        $actaRiesgo->save();
+        return response()->json($actaRiesgo);
+        }
+    }
+}
+/*
 $actaRiesgo->create(
 $request->only([
                             'nombre',
@@ -85,7 +104,7 @@ $request->only([
                         );
                         return response()->json($actaRiesgo);
                             }
-
+*/
 
     /**
      * Display the specified resource.
@@ -96,8 +115,17 @@ $request->only([
     public function show(ActaRiesgo $actaRiesgo)
     {
         return response()->json($actaRiesgo);
+    } 
+       
+    public function listaActaRiesgoPorProyecto($project_id){
+        $project =Project::find($project_id);
+       
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $actaRiesgo = $project->actaRiesgo;
+        return response()->json(['Acta de Riesgo del proyecto'=>$actaRiesgo],202);
     }
-
 
 
     /**
@@ -110,9 +138,9 @@ $request->only([
     public function update(Request $request, ActaRiesgo $actaRiesgo)
     {
         $this->validate($request, [
-            'nombre',
+                            'nombre',
                             'director',
-                            'version',
+                    /*        'version',
                             'edicion_revisada',
                             'fecha_edicion_revisada',
                             'fecha_revision',
@@ -134,13 +162,13 @@ $request->only([
                             'protocolo_de_control_riesgos',
                             'protocolo_de_conmunicacion_riesgos',
                             'protocolo_de_auditoria_riesgos'
-          
+          */
                     
                 ]);
         
                 $actaRiesgo->nombre = $request->nombre;
                 $actaRiesgo->director = $request->director;
-                $actaRiesgo->edicion_revisada = $request->edicion_revisada;
+              /*  $actaRiesgo->edicion_revisada = $request->edicion_revisada;
                 $actaRiesgo->fecha_edicion_revisada = $request->fecha_edicion_revisada;
                 $actaRiesgo->fecha_revision = $request->fecha_revision;
                 $actaRiesgo->descripcion_proceso_de_gestion = $request->descripcion_proceso_de_gestion;
@@ -162,7 +190,7 @@ $request->only([
                 $actaRiesgo->protocolo_de_conmunicacion_riesgos = $request->protocolo_de_conmunicacion_riesgos;
                 $actaRiesgo->protocolo_de_auditoria_riesgos = $request->protocolo_de_auditoria_riesgos;
                
-                
+                */
         
                 $actaRiesgo->save();
                 return response()->json($actaRiesgo);

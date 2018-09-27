@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\LessonLearned;
+use App\Project;
 use Illuminate\Http\Request;
 
 class LessonLearnedController extends Controller
@@ -25,21 +26,35 @@ class LessonLearnedController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $project_id)
     {
         $this->validate($request, [
             'nombre' => 'required',
             'descripcion' => 'required',
             'objetivo' => 'required',
             'informe' => 'required'
-            
-        
         ]);
-        $lessonLearned = new LessonLearned;
-        $lessonLearned->create(
-        $request->only(['nombre', 'descripcion', 'objetivo','informe'])
-        );
-        return response()->json($lessonLearned);
+        $project=Project::find($project_id);
+        
+            if (!$project) {
+                return response()->json(['No existe proyecto'],404);
+            }else{
+                $lessonLearned = $project->lessonLearned;
+                if ($lessonLearned) {
+                    return response()->json(['ya tiene leccion este proyecto'],404);
+                } else {
+                $lessonLearned = new LessonLearned([
+                    'nombre' =>$request->input('nombre'),
+                    'descripcion'=>$request->input('descripcion'),
+                    'objetivo'=>$request->input('objetivo'),
+                    'informe'=>$request->input('informe'),
+                    'project_id'=>$project_id
+                ]);
+                $lessonLearned->save();
+                return response()->json($lessonLearned);
+            }
+        }
+        
     }
 
     /**
@@ -52,8 +67,17 @@ class LessonLearnedController extends Controller
     {
         return response()->json($lessonLearned);
     }
+    public function listaLeccionPorProyecto($project_id){
+        $project =Project::find($project_id);
+        
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $lessonLearned = $project->lessonLearned;
+        return response()->json(['leccion del proyecto'=>$lessonLearned],202);
+    }
 
- 
+    
     /**
      * Update the specified resource in storage.
      *

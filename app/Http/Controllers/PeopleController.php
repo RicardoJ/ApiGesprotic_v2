@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\People;
+use App\Project_team;
 use Illuminate\Http\Request;
 
 class PeopleController extends Controller
@@ -23,7 +24,7 @@ class PeopleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $project_team_id)
     {
         $this->validate($request, [
             'nombre' => 'required',
@@ -31,16 +32,29 @@ class PeopleController extends Controller
             'rol' => 'required',
             'email' => 'required|unique:people,email',  
             'competencias' => 'required'
-
-
         ]);
-        $people = new People;
+        $project_team=Project_team::find($project_team_id);
+        if (!$project_team) {
+            return response()->json(['No existe proyecto'],404);
+        }else{
+        $people = new People([
+            'nombre' =>$request->input('nombre'),
+            'apellidos' =>$request->input('apellidos'),
+            'rol'=>$request->input('rol'),
+            'email'=>$request->input('email'),
+            'competencias'=>$request->input('competencias'),
+            'project_team_id'=>$project_team_id
+        ]);
+        $people->save();
+        return response()->json($people);
+        /*
         $people->create(
         $request->only(['nombre', 'apellidos', 'rol','email','competencias'])
         );
         return response()->json($people);
+        */
     }
-
+    }
     /**
      * Display the specified resource.
      *
@@ -51,7 +65,15 @@ class PeopleController extends Controller
     {
         return response()->json($people);
     }
-
+    public function listarPersonasDeEquipo($project_team_id){
+        $project_team =Project_team::find($project_team_id);
+       
+        if (!$project_team) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $people = $project_team->people;
+        return response()->json(['integrantes del equipo proyecto'=>$people],202);
+    }
 
 
     /**
@@ -67,7 +89,8 @@ class PeopleController extends Controller
             'nombre' => 'required',
             'apellidos' => 'required',
             'rol' => 'required',
-            'email' => 'required|unique',
+         //   'email' => 'required|unique',
+         'email' => 'required|unique:people,email,'.$people->id,
             'competencias' => 'required'
         ]);
 

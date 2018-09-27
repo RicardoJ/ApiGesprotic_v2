@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Agreement;
+use App\Provider;
 use Illuminate\Http\Request;
 
 class AgreementController extends Controller
@@ -24,21 +25,46 @@ class AgreementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $provider_id)
     {
         $this->validate($request, [
             'contenido' => 'required',
-            'fecha_Entrega' => 'required|date',
-            'fecha_Contrato' => 'required|date',
+            'fecha_Entrega' => 'required',
+            'fecha_Contrato' => 'required',
             'metodo_Pago' => 'required',
             'nombre_Empresa' => 'required',
             'persona_Encargada' => 'required'
         ]);
-        $agreement = new Agreement;
+
+        $provider=Provider::find($provider_id);
+        if (!$provider) {
+            return response()->json(['No existe proveedor'],404);
+        }else{
+            $agreement = $provider->agreement;
+            if ($agreement) {
+                return response()->json(['ya tiene contrato este proveedor'],404);
+            } else {
+                $agreement = new Agreement([
+                'contenido' =>$request->input('contenido'),
+                'fecha_Entrega'=>$request->input('fecha_Entrega'),
+                'fecha_Contrato'=>$request->input('fecha_Contrato'),
+                'metodo_Pago'=>$request->input('metodo_Pago'),
+                'nombre_Empresa'=>$request->input('nombre_Empresa'),
+                'persona_Encargada'=>$request->input('persona_Encargada'),
+                'provider_id'=>$provider_id
+            ]);
+            $agreement->save();
+            return response()->json($agreement);
+
+                }
+            }
+
+       
+        /*
         $agreement->create(
         $request->only(['contenido', 'fecha_Entrega', 'fecha_Contrato','fecha_Contrato','metodo_pago','nombre_Empresa','persona_Encargada'])
         );
-        return response()->json($agreement);
+        return response()->json($agreement); */
     }
 
     /**

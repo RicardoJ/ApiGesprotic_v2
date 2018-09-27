@@ -31,14 +31,18 @@ class ProviderController extends Controller
             'contacto' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
-            'email' => 'required|unique:people,email' 
+            'email' => 'required|unique:provider,email' 
 
         ]);
-        $provider = new Provider;
-        $provider->create(
-        $request->only(['empresa', 'contacto', 'telefono','direccion','email'])
-        );
-        return response()->json($provider);
+        $provider = new Provider([
+            'empresa' => $request->input('empresa'),
+            'contacto' => $request->input('contacto'),
+            'telefono' => $request->input('telefono'),
+            'direccion' => $request->input('direccion'),
+            'email' => $request->input('email')
+        ]);
+        $provider->save();
+        return response()->json(['success' => $provider]);
     }
 
     /**
@@ -67,10 +71,13 @@ class ProviderController extends Controller
             'contacto' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
-            'email' => 'required|unique:people,email' 
-
+            'email' => 'required|unique:provider,email,'.$provider->id
         ]);
-
+        /*
+            $provider->update($request->all());
+            return response()->json(['editado' => $provider]);
+            */
+            
         $provider->empresa = $request->empresa;
         $provider->contacto = $request->contacto;
         $provider->telefono = $request->telefono;
@@ -78,6 +85,7 @@ class ProviderController extends Controller
         $provider->email = $request->email;
         $provider->save();
         return response()->json($provider);
+        
     }
 
     /**

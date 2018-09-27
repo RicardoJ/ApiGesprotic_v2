@@ -48,7 +48,7 @@ class ActaConfiguracion extends Model
                             'procedimiento_y_niveles_de_aprobacion',
                             'procedimiento_de_auditoria_en_la_gestion_de_la_configuracion',
                             'documento_adjunto',
-                            'descripcion',
+                            'descripcion', 
                             'project_id'
                             ];
 

@@ -16,11 +16,11 @@ class Project_team extends Model
     }
 
     public function people(){
-        return hasMany('App\People');
+        return $this->hasMany('App\People');
     }
 
     
     public function activities(){
-        return hasMany('App\Activities');
+        return $this->hasMany('App\Activities');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ActaConfiguracion;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ActaConfiguracionController extends Controller
@@ -24,12 +25,12 @@ class ActaConfiguracionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $project_id)
     {
         $this->validate($request, [
                             'nombre'=> 'required',
                             'director'=> 'required',
-                            'aprobacion_persona'=> 'required',
+                    /*        'aprobacion_persona'=> 'required',
                             'nombre_del_rol'=> 'required',
                             'persona_asignada'=> 'required',
                             'responsabilidades'=> 'required',
@@ -67,13 +68,30 @@ class ActaConfiguracionController extends Controller
                             'procedimiento_y_niveles_de_aprobacion'=> 'required',
                             'procedimiento_de_auditoria_en_la_gestion_de_la_configuracion'=> 'required',
                             'documento_adjunto'=> 'required',
-                            'descripcion'=> 'required',
+                            'descripcion'=> 'required',*/
                                                             ]);
-$actaConfiguracion = new ActaConfiguracion;
-$actaConfiguracion->create(
+    $project=Project::find($project_id);
+        if (!$project) {
+            return response()->json(['No existe proyecto'],404);
+        }else{
+            
+            $actaConfiguracion = $project->actaConfiguracion;
+            if ($actaConfiguracion) {
+              return response()->json(['ya tiene acta de configuracion  este proyecto'],404);
+          } else {
+            $actaConfiguracion = new ActaConfiguracion([
+                'nombre' =>$request->input('nombre'),
+                'director'=>$request->input('director'),
+                'project_id'=>$project_id
+            ]);
+            $actaConfiguracion->save();
+            return response()->json($actaConfiguracion);
+
+
+/* $actaConfiguracion->create(
 $request->only(['nombre',
     'director',
-    'aprobacion_persona',
+  'aprobacion_persona',
     'nombre_del_rol',
     'persona_asignada',
     'responsabilidades',
@@ -111,12 +129,15 @@ $request->only(['nombre',
     'procedimiento_y_niveles_de_aprobacion',
     'procedimiento_de_auditoria_en_la_gestion_de_la_configuracion',
     'documento_adjunto',
-    'descripcion'
+    'descripcion' 
 
 ])
 );
 return response()->json($actaConfiguracion);
+*/
     }
+}
+   }
 
     /**
      * Display the specified resource.
@@ -129,7 +150,15 @@ return response()->json($actaConfiguracion);
         return response()->json($actaConfiguracion);
     }
 
-
+    public function listaActaConfiguracionPorProyecto($project_id){
+        $project =Project::find($project_id);
+        
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $actaConfiguracion = $project->actaConfiguracion;
+        return response()->json(['Acta de Configuracion del proyecto'=>$actaConfiguracion],202);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -143,7 +172,7 @@ return response()->json($actaConfiguracion);
         $this->validate($request, [
     'nombre',
     'director',
-    'aprobacion_persona',
+    /*'aprobacion_persona',
     'nombre_del_rol',
     'persona_asignada',
     'responsabilidades',
@@ -181,13 +210,13 @@ return response()->json($actaConfiguracion);
     'procedimiento_y_niveles_de_aprobacion',
     'procedimiento_de_auditoria_en_la_gestion_de_la_configuracion',
     'documento_adjunto',
-    'descripcion'
+    'descripcion'*/
             
         ]);
 
         $actaConfiguracion->nombre = $request->nombre;
         $actaConfiguracion->director = $request->director;
-        $actaConfiguracion->aprobacion_persona = $request->aprobacion_persona;
+     /*   $actaConfiguracion->aprobacion_persona = $request->aprobacion_persona;
         $actaConfiguracion->nombre_del_rol = $request->nombre_del_rol;
         $actaConfiguracion->persona_asignada = $request->persona_asignada;
         $actaConfiguracion->responsabilidades = $request->responsabilidades;
@@ -226,7 +255,7 @@ return response()->json($actaConfiguracion);
         $actaConfiguracion->procedimiento_de_auditoria_en_la_gestion_de_la_configuracion = $request->procedimiento_de_auditoria_en_la_gestion_de_la_configuracion;
         $actaConfiguracion->documento_adjunto = $request->documento_adjunto;
         $actaConfiguracion->descripcion = $request->descripcion;
-
+*/
         $actaConfiguracion->save();
         return response()->json($actaConfiguracion);
     }

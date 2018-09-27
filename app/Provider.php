@@ -8,13 +8,15 @@ class Provider extends Model
 {
     protected $table = 'provider';
     public $timestamps = false;
-    protected $fillable = ['empresa','contacto','telefono','direccion','email','provider_id','project_id'];
+    protected $fillable = ['empresa',
+    'contacto','telefono','direccion',
+    'email'];
 
     public function acquisition(){
-        return hasMany('App\Acquisition');
+        return $this->hasMany('App\Acquisition');
     }
 
     public function agreement(){
-        return hasOne('App\Agreement');
+        return $this->hasOne('App\Agreement');
     }
 }

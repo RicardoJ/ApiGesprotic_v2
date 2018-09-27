@@ -18,10 +18,11 @@ class ProjectController extends Controller
     {
  
 
-      $project = Project::all()->toArray();
-      return response()->json($project);
-        //return response()->json(Project::all());
-       // return response('INDEX',200);
+      //$project = Project::all()->toArray();
+      //return response()->json($project);
+
+      return response()->json(Project::all());
+      
     }
 
     /**
@@ -39,13 +40,18 @@ class ProjectController extends Controller
             'plan' => 'required',
             'completed' => 'required'
         ]);
+      
+$project = new Project ([
+    'director' => $request->input('director'),
+    'nombre' => $request->input('nombre'),
+    'plan' => $request->input('plan'),
+    'completed' => $request->input('completed')
+    
+]);
 
-        $project = new Project;
-        $project->create(
-            $request->only(['director', 'nombre','completed', 'plan'])
-        );
-        return response()->json($project);
-        
+$project->save();
+ return response()->json(['success' => $project]);
+     
        
     }
 
@@ -70,19 +76,34 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
         $this->validate($request, [
-            'director' => 'required|',
-            'nombre' => 'required|',
-            'plan' => 'required|',
+            'director' => 'required',
+            'nombre' => 'required',
+            'plan' => 'required',
             'completed' => 'required'
         ]);
+        $project->update($request->all());
+        return response()->json(['editado' => $project]);
+            // opcion 1
+  /*          
+        $project = Project::find($id);
         $project->director = $request->director;
         $project->nombre = $request->nombre;
         $project->plan = $request->plan;
-        $activities -> completed =$request->completed;
+        $project->completed = $request->completed;
+       // $activities ->completed =$request->completed;
         $project->save();
         return response()->json($project);
+*/
+     
+        /*
+        $project->director = $request->director;
+        $project->nombre = $request->nombre;
+        $project->plan = $request->plan;
+      //  $activities ->completed =$request->completed;
+        $project->save();
+        return response()->json($project);
+        */
     }
 
     /**

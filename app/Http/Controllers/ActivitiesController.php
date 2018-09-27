@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Activities;
+use App\Project_team;
 use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
@@ -16,24 +17,13 @@ class ActivitiesController extends Controller
     {
         return response()->json(Activities::all());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $project_team_id)
     {
 
         $this->validate($request, [
@@ -42,9 +32,25 @@ class ActivitiesController extends Controller
             'completed' => 'required'
            
         ]);
+
+        $project_team=Project_team::find($project_team_id);
+        if (!$project_team) {
+            return response()->json(['No existe proyecto'],404);
+        }else{
+        $activities = new Activities([
+            'nombre' =>$request->input('nombre'),
+            'porcentaje' =>$request->input('porcentaje'),
+            'completed'=>$request->input('completed'),
+            'project_team_id'=>$project_team_id
+        ]);
+        $activities->save();
+        return response()->json($activities);
+        /*
         $activities = new Activities();
         $activities->fill($request->all());
         $activities->save();
+        */
+        }
     }
 
     /**
@@ -57,20 +63,18 @@ class ActivitiesController extends Controller
     {
         return response()->json($activities);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Activities  $activities
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Activities $activities)
-    {
-        //
+    public function listarActividadporProyecto($project_team_id){
+        $project_team =Project_team::find($project_team_id);
+       
+        if (!$project_team) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $activities = $project_team->activities;
+        return response()->json(['integrantes del equipo proyecto'=>$activities],202);
     }
 
     /**
-     * Update the specified resource in storage.
+    * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Activities  $activities
@@ -80,14 +84,14 @@ class ActivitiesController extends Controller
     {
         $this->validate($request, [
             'nombre' => 'required',
-            'nombre' => 'required',
+            'porcentaje' => 'required',
             'completed' => 'required'
            
         ]);
 
         $activities->nombre = $request->nombre;
         $activities->porcentaje = $request->porcentaje;
-        $activities ->completed =$request->completed;
+        $activities->completed =$request->completed;
         $activities->save();
         return response()->json($activities);
     }
@@ -100,8 +104,12 @@ class ActivitiesController extends Controller
      */
     public function destroy(Activities $activities)
     {
-        $activities->delete();
-        return response()->json(['success' => 'borrado correctamente']);
+       
+            $activities->delete();
+            return response()->json(['success' => 'borrado correctamente']);
+        
+        
+        
     }
 
 

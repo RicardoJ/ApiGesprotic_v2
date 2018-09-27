@@ -35,7 +35,12 @@ class ChangeController extends Controller
         ]);
         $change = new Change;
         $change->create(
-        $request->only(['cambioPropuestoPor', 'descripcion', 'nombre','responsable','estado'])
+        $request->only(['cambioPropuestoPor', 
+                        'descripcion',
+                         'nombre',
+                         'responsable',
+                         'estado'
+                         ])
         );
         return response()->json($change);
     }

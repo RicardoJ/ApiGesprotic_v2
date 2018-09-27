@@ -10,7 +10,7 @@ class ActaConstitucion extends Model
     public $timestamps = false;
     protected $fillable = ['nombre',
                             'fecha',
-                            'cliente', 
+                          /*  'cliente', 
                             'codigo_identificacion',
                             'pendiente_asignacion',
                             'contrato',
@@ -59,6 +59,7 @@ class ActaConstitucion extends Model
                             'capacidad_tecnica_de_desicion',
                             'volumen_de_contratacion',
                             'persona_nivel_superior_de_desicion',
+                            */
                             'project_id'
                             ];
                             
