@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Acquisition;
+use App\Provider;
+use App\Project;
 use Illuminate\Http\Request;
 
 class AcquisitionController extends Controller
@@ -14,18 +16,10 @@ class AcquisitionController extends Controller
      */
     public function index()
     {
-        return response()->json(Aqquisition::all());
+        return response()->json(Acquisition::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -33,7 +27,7 @@ class AcquisitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request ,$provider_id)
     {
         $this->validate($request, [
             'descripcion' => 'required',
@@ -46,11 +40,35 @@ class AcquisitionController extends Controller
             'unidades'=>'required' 
 
         ]);
+        
+        $provider=Provider::findOrFail($provider_id);
+            if (!$provider) {
+                return response()->json(['No existe  proveedor'],404);
+            }else{
+              
+                $acquisition = new Acquisition([
+                    'descripcion' =>$request->input('descripcion'),
+                    'fecha_Inicial'=>$request->input('fecha_Inicial'),
+                    'fecha_Final' =>$request->input('fecha_Final'),
+                    'nombre'=>$request->input('nombre'),
+                    'origen' =>$request->input('origen'),
+                    'relevancia'=>$request->input('relevancia'),
+                    'tipo' =>$request->input('tipo'),
+                    'unidades'=>$request->input('unidades'),
+                    'provider_id'=>$provider_id
+                ]);
+                $acquisition->save();
+                return response()->json($acquisition);
+
+        /*
         $aquisition = new Aqquisition;
         $aquisition->create(
         $request->only(['descripcion', 'fecha_Inicial', 'fecha_Final','nombre','origen','relevancia','tipo','unidades'])
         );
         return response()->json($aquisition);
+        */
+    
+}
     }
 
     /**

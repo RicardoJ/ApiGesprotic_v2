@@ -46,7 +46,7 @@ class ActaConfiguracionController extends Controller
                             'nombre_item_de_configuracion'=> 'required',
                             'categoria'=> 'required',
                             'fuente'=> 'required',
-                            'formato'=> 'required',
+                            'formato_cambio'=> 'required',
                             'gestion_del_cambio'=> 'required',
                             'contabilidad_de_estado_y_metricas'=> 'required',
                             'verificacion_y_auditorias'=> 'required',

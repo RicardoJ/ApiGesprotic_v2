@@ -12,7 +12,7 @@ class Acquisition extends Model
 
     
     public function project(){
-        return $this->BelongsTo('App\project', 'project_id');
+        return $this->BelongsTo('App\Project', 'project_id');
         
     }
 

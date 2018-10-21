@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PlanProject;
+use App\ Project;
 use Illuminate\Http\Request;
 
 class PlanProjectController extends Controller
@@ -17,15 +18,6 @@ class PlanProjectController extends Controller
         return response()->json(PlanProject::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,7 +25,7 @@ class PlanProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$project_id)
     {
         $this->validate($request, [
             'nombre' => 'required',
@@ -42,9 +34,30 @@ class PlanProjectController extends Controller
             'completed' => 'required'
            
         ]);
+        $project=Project::find($project_id);
+            if (!$project) {
+                return response()->json(['No existe proyecto'],404);
+            }else{
+                $planProject = $project->planProject;
+                if ($planProject) {
+                    return response()->json(['ya tiene plan este proyecto'],404);
+                } else {
+                $planProject = new PlanProject([
+                    'nombre' =>$request->input('nombre'),
+                    'porcentaje'=>$request->input('porcentaje'),
+                    'descripcion'=>$request->input('descripcion'),
+                    'completed'=>$request->input('completed'),
+                    'project_id'=>$project_id
+                ]);
+                $planProject->save();
+                return response()->json($planProject);
+                /*
         $planProject = new PlanProject();
         $planProject->fill($request->all());
         $planProject->save();
+        */
+                }
+            }
     }
 
     /**
@@ -58,16 +71,7 @@ class PlanProjectController extends Controller
         return response()->json($planProject);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\planProject  $planProject
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(planProject $planProject)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -94,6 +98,17 @@ class PlanProjectController extends Controller
         return response()->json($planProject);
     }
 
+    
+    public function listaplanPorProyecto($project_id){
+        $project =Project::find($project_id);
+
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $planProject = $project->planProject;
+        return response()->json(['Plan del proyecto'=>$planProject],202);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -108,7 +123,7 @@ class PlanProjectController extends Controller
 
 
     
-    public function completed(Project_team $projec , PlanProject $planProject){
+    public function completed(Project_team $project_team , PlanProject $planProject){
 
         if($planProject->completed==false){
     

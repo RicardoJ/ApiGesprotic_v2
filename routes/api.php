@@ -143,7 +143,7 @@ Route::prefix('agreement')->group(function(){
     Route::get('/provider/{provider}/agreement', 'AgreementController@listaContratoPorProyecto')->name('listaContratoPorProyecto');
 });
 */
-
+/*
 Route::prefix('activitie')->group(function(){
     Route::get('/', 'ActivitiesController@index')->name('index');
     Route::get('/{activities}', 'ActivitiesController@show')->name('show');
@@ -154,24 +154,26 @@ Route::prefix('activitie')->group(function(){
     Route::patch('project_team/{project_team}/activitie/{activities}/completed', 'ActivitiesController@completed')->name('completed');
 
 });
+*/
 /*
 Route::prefix('planProject')->group(function(){
-    Route::get('/planProject', 'PlanProjectController@index')->name('index');
-    Route::get('/planProject/{planProject}', 'PlanProjectController@show')->name('show');
-    Route::post('/planProject', 'PlanProjectController@store')->name('store');
-    Route::put('/planProject/{planProject}', 'PlanProjectController@update')->name('update');
-    Route::delete('/planProject/{planProject}', 'PlanProjectController@destroy')->name('delete');
+    Route::get('/', 'PlanProjectController@index')->name('index');
+    Route::get('/{planProject}', 'PlanProjectController@show')->name('show');
+    Route::post('/{project}', 'PlanProjectController@store')->name('store');
+    Route::put('/{planProject}', 'PlanProjectController@update')->name('update');
+    Route::delete('/{planProject}', 'PlanProjectController@destroy')->name('delete');
     Route::patch('project_team/{project_team}/planProject/{planProject}/completed', 'PlanProjectController@completed')->name('completed');
-
+    Route::get('/project/{project}/planProject', 'PlanProjectController@listaplanPorProyecto')->name('listaplanPorProyecto');
+    
 });
+*/
 
 Route::prefix('acquisition')->group(function(){
-    Route::get('/acquisition', 'AcquisitionController@index')->name('index');
-    Route::get('/acquisition/{acquisition}', 'AcquisitionController@show')->name('show');
-    Route::post('/acquisition', 'AcquisitionController@store')->name('store');
-    Route::put('/acquisition/{acquisition}', 'AcquisitionController@update')->name('update');
-    Route::delete('/acquisition/{acquisition}', 'AcquisitionController@destroy')->name('delete');
+    Route::get('/', 'AcquisitionController@index')->name('index');
+    Route::get('/{acquisition}', 'AcquisitionController@show')->name('show');
+    Route::post('/{provider}', 'AcquisitionController@store')->name('store');
+    Route::put('/{acquisition}', 'AcquisitionController@update')->name('update');
+    Route::delete('/{acquisition}', 'AcquisitionController@destroy')->name('delete');
    
 
 });
-*/

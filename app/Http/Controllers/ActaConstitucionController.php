@@ -61,7 +61,7 @@ class ActaConstitucionController extends Controller
                             'duracion'=> 'required',
                             'hito'=> 'required',
                             'entregable'=> 'required',
-                            'fecha'=> 'required',
+                            'fecha_fase'=> 'required',
                             'nombre_principalesImplicados'=> 'required',
                             'cargo'=> 'required',
                             'limitacion'=> 'required',
