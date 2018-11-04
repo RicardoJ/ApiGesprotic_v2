@@ -83,6 +83,16 @@ class ProjectTeamController extends Controller
         return response()->json($project_team);
     }
 
+      
+    public function listaProjectTeamPorProyecto($project_id){
+        $project =Project::find($project_id);
+       
+        if (!$project) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $project_team = $project->project_team;
+        return response()->json(['Equipo del proyecto del proyecto'=>$project_team],202);
+    }
 
     /**
      * Update the specified resource in storage.

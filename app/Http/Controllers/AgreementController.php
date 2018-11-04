@@ -36,7 +36,7 @@ class AgreementController extends Controller
             'persona_Encargada' => 'required'
         ]);
 
-        $provider=Provider::find($provider_id);
+        $provider=Provider::findOrFail($provider_id);
         if (!$provider) {
             return response()->json(['No existe proveedor'],404);
         }else{

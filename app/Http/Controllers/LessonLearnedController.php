@@ -34,7 +34,7 @@ class LessonLearnedController extends Controller
             'objetivo' => 'required',
             'informe' => 'required'
         ]);
-        $project=Project::find($project_id);
+        $project=Project::findOrFail($project_id);
         
             if (!$project) {
                 return response()->json(['No existe proyecto'],404);

@@ -71,7 +71,7 @@ class ActaPlanDirectorController extends Controller
                             'descripcion_documento'=> 'required' */
             
                                             ]);
- $project=Project::find($project_id);
+ $project=Project::findOrFail($project_id);
  if (!$project) {
     return response()->json(['No existe proyecto'],404);
 }else{

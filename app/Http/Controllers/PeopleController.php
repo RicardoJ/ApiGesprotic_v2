@@ -33,7 +33,7 @@ class PeopleController extends Controller
             'email' => 'required|unique:people,email',  
             'competencias' => 'required'
         ]);
-        $project_team=Project_team::find($project_team_id);
+        $project_team=Project_team::findOrFail($project_team_id);
         if (!$project_team) {
             return response()->json(['No existe proyecto'],404);
         }else{

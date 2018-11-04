@@ -55,7 +55,7 @@ class ActaRiesgoController extends Controller
                             'protocolo_de_auditoria_riesgos'=> 'required',
             */
                                             ]);
-$project=Project::find($project_id);
+$project=Project::findOrFail($project_id);
 if (!$project) {
     return response()->json(['No existe proyecto'],404);
 }else{
