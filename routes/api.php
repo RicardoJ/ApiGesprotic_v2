@@ -167,7 +167,7 @@ Route::prefix('planProject')->group(function(){
     
 });
 */
-
+/*
 Route::prefix('acquisition')->group(function(){
     Route::get('/', 'AcquisitionController@index')->name('index');
     Route::get('/{acquisition}', 'AcquisitionController@show')->name('show');
@@ -177,3 +177,4 @@ Route::prefix('acquisition')->group(function(){
    
 
 });
+*/
