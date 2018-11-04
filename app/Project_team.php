@@ -11,7 +11,7 @@ class Project_team extends Model
     protected $fillable = ['nombre','image','project_id'];
     
     public function project(){
-        return $this->BelongsTo('App\project', 'project_id');
+        return $this->BelongsTo('App\Project', 'project_id');
         
     }
 

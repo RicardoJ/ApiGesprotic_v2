@@ -98,13 +98,13 @@ Route::prefix('actaRiesgo')->group(function(){
 Route::prefix('change')->group(function(){
     Route::get('/', 'ChangeController@index')->name('index');
     Route::get('/{change}', 'ChangeController@show')->name('show');
-    Route::post('/', 'ChangeController@store')->name('store');
+    Route::post('/{project}', 'ChangeController@store')->name('store');
     Route::put('/{change}', 'ChangeController@update')->name('update');
     Route::delete('/{change}', 'ChangeController@destroy')->name('delete');
 });
 */
-/*
-ya tiene las rutas completa s, solo hacer lo que esta en la nota
+
+//ya tiene las rutas completa s, solo hacer lo que esta en la nota
 Route::prefix('project_team')->group(function(){
     Route::get('/', 'ProjectTeamController@index')->name('index');
     Route::get('/{project_team}', 'ProjectTeamController@show')->name('show');
@@ -113,7 +113,7 @@ Route::prefix('project_team')->group(function(){
     Route::delete('/{project_team}', 'ProjectTeamController@destroy')->name('delete');
     Route::get('/project/{project}/project_team', 'ProjectTeamController@listaProjectTeamPorProyecto')->name('listaProjectTeamPorProyecto');
 });
-*/
+
 /*
 Route::prefix('people')->group(function(){
     Route::get('/', 'PeopleController@index')->name('index');

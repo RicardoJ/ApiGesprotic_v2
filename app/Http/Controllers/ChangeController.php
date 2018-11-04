@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Change;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ChangeController extends Controller
@@ -23,7 +24,7 @@ class ChangeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$project_id)
     {
         $this->validate($request, [
             'cambioPropuestoPor' => 'required',
@@ -33,18 +34,23 @@ class ChangeController extends Controller
             'estado' => 'required'
         
         ]);
-        $change = new Change;
-        $change->create(
-        $request->only(['cambioPropuestoPor', 
-                        'descripcion',
-                         'nombre',
-                         'responsable',
-                         'estado'
-                         ])
-        );
+        $project=Project::findOrFail($project_id);
+        if (!$project) {
+            return response()->json(['No existe  proyecto'],404);
+        }else{
+        $change = new Change([
+            'cambioPropuestoPor' =>$request->input('cambioPropuestoPor'),
+            'descripcion' =>$request->input('descripcion'),
+            'nombre' =>$request->input('nombre'),
+            'responsable' =>$request->input('responsable'),
+            'estado' =>$request->input('estado'),
+            'project_id'=>$project_id
+
+        ]);
+         $change->save();
         return response()->json($change);
     }
-
+    }
     /**
      * Display the specified resource.
      *
