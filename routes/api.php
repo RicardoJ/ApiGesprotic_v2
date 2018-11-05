@@ -104,17 +104,18 @@ Route::prefix('change')->group(function(){
 });
 */
 
-//ya tiene las rutas completa s, solo hacer lo que esta en la nota
+
 Route::prefix('project_team')->group(function(){
     Route::get('/', 'ProjectTeamController@index')->name('index');
     Route::get('/{project_team}', 'ProjectTeamController@show')->name('show');
     Route::post('/{project}', 'ProjectTeamController@store')->name('store');
-    Route::put('/{project_team}', 'ProjectTeamController@update')->name('update');
+    Route::put('Name/{project_team}', 'ProjectTeamController@updateName')->name('updateName');
+    Route::post('Image/{project_team}', 'ProjectTeamController@updateImage')->name('updateImage');
     Route::delete('/{project_team}', 'ProjectTeamController@destroy')->name('delete');
     Route::get('/project/{project}/project_team', 'ProjectTeamController@listaProjectTeamPorProyecto')->name('listaProjectTeamPorProyecto');
 });
 
-/*
+
 Route::prefix('people')->group(function(){
     Route::get('/', 'PeopleController@index')->name('index');
     Route::get('/{people}', 'PeopleController@show')->name('show');
@@ -123,7 +124,7 @@ Route::prefix('people')->group(function(){
     Route::delete('/{people}', 'PeopleController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/people', 'PeopleController@listarPersonasDeEquipo')->name('listarPersonasDeEquipo');
 });
-*/
+
 /*
 Route::prefix('provider')->group(function(){
     Route::get('/', 'ProviderController@index')->name('index');

@@ -52,7 +52,7 @@ class ProjectTeamController extends Controller
             
     if ($request->hasFile('image')) {
         $image = $request->File('image');
-        $name = str_slug($request->title).'.'.$image->getClientOriginalExtension();
+        $name = str_random(10).'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('/uploads/projectTeam');
         $imagePath = $destinationPath. "/".  $name;
         $image->move($destinationPath, $name);
@@ -101,31 +101,40 @@ class ProjectTeamController extends Controller
      * @param  \App\Project_team  $project_team
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project_team $project_team)
+    public function updateName(Request $request, Project_team $project_team)
     {
         $this->validate($request, [
-            'nombre' => 'required',
-            'image' => 'required|image'
+            'nombre' => 'required'
+            //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
  
         ]);
-          /**
-         * si tenemos un archivo 'file' en el campo 'file'
-         * Luego se guarda en el disco en public en una carpeta llamada image y ahi se va guardar
-         * la imagen en el campo file
-         * Luego se actualiza el post
-         */
-
-        if($request->file('image')){
-            $path = Storage::disk('public')->put('image',  $request->file('image'));
-            $project_team->fill(['file' => asset($path)])->save();
-        }
         $project_team->nombre = $request->nombre;
-        $project_team->image = $request->image;
        
         $project_team->save();
-        return response()->json($project_team);
+        return response()->json(['Nombre Equipo del proyecto Editado'=>$project_team],202);
     }
-
+    public function updateImage(Request $request, $project_team_id)
+    {
+        $this->validate($request, [
+         //   'nombre' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+ 
+        ]);
+    
+        $project_team = Project_team::find($project_team_id);
+       if ($request->hasFile('image')) {
+        $image = $request->File('image');
+        $name = str_random(10).'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/uploads/projectTeam');
+        $imagePath = $destinationPath. "/".  $name;
+        $image->move($destinationPath, $name);
+        $project_team->image = $name; 
+      }
+       
+        $project_team->save();
+        return response()->json(['Imagen Equipo del proyecto Editado'=>$project_team],202);
+    
+}
     /**
      * Remove the specified resource from storage.
      *
@@ -137,4 +146,6 @@ class ProjectTeamController extends Controller
         $project_team->delete();
         return response()->json(['success' => 'borrado correctamente']);
     }
+
+
 }
