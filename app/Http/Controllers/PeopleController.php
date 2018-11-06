@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\People;
 use App\Project_team;
 use Illuminate\Http\Request;
@@ -26,13 +26,19 @@ class PeopleController extends Controller
      */
     public function store(Request $request, $project_team_id)
     {
-        $this->validate($request, [
+        
+       $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'apellidos' => 'required',
             'rol' => 'required',
             'email' => 'required|unique:people,email',  
             'competencias' => 'required'
-        ]);
+]);
+
+        if ($validator->fails()) {
+            return response()->json(['Email ya existe'],404);
+
+        }else{
         $project_team=Project_team::findOrFail($project_team_id);
         if (!$project_team) {
             return response()->json(['No existe proyecto'],404);
@@ -47,12 +53,8 @@ class PeopleController extends Controller
         ]);
         $people->save();
         return response()->json($people);
-        /*
-        $people->create(
-        $request->only(['nombre', 'apellidos', 'rol','email','competencias'])
-        );
-        return response()->json($people);
-        */
+    }
+     
     }
     }
     /**

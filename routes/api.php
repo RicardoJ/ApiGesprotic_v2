@@ -104,7 +104,7 @@ Route::prefix('change')->group(function(){
 });
 */
 
-
+/*
 Route::prefix('project_team')->group(function(){
     Route::get('/', 'ProjectTeamController@index')->name('index');
     Route::get('/{project_team}', 'ProjectTeamController@show')->name('show');
@@ -114,12 +114,12 @@ Route::prefix('project_team')->group(function(){
     Route::delete('/{project_team}', 'ProjectTeamController@destroy')->name('delete');
     Route::get('/project/{project}/project_team', 'ProjectTeamController@listaProjectTeamPorProyecto')->name('listaProjectTeamPorProyecto');
 });
-
+*/
 
 Route::prefix('people')->group(function(){
     Route::get('/', 'PeopleController@index')->name('index');
     Route::get('/{people}', 'PeopleController@show')->name('show');
-    Route::post('/{project_team}', 'ProjectTeamController@store')->name('store');
+    Route::post('/{project_team}', 'PeopleController@store')->name('store');
     Route::put('/{people}', 'PeopleController@update')->name('update');
     Route::delete('/{people}', 'PeopleController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/people', 'PeopleController@listarPersonasDeEquipo')->name('listarPersonasDeEquipo');
