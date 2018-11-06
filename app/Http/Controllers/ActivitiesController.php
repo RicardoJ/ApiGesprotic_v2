@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Activities;
 use App\Project_team;
 use Illuminate\Http\Request;
@@ -26,13 +26,16 @@ class ActivitiesController extends Controller
     public function store(Request $request, $project_team_id)
     {
 
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'porcentaje' => 'required',
             'completed' => 'required'
            
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $project_team=Project_team::findOrFail($project_team_id);
         if (!$project_team) {
             return response()->json(['No existe proyecto'],404);
@@ -52,6 +55,7 @@ class ActivitiesController extends Controller
         */
         }
     }
+}
 
     /**
      * Display the specified resource.
@@ -82,20 +86,24 @@ class ActivitiesController extends Controller
      */
     public function update(Request $request, Activities $activities)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'porcentaje' => 'required',
             'completed' => 'required'
            
         ]);
 
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $activities->nombre = $request->nombre;
         $activities->porcentaje = $request->porcentaje;
         $activities->completed =$request->completed;
         $activities->save();
         return response()->json($activities);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

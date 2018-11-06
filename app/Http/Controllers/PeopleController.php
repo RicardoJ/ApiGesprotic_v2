@@ -87,7 +87,7 @@ class PeopleController extends Controller
      */
     public function update(Request $request, People $people)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'apellidos' => 'required',
             'rol' => 'required',
@@ -95,7 +95,10 @@ class PeopleController extends Controller
          'email' => 'required|unique:people,email,'.$people->id,
             'competencias' => 'required'
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $people->nombre = $request->nombre;
         $people->apellidos = $request->apellidos;
         $people->rol = $request->rol;
@@ -104,7 +107,7 @@ class PeopleController extends Controller
         $people->save();
         return response()->json($people);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

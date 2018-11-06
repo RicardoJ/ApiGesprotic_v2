@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Resource;
 use App\Project;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class ResourceController extends Controller
      */
     public function store(Request $request , $project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'descripcion' => 'required',
             'fecha_Inicial' => 'required',
             'fecha_Final' => 'required',
@@ -50,6 +50,10 @@ class ResourceController extends Controller
             'unidades'=>'required' 
 
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project=Project::findOrFail($project_id);
             if (!$project) {
                 return response()->json(['No existe proyecto'],404);
@@ -69,6 +73,7 @@ class ResourceController extends Controller
         return response()->json($resource);
     }
 }
+    }
 
     /**
      * Display the specified resource.
@@ -93,7 +98,7 @@ class ResourceController extends Controller
      */
     public function update(Request $request, Resource $resource)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'descripcion' => 'required',
             'fecha_Inicial' => 'required',
             'fecha_Final' => 'required',
@@ -104,6 +109,10 @@ class ResourceController extends Controller
             'unidades'=>'required' 
 
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $resource->descripcion = $request->descripcion;
         $resource->fecha_Inicial = $request->fecha_Inicial;
         $resource->fecha_Final = $request->fecha_Final;
@@ -115,7 +124,7 @@ class ResourceController extends Controller
         $resource->save();
         return response()->json($resource);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

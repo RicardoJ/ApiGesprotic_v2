@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Change;
 use App\Project;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class ChangeController extends Controller
      */
     public function store(Request $request,$project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'cambioPropuestoPor' => 'required',
             'descripcion' => 'required',
             'nombre' => 'required',
@@ -34,6 +34,10 @@ class ChangeController extends Controller
             'estado' => 'required'
         
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project=Project::findOrFail($project_id);
         if (!$project) {
             return response()->json(['No existe  proyecto'],404);
@@ -51,6 +55,7 @@ class ChangeController extends Controller
         return response()->json($change);
     }
     }
+}
     /**
      * Display the specified resource.
      *
@@ -73,7 +78,7 @@ class ChangeController extends Controller
      */
     public function update(Request $request, Change $change)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'cambioPropuestoPor' => 'required',
             'descripcion' => 'required',
             'nombre' => 'required',
@@ -81,7 +86,10 @@ class ChangeController extends Controller
             'estado' => 'required'
         
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $change->cambioPropuestoPor = $request->cambioPropuestoPor;
         $change->descripcion = $request->descripcion;
         $change->nombre = $request->nombre;
@@ -91,7 +99,7 @@ class ChangeController extends Controller
         $change->save();
         return response()->json($change);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

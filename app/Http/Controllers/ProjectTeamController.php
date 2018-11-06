@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Project_team;
 use App\Project;
 use Illuminate\Http\Request;
@@ -18,9 +18,6 @@ class ProjectTeamController extends Controller
     {
         return response()->json(Project_team::all());
     }
-
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -30,7 +27,7 @@ class ProjectTeamController extends Controller
     
     public function store(Request $request, $project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required|String',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
  
@@ -42,7 +39,10 @@ class ProjectTeamController extends Controller
          * la imagen en el campo file 
          * Luego se actualiza el post
          */
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $project_team = new Project_team(['project_id'=>$project_id]);
         $project=Project::findOrFail($project_id);
         if (!$project) {
@@ -68,9 +68,8 @@ class ProjectTeamController extends Controller
             $project_team->save();
             return response()->json($project_team);
         }
-      
-       
     }
+}
 
     /**
      * Display the specified resource.
@@ -103,24 +102,32 @@ class ProjectTeamController extends Controller
      */
     public function updateName(Request $request, Project_team $project_team)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required'
             //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
  
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project_team->nombre = $request->nombre;
        
         $project_team->save();
         return response()->json(['Nombre Equipo del proyecto Editado'=>$project_team],202);
     }
+}
     public function updateImage(Request $request, $project_team_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
          //   'nombre' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
  
         ]);
-    
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project_team = Project_team::find($project_team_id);
        if ($request->hasFile('image')) {
         $image = $request->File('image');
@@ -133,7 +140,7 @@ class ProjectTeamController extends Controller
        
         $project_team->save();
         return response()->json(['Imagen Equipo del proyecto Editado'=>$project_team],202);
-    
+    }
 }
     /**
      * Remove the specified resource from storage.

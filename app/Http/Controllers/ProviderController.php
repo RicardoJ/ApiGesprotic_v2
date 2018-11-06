@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Provider;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,7 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'empresa' => 'required',
             'contacto' => 'required',
             'telefono' => 'required',
@@ -34,6 +34,10 @@ class ProviderController extends Controller
             'email' => 'required|unique:provider,email' 
 
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $provider = new Provider([
             'empresa' => $request->input('empresa'),
             'contacto' => $request->input('contacto'),
@@ -44,7 +48,7 @@ class ProviderController extends Controller
         $provider->save();
         return response()->json(['success' => $provider]);
     }
-
+    }
     /**
      * Display the specified resource.
      *
@@ -66,18 +70,17 @@ class ProviderController extends Controller
      */
     public function update(Request $request, Provider $provider)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'empresa' => 'required',
             'contacto' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
             'email' => 'required|unique:provider,email,'.$provider->id
         ]);
-        /*
-            $provider->update($request->all());
-            return response()->json(['editado' => $provider]);
-            */
-            
+            if ($validator->fails()) {
+                return response()->json(['Error'],404);
+    
+            }else{
         $provider->empresa = $request->empresa;
         $provider->contacto = $request->contacto;
         $provider->telefono = $request->telefono;
@@ -85,7 +88,7 @@ class ProviderController extends Controller
         $provider->email = $request->email;
         $provider->save();
         return response()->json($provider);
-        
+            }
     }
 
     /**

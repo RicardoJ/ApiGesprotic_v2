@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Acquisition;
 use App\Provider;
 use App\Project;
@@ -29,7 +29,7 @@ class AcquisitionController extends Controller
      */
     public function store(Request $request ,$provider_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'descripcion' => 'required',
             'fecha_Inicial' => 'required',
             'fecha_Final' => 'required',
@@ -41,6 +41,10 @@ class AcquisitionController extends Controller
 
         ]);
         
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $provider=Provider::findOrFail($provider_id);
             if (!$provider) {
                 return response()->json(['No existe  proveedor'],404);
@@ -60,13 +64,7 @@ class AcquisitionController extends Controller
                 $acquisition->save();
                 return response()->json($acquisition);
 
-        /*
-        $aquisition = new Aqquisition;
-        $aquisition->create(
-        $request->only(['descripcion', 'fecha_Inicial', 'fecha_Final','nombre','origen','relevancia','tipo','unidades'])
-        );
-        return response()->json($aquisition);
-        */
+                }
     
 }
     }
@@ -103,7 +101,7 @@ class AcquisitionController extends Controller
      */
     public function update(Request $request, Acquisition $acquisition)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'descripcion' => 'required',
             'fecha_Inicial' => 'required',
             'fecha_Final' => 'required',
@@ -114,6 +112,10 @@ class AcquisitionController extends Controller
             'unidades'=>'required' 
 
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $acquisition->descripcion = $request->descripcion;
         $acquisition->fecha_Inicial = $request->fecha_Inicial;
         $acquisition->fecha_Final = $request->fecha_Final;
@@ -125,7 +127,7 @@ class AcquisitionController extends Controller
         $acquisition->save();
         return response()->json($acquisition);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\ActaPlanDirector;
 use App\Project;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class ActaPlanDirectorController extends Controller
      */
     public function store(Request $request, $project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
                             'nombre'=> 'required',
                             'director_del_proyecto'=> 'required',
                            /* 'persona_revision'=> 'required', 
@@ -71,6 +71,9 @@ class ActaPlanDirectorController extends Controller
                             'descripcion_documento'=> 'required' */
             
                                             ]);
+                           if ($validator->fails()) {
+                       return response()->json(['Error'],404);
+                                }else{
  $project=Project::findOrFail($project_id);
  if (!$project) {
     return response()->json(['No existe proyecto'],404);
@@ -136,7 +139,7 @@ $request->only([
 return response()->json($actaPlanDirector);
 */
     }
-
+    }
     /**
      * Display the specified resource.
      *
@@ -167,7 +170,7 @@ return response()->json($actaPlanDirector);
      */
     public function update(Request $request, ActaPlanDirector $actaPlanDirector)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre',
             'director_del_proyecto',
            /* 'persona_revision', 
@@ -210,7 +213,10 @@ return response()->json($actaPlanDirector);
             'descripcion_documento'
                     */
                 ]);
+                if ($validator->fails()) {
+                    return response()->json(['Error'],404);
         
+                }else{
                 $actaPlanDirector->nombre = $request->nombre;
                 $actaPlanDirector->director_del_proyecto = $request->director_del_proyecto;
              /*   $actaPlanDirector->persona_revision = $request->persona_revision;
@@ -255,7 +261,7 @@ return response()->json($actaPlanDirector);
                 $actaPlanDirector->save();
                 return response()->json($actaPlanDirector);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

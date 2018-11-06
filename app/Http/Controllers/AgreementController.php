@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Agreement;
 use App\Provider;
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class AgreementController extends Controller
      */
     public function store(Request $request, $provider_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'contenido' => 'required',
             'fecha_Entrega' => 'required',
             'fecha_Contrato' => 'required',
@@ -35,7 +35,10 @@ class AgreementController extends Controller
             'nombre_Empresa' => 'required',
             'persona_Encargada' => 'required'
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $provider=Provider::findOrFail($provider_id);
         if (!$provider) {
             return response()->json(['No existe proveedor'],404);
@@ -59,7 +62,7 @@ class AgreementController extends Controller
                 }
             }
 
-       
+        }
         /*
         $agreement->create(
         $request->only(['contenido', 'fecha_Entrega', 'fecha_Contrato','fecha_Contrato','metodo_pago','nombre_Empresa','persona_Encargada'])
@@ -88,7 +91,7 @@ class AgreementController extends Controller
      */
     public function update(Request $request, Agreement $agreement)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'contenido' => 'required',
             'fecha_Entrega' => 'required|date',
             'fecha_Contrato' => 'required|date',
@@ -96,6 +99,10 @@ class AgreementController extends Controller
             'nombre_Empresa' => 'required',
             'persona_Encargada' => 'required'
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $agreement->contenido = $request->contenido;
         $agreement->fecha_Entrega = $request->fecha_Entrega;
         $agreement->fecha_Contrato = $request->fecha_Contrato;
@@ -105,7 +112,7 @@ class AgreementController extends Controller
         $agreement->save();
         return response()->json($agreement);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

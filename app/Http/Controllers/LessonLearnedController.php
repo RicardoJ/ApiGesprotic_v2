@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\LessonLearned;
 use App\Project;
 use Illuminate\Http\Request;
@@ -28,12 +28,16 @@ class LessonLearnedController extends Controller
      */
     public function store(Request $request, $project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'descripcion' => 'required',
             'objetivo' => 'required',
             'informe' => 'required'
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project=Project::findOrFail($project_id);
         
             if (!$project) {
@@ -56,7 +60,7 @@ class LessonLearnedController extends Controller
         }
         
     }
-
+    }
     /**
      * Display the specified resource.
      *
@@ -87,7 +91,7 @@ class LessonLearnedController extends Controller
      */
     public function update(Request $request, LessonLearned $lessonLearned)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'descripcion' => 'required',
             'objetivo' => 'required',
@@ -95,6 +99,10 @@ class LessonLearnedController extends Controller
             
         
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $lessonLearned->nombre = $request->nombre;
         $lessonLearned->descripcion = $request->descripcion;
         $lessonLearned->objetivo = $request->objetivo;
@@ -102,7 +110,7 @@ class LessonLearnedController extends Controller
         $lessonLearned->save();
         return response()->json($lessonLearned);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

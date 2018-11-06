@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\ActaRiesgo;
 use App\Project;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class ActaRiesgoController extends Controller
      */
     public function store(Request $request, $project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
                             'nombre'=> 'required',
                             'director'=> 'required',
                            /* 'version'=> 'required',
@@ -55,6 +55,10 @@ class ActaRiesgoController extends Controller
                             'protocolo_de_auditoria_riesgos'=> 'required',
             */
                                             ]);
+                                            if ($validator->fails()) {
+                                                return response()->json(['Error'],404);
+                                    
+                                            }else{
 $project=Project::findOrFail($project_id);
 if (!$project) {
     return response()->json(['No existe proyecto'],404);
@@ -73,6 +77,7 @@ if (!$project) {
         }
     }
 }
+    }
 /*
 $actaRiesgo->create(
 $request->only([
@@ -137,7 +142,7 @@ $request->only([
      */
     public function update(Request $request, ActaRiesgo $actaRiesgo)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
                             'nombre',
                             'director',
                     /*        'version',
@@ -165,7 +170,10 @@ $request->only([
           */
                     
                 ]);
+                if ($validator->fails()) {
+                    return response()->json(['Error'],404);
         
+                }else{
                 $actaRiesgo->nombre = $request->nombre;
                 $actaRiesgo->director = $request->director;
               /*  $actaRiesgo->edicion_revisada = $request->edicion_revisada;
@@ -195,7 +203,7 @@ $request->only([
                 $actaRiesgo->save();
                 return response()->json($actaRiesgo);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

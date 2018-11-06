@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Project;
 use Illuminate\Http\Request;
 
@@ -34,13 +34,16 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'director' => 'required',
             'nombre' => 'required',
             'plan' => 'required',
             'completed' => 'required'
         ]);
-      
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
 $project = new Project ([
     'director' => $request->input('director'),
     'nombre' => $request->input('nombre'),
@@ -54,6 +57,7 @@ $project->save();
      
        
     }
+}
 
     /**
      * Display the specified resource.
@@ -76,12 +80,16 @@ $project->save();
      */
     public function update(Request $request, Project $project)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'director' => 'required',
             'nombre' => 'required',
             'plan' => 'required',
             'completed' => 'required'
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project->update($request->all());
         return response()->json(['editado' => $project]);
             // opcion 1
@@ -105,7 +113,7 @@ $project->save();
         return response()->json($project);
         */
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

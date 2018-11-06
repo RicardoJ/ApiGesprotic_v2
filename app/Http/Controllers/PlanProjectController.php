@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\PlanProject;
 use App\ Project;
 use Illuminate\Http\Request;
@@ -27,13 +27,17 @@ class PlanProjectController extends Controller
      */
     public function store(Request $request,$project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'porcentaje' => 'required',
             'descripcion' => 'required',
             'completed' => 'required'
            
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project=Project::findOrFail($project_id);
             if (!$project) {
                 return response()->json(['No existe proyecto'],404);
@@ -51,15 +55,11 @@ class PlanProjectController extends Controller
                 ]);
                 $planProject->save();
                 return response()->json($planProject);
-                /*
-        $planProject = new PlanProject();
-        $planProject->fill($request->all());
-        $planProject->save();
-        */
+        
                 }
             }
     }
-
+    }
     /**
      * Display the specified resource.
      *
@@ -82,20 +82,24 @@ class PlanProjectController extends Controller
      */
     public function update(Request $request, planProject $planProject)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'nombre' => 'required',
             'descripcion' => 'required',
             'completed' => 'required'
            
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $planProject->nombre = $request->nombre;
         $planProject->porcentaje = $request->porcentaje;
         $planProject->descripcion = $request->descripcion;
         $planProject ->completed =$request->completed;
         $planProject->save();
         return response()->json($planProject);
+    }
     }
 
     

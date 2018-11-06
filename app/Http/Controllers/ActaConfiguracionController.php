@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\ActaConfiguracion;
 use App\Project;
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class ActaConfiguracionController extends Controller
      */
     public function store(Request $request , $project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
                             'nombre'=> 'required',
                             'director'=> 'required',
                     /*        'aprobacion_persona'=> 'required',
@@ -70,6 +70,9 @@ class ActaConfiguracionController extends Controller
                             'documento_adjunto'=> 'required',
                             'descripcion'=> 'required',*/
                                                             ]);
+        if ($validator->fails()) {
+         return response()->json(['Email ya existe'],404);
+              }else{
     $project=Project::findOrFail($project_id);
         if (!$project) {
             return response()->json(['No existe proyecto'],404);
@@ -138,7 +141,7 @@ return response()->json($actaConfiguracion);
     }
 }
    }
-
+    }
     /**
      * Display the specified resource.
      *
@@ -169,7 +172,7 @@ return response()->json($actaConfiguracion);
      */
     public function update(Request $request, ActaConfiguracion $actaConfiguracion)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
     'nombre',
     'director',
     /*'aprobacion_persona',
@@ -213,7 +216,10 @@ return response()->json($actaConfiguracion);
     'descripcion'*/
             
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $actaConfiguracion->nombre = $request->nombre;
         $actaConfiguracion->director = $request->director;
      /*   $actaConfiguracion->aprobacion_persona = $request->aprobacion_persona;
@@ -259,7 +265,7 @@ return response()->json($actaConfiguracion);
         $actaConfiguracion->save();
         return response()->json($actaConfiguracion);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *

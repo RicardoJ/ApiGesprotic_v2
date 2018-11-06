@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\ActaConstitucion;
 use App\Project;
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class ActaConstitucionController extends Controller
      */
     public function store(Request $request,$project_id)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(),[
                             'nombre' => 'required',
                             'fecha' => 'required',
                           /*  'cliente' => 'required', 
@@ -83,6 +83,10 @@ class ActaConstitucionController extends Controller
 */
 
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
         $project=Project::findOrFail($project_id);
             if (!$project) {
                 return response()->json(['No existe proyecto'],404);
@@ -164,6 +168,7 @@ class ActaConstitucionController extends Controller
 
        
     }
+}
 
     /**
      * Display the specified resource.
@@ -195,8 +200,8 @@ class ActaConstitucionController extends Controller
      */
     public function update(Request $request, ActaConstitucion $actaConstitucion)
     {
-        $this->validate($request, [
-            'nombre'=>'required',
+        $validator = Validator::make($request->all(),[
+        'nombre'=>'required',
         'fecha'=>'required',
      /*   'cliente'=>'required', 
         'patrocinador'=>'required',
@@ -249,7 +254,10 @@ class ActaConstitucionController extends Controller
         'volumen_de_contratacion'=>'required',
         'persona_nivel_superior_de_desicion'=>'required' */
         ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
 
+        }else{
         $actaConstitucion->nombre = $request->nombre;
         $actaConstitucion->fecha = $request->fecha;
         /*
@@ -306,7 +314,7 @@ class ActaConstitucionController extends Controller
         $actaConstitucion->save();
         return response()->json($actaConstitucion);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      *
