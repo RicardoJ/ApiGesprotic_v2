@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Resource;
 use App\Project;
+use App\Provider;
+use App\Agreement;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
@@ -28,6 +30,16 @@ class ResourceController extends Controller
         }
         $resource = $project->resource;
         return response()->json(['Recurso del proyecto'=>$resource],202);
+    }
+
+    public function listarRecursoPorProveedor($provider_id){
+        $provider=Provider::findOrFail($provider_id);
+       
+        if (!$provider) {
+            return response()->json(['No existe el proveedor'],404);
+        }
+        $resource = $provider->resource;
+        return response()->json(['Recurso del proveedor'=>$resource],202);
     }
 
 
@@ -74,7 +86,48 @@ class ResourceController extends Controller
     }
 }
     }
+    public function storeWithProvider(Request $request , $provider_id)
+    {
+        $validator = Validator::make($request->all(),[
+            'descripcion' => 'required',
+            'fecha_Inicial' => 'required',
+            'fecha_Final' => 'required',
+            'nombre' => 'required',
+            'origen' => 'required',
+            'relevancia'=>'required',
+            'tipo'=>'required',
+            'unidades'=>'required' 
 
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
+            $provider=Provider::findOrFail($provider_id);
+            if (!$provider) {
+                return response()->json(['No existe  proveedor'],404);
+            }else{
+        $agreement = $provider->agreement;
+        if (!$agreement) {
+            return response()->json(['No tiene contrato este proveedor'],404);
+        } else {
+        $resource = new Resource([
+            'descripcion' => $request->input('descripcion'),
+            'fecha_Inicial' => $request->input('fecha_Inicial'),
+            'fecha_Final' => $request->input('fecha_Final'),
+            'nombre' =>$request->input('nombre'),
+            'origen' =>$request->input('origen'),
+            'relevancia'=>$request->input('relevancia'),
+            'tipo'=>$request->input('tipo'),
+            'unidades'=>$request->input('unidades'),
+            'provider_id'=>$provider_id
+        ]);
+        $resource->save();
+        return response()->json($resource);
+    }
+}
+}
+    }
     /**
      * Display the specified resource.
      *

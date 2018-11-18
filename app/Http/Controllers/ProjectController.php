@@ -20,7 +20,7 @@ class ProjectController extends Controller
 
       //$project = Project::all()->toArray();
       //return response()->json($project);
-
+ 
       return response()->json(Project::all());
       
     }

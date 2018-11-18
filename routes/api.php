@@ -23,16 +23,18 @@ Route::name('project.')->group(function(){
 
 });
 */
-/*
+
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
     Route::get('/{resource}', 'ResourceController@show')->name('show');
-    Route::post('/{project}', 'ResourceController@store')->name('store');
+    Route::post('/project/{project}', 'ResourceController@store')->name('store');
+    Route::post('/provider/{provider}', 'ResourceController@storeWithProvider')->name('storeWithProvider');
     Route::put('/{resource}/project/{project}', 'ResourceController@update')->name('update');
     Route::delete('/{resource}', 'ResourceController@destroy')->name('delete');
     Route::get('/project/{project}/resource', 'ResourceController@listarRecursoPorProyecto')->name('listarRecursoPorProyecto');
+    Route::get('/provider/{provider}/resource', 'ResourceController@listarRecursoPorProveedor')->name('listarRecursoPorProveedor');
 });
-*/
+
 
 /*
 Route::prefix('lessonLearned')->group(function(){
@@ -115,7 +117,7 @@ Route::prefix('project_team')->group(function(){
     Route::get('/project/{project}/project_team', 'ProjectTeamController@listaProjectTeamPorProyecto')->name('listaProjectTeamPorProyecto');
 });
 */
-
+/*
 Route::prefix('people')->group(function(){
     Route::get('/', 'PeopleController@index')->name('index');
     Route::get('/{people}', 'PeopleController@show')->name('show');
@@ -124,7 +126,7 @@ Route::prefix('people')->group(function(){
     Route::delete('/{people}', 'PeopleController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/people', 'PeopleController@listarPersonasDeEquipo')->name('listarPersonasDeEquipo');
 });
-
+ */
 /*
 Route::prefix('provider')->group(function(){
     Route::get('/', 'ProviderController@index')->name('index');

@@ -19,4 +19,7 @@ class Provider extends Model
     public function agreement(){
         return $this->hasOne('App\Agreement');
     }
+    public function resource(){
+        return $this->hasMany('App\Resource');
+    }
 }

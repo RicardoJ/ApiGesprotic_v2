@@ -38,7 +38,7 @@ class Project extends Model
         return $this->hasMany('App\Resource');
     }
     public function acquisition(){
-        return  $this->hasMany('App\Acquisition');
+        return  $this->belongsToMany('App\Acquisition');
     }
     public function planProject(){
         return $this->hasOne('App\PlanProject');
