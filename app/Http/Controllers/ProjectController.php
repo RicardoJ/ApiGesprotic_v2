@@ -37,7 +37,7 @@ class ProjectController extends Controller
         $validator = Validator::make($request->all(),[
             'director' => 'required',
             'nombre' => 'required',
-            'plan' => 'required',
+            'departamento' => 'required',
             'completed' => 'required'
         ]);
         if ($validator->fails()) {
@@ -47,7 +47,7 @@ class ProjectController extends Controller
 $project = new Project ([
     'director' => $request->input('director'),
     'nombre' => $request->input('nombre'),
-    'plan' => $request->input('plan'),
+    'departamento' => $request->input('departamento'),
     'completed' => $request->input('completed')
     
 ]);

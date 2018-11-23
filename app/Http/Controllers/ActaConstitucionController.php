@@ -30,6 +30,7 @@ class ActaConstitucionController extends Controller
         $validator = Validator::make($request->all(),[
                             'nombre' => 'required',
                             'fecha' => 'required',
+                            'check_box' => 'required',
                           /*  'cliente' => 'required', 
                             'patrocinador' => 'required',
                             'codigo_identificacion' => 'required',
@@ -98,6 +99,7 @@ class ActaConstitucionController extends Controller
                 $actaConstitucion = new ActaConstitucion([
                     'nombre' =>$request->input('nombre'),
                     'fecha'=>$request->input('fecha'),
+                    'check_box'=>($request->has('check_box')) ? true : false ,
                     'project_id'=>$project_id
                 ]);
                 $actaConstitucion->save();

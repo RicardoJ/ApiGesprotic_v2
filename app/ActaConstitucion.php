@@ -59,7 +59,7 @@ class ActaConstitucion extends Model
                             'capacidad_tecnica_de_desicion',
                             'volumen_de_contratacion',
                             'persona_nivel_superior_de_desicion',
-                            */
+                            */ 'check_box',
                             'project_id'
                             ];
                             

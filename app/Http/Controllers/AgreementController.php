@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use App\Agreement;
 use App\Provider;
 use Illuminate\Http\Request;
-
 class AgreementController extends Controller
 {
     /**
@@ -17,8 +15,6 @@ class AgreementController extends Controller
     {
         return response()->json(Agreement::all());
     }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -28,16 +24,19 @@ class AgreementController extends Controller
     public function store(Request $request, $provider_id)
     {
         $validator = Validator::make($request->all(),[
-            'contenido' => 'required',
-            'fecha_Entrega' => 'required',
-            'fecha_Contrato' => 'required',
-            'metodo_Pago' => 'required',
+            'lugar'=> 'required',
+            'nit' => 'required', //entero
+            'fecha' => 'required', //date
+            'lugar_domicilio' => 'required',
+            'monto' => 'required',
+            'domicilio_proveedor' => 'required',
+            'tipo_adquisicion' => 'required',
+            'tiempo_contrato' => 'required',
             'nombre_Empresa' => 'required',
-            'persona_Encargada' => 'required'
+            'nombre_proveedor' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
-
         }else{
         $provider=Provider::findOrFail($provider_id);
         if (!$provider) {
@@ -48,20 +47,22 @@ class AgreementController extends Controller
                 return response()->json(['ya tiene contrato este proveedor'],404);
             } else {
                 $agreement = new Agreement([
-                'contenido' =>$request->input('contenido'),
-                'fecha_Entrega'=>$request->input('fecha_Entrega'),
-                'fecha_Contrato'=>$request->input('fecha_Contrato'),
-                'metodo_Pago'=>$request->input('metodo_Pago'),
+                'lugar' =>$request->input('lugar'),
+                'nit'=>$request->input('nit'),
+                'fecha'=>$request->input('fecha'),
+                'lugar_domicilio'=>$request->input('lugar_domicilio'),
+                'monto'=>$request->input('monto'),
+                'domicilio_proveedor'=>$request->input('domicilio_proveedor'),
+                'tipo_adquisicion'=>$request->input('tipo_adquisicion'),
+                'tiempo_contrato'=>$request->input('tiempo_contrato'),
                 'nombre_Empresa'=>$request->input('nombre_Empresa'),
-                'persona_Encargada'=>$request->input('persona_Encargada'),
+                'nombre_proveedor'=>$request->input('nombre_proveedor'),
                 'provider_id'=>$provider_id
             ]);
             $agreement->save();
             return response()->json($agreement);
-
                 }
             }
-
         }
         /*
         $agreement->create(
@@ -69,7 +70,6 @@ class AgreementController extends Controller
         );
         return response()->json($agreement); */
     }
-
     /**
      * Display the specified resource.
      *
@@ -81,7 +81,15 @@ class AgreementController extends Controller
         return response()->json($agreement);
     }
 
-
+    public function listaContratoPorProveedor($provider_id){
+        $provider =Provider::find($provider_id);
+       
+        if (!$provider) {
+            return response()->json(['No existe el proyecto'],404);
+        }
+        $agreement = $provider->agreement;
+        return response()->json(['contrato del proveedor'=>$agreement],202);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -92,23 +100,30 @@ class AgreementController extends Controller
     public function update(Request $request, Agreement $agreement)
     {
         $validator = Validator::make($request->all(),[
-            'contenido' => 'required',
-            'fecha_Entrega' => 'required|date',
-            'fecha_Contrato' => 'required|date',
-            'metodo_Pago' => 'required',
+            'lugar'=> 'required',
+            'nit' => 'required', //entero
+            'fecha' => 'required', //date
+            'lugar_domicilio' => 'required',
+            'monto' => 'required',
+            'domicilio_proveedor' => 'required',
+            'tipo_adquisicion' => 'required',
+            'tiempo_contrato' => 'required',
             'nombre_Empresa' => 'required',
-            'persona_Encargada' => 'required'
+            'nombre_proveedor' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
-
         }else{
-        $agreement->contenido = $request->contenido;
-        $agreement->fecha_Entrega = $request->fecha_Entrega;
-        $agreement->fecha_Contrato = $request->fecha_Contrato;
-        $agreement->metodo_Pago = $request->metodo_Pago;
+        $agreement->lugar = $request->lugar;
+        $agreement->nit = $request->nit;
+        $agreement->fecha = $request->fecha;
+        $agreement->lugar_domicilio = $request->lugar_domicilio;
+        $agreement->monto = $request->monto;
+        $agreement->domicilio_proveedor = $request->domicilio_proveedor;
+        $agreement->tipo_adquisicion = $request->tipo_adquisicion;
+        $agreement->tiempo_contrato = $request->tiempo_contrato;
         $agreement->nombre_Empresa = $request->nombre_Empresa;
-        $agreement->persona_Encargada = $request->persona_Encargada;
+        $agreement->nombre_proveedor = $request->nombre_proveedor;
         $agreement->save();
         return response()->json($agreement);
     }

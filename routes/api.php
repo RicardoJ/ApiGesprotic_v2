@@ -23,7 +23,7 @@ Route::name('project.')->group(function(){
 
 });
 */
-
+/*
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
     Route::get('/{resource}', 'ResourceController@show')->name('show');
@@ -34,7 +34,7 @@ Route::prefix('resource')->group(function(){
     Route::get('/project/{project}/resource', 'ResourceController@listarRecursoPorProyecto')->name('listarRecursoPorProyecto');
     Route::get('/provider/{provider}/resource', 'ResourceController@listarRecursoPorProveedor')->name('listarRecursoPorProveedor');
 });
-
+*/
 
 /*
 Route::prefix('lessonLearned')->group(function(){
@@ -127,7 +127,7 @@ Route::prefix('people')->group(function(){
     Route::get('/project_team/{project_team}/people', 'PeopleController@listarPersonasDeEquipo')->name('listarPersonasDeEquipo');
 });
  */
-/*
+/* probado
 Route::prefix('provider')->group(function(){
     Route::get('/', 'ProviderController@index')->name('index');
     Route::get('/{provider}', 'ProviderController@show')->name('show');
@@ -136,14 +136,14 @@ Route::prefix('provider')->group(function(){
     Route::delete('/{provider}', 'ProviderController@destroy')->name('delete');
 });
 */
-/*
+/* probado
 Route::prefix('agreement')->group(function(){
     Route::get('/', 'AgreementController@index')->name('index');
     Route::get('/{agreement}', 'AgreementController@show')->name('show');
     Route::post('/{provider}', 'AgreementController@store')->name('store');
     Route::put('/{agreement}', 'AgreementController@update')->name('update');
     Route::delete('/{agreement}', 'AgreementController@destroy')->name('delete');
-    Route::get('/provider/{provider}/agreement', 'AgreementController@listaContratoPorProyecto')->name('listaContratoPorProyecto');
+    Route::get('/provider/{provider}/agreement', 'AgreementController@listaContratoPorProveedor')->name('listaContratoPorProveedor');
 });
 */
 /*
@@ -170,14 +170,14 @@ Route::prefix('planProject')->group(function(){
     
 });
 */
-/*
+
+
+   
 Route::prefix('acquisition')->group(function(){
     Route::get('/', 'AcquisitionController@index')->name('index');
     Route::get('/{acquisition}', 'AcquisitionController@show')->name('show');
-    Route::post('/{provider}', 'AcquisitionController@store')->name('store');
+    Route::post('/', 'AcquisitionController@store')->name('store');
     Route::put('/{acquisition}', 'AcquisitionController@update')->name('update');
     Route::delete('/{acquisition}', 'AcquisitionController@destroy')->name('delete');
-   
-
 });
-*/
+
