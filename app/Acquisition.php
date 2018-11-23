@@ -8,9 +8,26 @@ class Acquisition extends Model
 {
     protected $table = 'acquisition';
     public $timestamps = false;
-    protected $fillable = ['descripcion','fecha_Inicial','fecha_Final','nombre','origen','relevancia','tipo','unidades','project_id','provider_id'];
+    protected $fillable = [
 
-    
+        'fecha',
+        'edicion',
+        'nombre_persona_responsable',
+        'alcance',
+        'prescripciones',
+        'cantidad',
+        'documentacion',
+        'documentacion_a_entregar',
+        'precio',
+        'plazo_final' ,
+        'informacion_a_incluir',
+        'criterio',
+        'otra_informacion'
+
+
+   ];
+
+    /*
     public function project(){
         return $this->BelongsTo('App\Project', 'project_id');
         
@@ -20,4 +37,5 @@ class Acquisition extends Model
         return $this->BelongsTo('App\Provider', 'provider_id');
         
     }
+    */
 }
