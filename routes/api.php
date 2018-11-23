@@ -174,7 +174,7 @@ Route::prefix('planProject')->group(function(){
 Route::prefix('acquisition')->group(function(){
     Route::get('/', 'AcquisitionController@index')->name('index');
     Route::get('/{acquisition}', 'AcquisitionController@show')->name('show');
-    Route::post('/{provider}', 'AcquisitionController@store')->name('store');
+    Route::post('/', 'AcquisitionController@store')->name('store');
     Route::put('/{acquisition}', 'AcquisitionController@update')->name('update');
     Route::delete('/{acquisition}', 'AcquisitionController@destroy')->name('delete');
    
