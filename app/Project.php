@@ -31,7 +31,7 @@ class Project extends Model
     }
 
     public function project_team(){
-        return $this->hasOne('App\Project_team');
+        return $this->hasMany('App\Project_team');
     }
 
     public function resource(){

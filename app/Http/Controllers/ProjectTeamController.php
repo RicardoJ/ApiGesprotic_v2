@@ -28,7 +28,12 @@ class ProjectTeamController extends Controller
     public function store(Request $request, $project_id)
     {
         $validator = Validator::make($request->all(),[
-            'nombre' => 'required|String',
+            'nombre_equipo' => 'required|String',
+            'fecha' => 'required',
+            'rol' => 'required',
+            'responsabilidad' => 'required',
+            'ambito' => 'required',
+            'competencias' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
  
         ]);
@@ -59,7 +64,12 @@ class ProjectTeamController extends Controller
         $project_team->image = $name; 
       }
             
-            $project_team->nombre =$request->get('nombre');
+            $project_team->nombre_equipo =$request->get('nombre_equipo');
+            $project_team->fecha =$request->get('fecha');
+            $project_team->rol =$request->get('rol');
+            $project_team->responsabilidad =$request->get('responsabilidad');
+            $project_team->ambito =$request->get('ambito');
+            $project_team->competencias =$request->get('competencias');
             //$project_team->image =$request->get('image');
                
            // $project_team->project_id = $request->get('project_id');
@@ -100,10 +110,17 @@ class ProjectTeamController extends Controller
      * @param  \App\Project_team  $project_team
      * @return \Illuminate\Http\Response
      */
+    //x-wwww si content en POSTMAN
     public function updateName(Request $request, Project_team $project_team)
     {
         $validator = Validator::make($request->all(),[
-            'nombre' => 'required'
+            'nombre_equipo' => 'required',
+            'fecha' => 'required',
+            'rol' => 'required',
+            'responsabilidad' => 'required',
+            'ambito' => 'required',
+            'competencias' => 'required'
+   
             //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
  
         ]);
@@ -111,12 +128,18 @@ class ProjectTeamController extends Controller
             return response()->json(['Error'],404);
 
         }else{
-        $project_team->nombre = $request->nombre;
+        $project_team->nombre_equipo = $request->nombre_equipo;
+        $project_team->fecha =$request->fecha;
+        $project_team->rol =$request->rol;
+        $project_team->responsabilidad =$request->responsabilidad;
+        $project_team->ambito =$request->ambito;
+        $project_team->competencias =$request->competencias;
        
         $project_team->save();
         return response()->json(['Nombre Equipo del proyecto Editado'=>$project_team],202);
     }
 }
+//form data no content en POSTMAN
     public function updateImage(Request $request, $project_team_id)
     {
         $validator = Validator::make($request->all(),[

@@ -52,14 +52,12 @@ class ResourceController extends Controller
     public function store(Request $request , $project_id)
     {
         $validator = Validator::make($request->all(),[
-            'descripcion' => 'required',
-            'fecha_Inicial' => 'required',
-            'fecha_Final' => 'required',
-            'nombre' => 'required',
-            'origen' => 'required',
-            'relevancia'=>'required',
-            'tipo'=>'required',
-            'unidades'=>'required' 
+            'wbs' => 'required',
+            'tipo_recurso' => 'required',
+            'cantidad' => 'required',
+            'comentarios' => 'required',
+            'vision_estrategica' => 'required'
+            
 
         ]);
         if ($validator->fails()) {
@@ -71,14 +69,11 @@ class ResourceController extends Controller
                 return response()->json(['No existe proyecto'],404);
             }else{
         $resource = new Resource([
-            'descripcion' => $request->input('descripcion'),
-            'fecha_Inicial' => $request->input('fecha_Inicial'),
-            'fecha_Final' => $request->input('fecha_Final'),
-            'nombre' =>$request->input('nombre'),
-            'origen' =>$request->input('origen'),
-            'relevancia'=>$request->input('relevancia'),
-            'tipo'=>$request->input('tipo'),
-            'unidades'=>$request->input('unidades'),
+            'wbs' => $request->input('wbs'),
+            'tipo_recurso' => $request->input('tipo_recurso'),
+            'cantidad' => $request->input('cantidad'),
+            'comentarios' =>$request->input('comentarios'),
+            'vision_estrategica' =>$request->input('vision_estrategica'),
             'project_id'=>$project_id
         ]);
          $resource->save();
@@ -89,14 +84,11 @@ class ResourceController extends Controller
     public function storeWithProvider(Request $request , $provider_id)
     {
         $validator = Validator::make($request->all(),[
-            'descripcion' => 'required',
-            'fecha_Inicial' => 'required',
-            'fecha_Final' => 'required',
-            'nombre' => 'required',
-            'origen' => 'required',
-            'relevancia'=>'required',
-            'tipo'=>'required',
-            'unidades'=>'required' 
+            'wbs' => 'required',
+            'tipo_recurso' => 'required',
+            'cantidad' => 'required',
+            'comentarios' => 'required',
+            'vision_estrategica' => 'required'
 
         ]);
         if ($validator->fails()) {
@@ -112,14 +104,11 @@ class ResourceController extends Controller
             return response()->json(['No tiene contrato este proveedor'],404);
         } else {
         $resource = new Resource([
-            'descripcion' => $request->input('descripcion'),
-            'fecha_Inicial' => $request->input('fecha_Inicial'),
-            'fecha_Final' => $request->input('fecha_Final'),
-            'nombre' =>$request->input('nombre'),
-            'origen' =>$request->input('origen'),
-            'relevancia'=>$request->input('relevancia'),
-            'tipo'=>$request->input('tipo'),
-            'unidades'=>$request->input('unidades'),
+            'wbs' => $request->input('wbs'),
+            'tipo_recurso' => $request->input('tipo_recurso'),
+            'cantidad' => $request->input('cantidad'),
+            'comentarios' =>$request->input('comentarios'),
+            'vision_estrategica' =>$request->input('vision_estrategica'),
             'provider_id'=>$provider_id
         ]);
         $resource->save();
@@ -152,32 +141,53 @@ class ResourceController extends Controller
     public function update(Request $request, Resource $resource)
     {
         $validator = Validator::make($request->all(),[
-            'descripcion' => 'required',
-            'fecha_Inicial' => 'required',
-            'fecha_Final' => 'required',
-            'nombre' => 'required',
-            'origen' => 'required',
-            'relevancia'=>'required',
-            'tipo'=>'required',
-            'unidades'=>'required' 
+            'wbs' => 'required',
+            'tipo_recurso' => 'required',
+            'cantidad' => 'required',
+            'comentarios' => 'required',
+            'vision_estrategica' => 'required'
 
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
 
         }else{
-        $resource->descripcion = $request->descripcion;
-        $resource->fecha_Inicial = $request->fecha_Inicial;
-        $resource->fecha_Final = $request->fecha_Final;
-        $resource->nombre = $request->nombre;
-        $resource->origen = $request->origen;
-        $resource->relevancia = $request->relevancia;
-        $resource->tipo = $request->tipo;
-        $resource->unidades = $request->unidades;
+        $resource->wbs = $request->wbs;
+        $resource->tipo_recurso = $request->tipo_recurso;
+        $resource->cantidad = $request->cantidad;
+        $resource->comentarios = $request->comentarios;
+        $resource->vision_estrategica = $request->vision_estrategica;
+       
         $resource->save();
         return response()->json($resource);
     }
     }
+    public function updateProvider(Request $request, Resource $resource)
+    {
+        $validator = Validator::make($request->all(),[
+            'wbs' => 'required',
+            'tipo_recurso' => 'required',
+            'cantidad' => 'required',
+            'comentarios' => 'required',
+            'vision_estrategica' => 'required'
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
+        $resource->wbs = $request->wbs;
+        $resource->tipo_recurso = $request->tipo_recurso;
+        $resource->cantidad = $request->cantidad;
+        $resource->comentarios = $request->comentarios;
+        $resource->vision_estrategica = $request->vision_estrategica;
+       
+        $resource->save();
+        return response()->json($resource);
+    }
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *

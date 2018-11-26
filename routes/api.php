@@ -23,19 +23,20 @@ Route::name('project.')->group(function(){
 
 });
 */
-/*
+/* probado
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
     Route::get('/{resource}', 'ResourceController@show')->name('show');
     Route::post('/project/{project}', 'ResourceController@store')->name('store');
     Route::post('/provider/{provider}', 'ResourceController@storeWithProvider')->name('storeWithProvider');
     Route::put('/{resource}/project/{project}', 'ResourceController@update')->name('update');
+    Route::put('/{resource}/provider/{provider}', 'ResourceController@updateProvider')->name('updateProvider');
     Route::delete('/{resource}', 'ResourceController@destroy')->name('delete');
     Route::get('/project/{project}/resource', 'ResourceController@listarRecursoPorProyecto')->name('listarRecursoPorProyecto');
     Route::get('/provider/{provider}/resource', 'ResourceController@listarRecursoPorProveedor')->name('listarRecursoPorProveedor');
 });
-*/
 
+*/
 /*
 Route::prefix('lessonLearned')->group(function(){
     Route::get('/', 'LessonLearnedController@index')->name('index');
@@ -105,8 +106,7 @@ Route::prefix('change')->group(function(){
     Route::delete('/{change}', 'ChangeController@destroy')->name('delete');
 });
 */
-
-/*
+/* probado
 Route::prefix('project_team')->group(function(){
     Route::get('/', 'ProjectTeamController@index')->name('index');
     Route::get('/{project_team}', 'ProjectTeamController@show')->name('show');
@@ -117,7 +117,7 @@ Route::prefix('project_team')->group(function(){
     Route::get('/project/{project}/project_team', 'ProjectTeamController@listaProjectTeamPorProyecto')->name('listaProjectTeamPorProyecto');
 });
 */
-/*
+/* probado
 Route::prefix('people')->group(function(){
     Route::get('/', 'PeopleController@index')->name('index');
     Route::get('/{people}', 'PeopleController@show')->name('show');
@@ -172,7 +172,7 @@ Route::prefix('planProject')->group(function(){
 */
 
 
-   
+  /*  probado
 Route::prefix('acquisition')->group(function(){
     Route::get('/', 'AcquisitionController@index')->name('index');
     Route::get('/{acquisition}', 'AcquisitionController@show')->name('show');
@@ -180,4 +180,4 @@ Route::prefix('acquisition')->group(function(){
     Route::put('/{acquisition}', 'AcquisitionController@update')->name('update');
     Route::delete('/{acquisition}', 'AcquisitionController@destroy')->name('delete');
 });
-
+*/

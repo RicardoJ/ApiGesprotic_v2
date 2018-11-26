@@ -8,7 +8,15 @@ class Project_team extends Model
 {
     protected $table = 'project_team';
     public $timestamps = false;
-    protected $fillable = ['nombre','image','project_id'];
+    protected $fillable = [
+        'nombre_equipo',
+            'fecha',
+            'rol' ,
+            'responsabilidad' ,
+            'ambito' ,
+            'competencias' ,
+            'image' ,
+ 'project_id'];
     
     public function project(){
         return $this->BelongsTo('App\Project', 'project_id');

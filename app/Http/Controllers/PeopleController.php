@@ -27,12 +27,15 @@ class PeopleController extends Controller
     public function store(Request $request, $project_team_id)
     {
         
-       $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'apellidos' => 'required',
             'rol' => 'required',
             'email' => 'required|unique:people,email',  
-            'competencias' => 'required'
+            'departamento' => 'required',
+            'lugar_de_trabajo' => 'required',
+            'horario' => 'required',
+            'tlf' => 'required'
 ]);
 
         if ($validator->fails()) {
@@ -48,7 +51,10 @@ class PeopleController extends Controller
             'apellidos' =>$request->input('apellidos'),
             'rol'=>$request->input('rol'),
             'email'=>$request->input('email'),
-            'competencias'=>$request->input('competencias'),
+            'departamento'=>$request->input('departamento'),
+            'horario'=>$request->input('horario'),
+            'lugar_de_trabajo'=>$request->input('lugar_de_trabajo'),
+            'tlf'=>$request->input('tlf'),
             'project_team_id'=>$project_team_id
         ]);
         $people->save();
@@ -91,9 +97,13 @@ class PeopleController extends Controller
             'nombre' => 'required',
             'apellidos' => 'required',
             'rol' => 'required',
-         //   'email' => 'required|unique',
-         'email' => 'required|unique:people,email,'.$people->id,
-            'competencias' => 'required'
+            'departamento' => 'required',
+            'lugar_de_trabajo' => 'required',
+            'horario' => 'required',
+            'tlf' => 'required',
+       
+         'email' => 'required|unique:people,email,'.$people->id
+       
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -103,7 +113,10 @@ class PeopleController extends Controller
         $people->apellidos = $request->apellidos;
         $people->rol = $request->rol;
         $people->email = $request->email;
-        $people->competencias = $request->competencias;
+        $people->departamento = $request->departamento;
+        $people->lugar_de_trabajo = $request->lugar_de_trabajo;
+        $people->horario = $request->horario;
+        $people->tlf = $request->tlf;
         $people->save();
         return response()->json($people);
     }
