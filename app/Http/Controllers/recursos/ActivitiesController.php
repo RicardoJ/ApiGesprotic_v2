@@ -27,10 +27,22 @@ class ActivitiesController extends Controller
     {
 
         $validator = Validator::make($request->all(),[
-            'nombre' => 'required',
-            'porcentaje' => 'required',
-            'completed' => 'required'
-           
+            
+            'fecha' => 'required',
+            'codigo_Actividad'=> 'required',
+            'actividad'=> 'required',
+            'descripcion_trabajo'=> 'required',
+           ' actividad_predecesora'=> 'required',
+            'relaciones_logicas_predecesora'=> 'required',
+            'adelantos_o_atrasos_predecesora'=> 'required',
+            'actividad_sucesora'=> 'required',
+            'relaciones_logicas_sucesora'=> 'required',
+            'adelantos_o_atraso_sucesora'=> 'required',
+            'nombre_recurso_requierido'=> 'required',
+           ' habilidades'=> 'required',
+            'otros_recursos_requerido'=> 'required',
+            'nivel_esfuerzo'=> 'required',
+            'supuesto'=> 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -41,9 +53,21 @@ class ActivitiesController extends Controller
             return response()->json(['No existe proyecto'],404);
         }else{
         $activities = new Activities([
-            'nombre' =>$request->input('nombre'),
-            'porcentaje' =>$request->input('porcentaje'),
-            'completed'=>$request->input('completed'),
+            'fecha' =>$request->input('fecha'),
+            'codigo_Actividad' =>$request->input('codigo_Actividad'),
+            'actividad'=>$request->input('actividad'),
+            'descripcion_trabajo' =>$request->input('descripcion_trabajo'),
+            'actividad_predecesora' =>$request->input('actividad_predecesora'),
+            'relaciones_logicas_predecesora'=>$request->input('relaciones_logicas_predecesora'),
+            'adelantos_o_atrasos_predecesora' =>$request->input('adelantos_o_atrasos_predecesora'),
+            'actividad_sucesora' =>$request->input('actividad_sucesora'),
+            'relaciones_logicas_sucesora'=>$request->input('relaciones_logicas_sucesora'),
+            'adelantos_o_atraso_sucesora' =>$request->input('adelantos_o_atraso_sucesora'),
+            'nombre_recurso_requierido' =>$request->input('nombre_recurso_requierido'),
+            'habilidades'=>$request->input('habilidades'),
+            'otros_recursos_requerido' =>$request->input('otros_recursos_requerido'),
+            'nivel_esfuerzo' =>$request->input('nivel_esfuerzo'),
+            'supuesto'=>$request->input('supuesto'),
             'project_team_id'=>$project_team_id
         ]);
         $activities->save();
@@ -87,9 +111,22 @@ class ActivitiesController extends Controller
     public function update(Request $request, Activities $activities)
     {
         $validator = Validator::make($request->all(),[
-            'nombre' => 'required',
-            'porcentaje' => 'required',
-            'completed' => 'required'
+            
+            'fecha' => 'required',
+            'codigo_Actividad'=> 'required',
+            'actividad'=> 'required',
+            'descripcion_trabajo'=> 'required',
+           ' actividad_predecesora'=> 'required',
+            'relaciones_logicas_predecesora'=> 'required',
+            'adelantos_o_atrasos_predecesora'=> 'required',
+            'actividad_sucesora'=> 'required',
+            'relaciones_logicas_sucesora'=> 'required',
+            'adelantos_o_atraso_sucesora'=> 'required',
+            'nombre_recurso_requierido'=> 'required',
+           ' habilidades'=> 'required',
+            'otros_recursos_requerido'=> 'required',
+            'nivel_esfuerzo'=> 'required',
+            'supuesto'=> 'required'
            
         ]);
 
@@ -97,9 +134,22 @@ class ActivitiesController extends Controller
             return response()->json(['Error'],404);
 
         }else{
-        $activities->nombre = $request->nombre;
-        $activities->porcentaje = $request->porcentaje;
-        $activities->completed =$request->completed;
+        $activities->fecha = $request->fecha;
+        $activities->codigo_Actividad = $request->codigo_Actividad;
+        $activities->actividad =$request->actividad;
+
+        $activities->descripcion_trabajo =$request->descripcion_trabajo;
+        $activities->actividad_predecesora =$request->actividad_predecesora;
+        $activities->relaciones_logicas_predecesora =$request->relaciones_logicas_predecesora;
+        $activities->adelantos_o_atrasos_predecesora =$request->adelantos_o_atrasos_predecesora;
+        $activities->actividad_sucesora =$request->actividad_sucesora;
+        $activities->relaciones_logicas_sucesora =$request->relaciones_logicas_sucesora;
+        $activities->adelantos_o_atraso_sucesora =$request->adelantos_o_atraso_sucesora;
+        $activities->nombre_recurso_requierido =$request->nombre_recurso_requierido;
+        $activities->habilidades =$request->habilidades;
+        $activities->otros_recursos_requerido =$request->otros_recursos_requerido;
+        $activities->nivel_esfuerzo =$request->nivel_esfuerzo;
+        $activities->supuesto =$request->supuesto;
         $activities->save();
         return response()->json($activities);
     }
