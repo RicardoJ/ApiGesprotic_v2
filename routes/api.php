@@ -23,7 +23,7 @@ Route::name('project.')->group(function(){
 
 });
 */
-
+/*
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
     Route::get('/{resource}', 'ResourceController@show')->name('show');
@@ -34,7 +34,7 @@ Route::prefix('resource')->group(function(){
     Route::get('/project/{project}/resource', 'ResourceController@listarRecursoPorProyecto')->name('listarRecursoPorProyecto');
     Route::get('/provider/{provider}/resource', 'ResourceController@listarRecursoPorProveedor')->name('listarRecursoPorProveedor');
 });
-
+*/
 
 /*
 Route::prefix('lessonLearned')->group(function(){
