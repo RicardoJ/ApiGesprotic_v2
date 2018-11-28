@@ -206,3 +206,29 @@ Route::prefix('projectOrganization')->group(function(){
     
 });
 */
+
+/*
+Route::prefix('teamDevelopment')->group(function(){
+    Route::get('/', 'TeamDevelopmentController@index')->name('index');
+    Route::get('/{teamDevelopment}', 'TeamDevelopmentController@show')->name('show');
+    Route::post('/{project}', 'TeamDevelopmentController@store')->name('store');
+    Route::put('/{teamDevelopment}', 'TeamDevelopmentController@update')->name('update');
+    Route::delete('/{teamDevelopment}', 'TeamDevelopmentController@destroy')->name('delete');
+    Route::get('/project_team/{project_team}/teamDevelopment', 'TeamDevelopmentController@listarTeamDev')->name('listarTeamDev');
+   
+    
+});
+*/
+
+/*
+Route::prefix('teamManagement')->group(function(){
+    Route::get('/', 'TeamManagementController@index')->name('index');
+    Route::get('/{teamManagement}', 'TeamManagementController@show')->name('show');
+    Route::post('/{project}', 'TeamManagementController@store')->name('store');
+    Route::put('/{teamManagement}', 'TeamManagementController@update')->name('update');
+    Route::delete('/{teamManagement}', 'TeamManagementController@destroy')->name('delete');
+    Route::get('/project_team/{project_team}/teamManagement', 'TeamManagementController@listarTeamMan')->name('listarTeamMan');
+   
+    
+});
+*/

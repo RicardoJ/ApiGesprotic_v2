@@ -133,14 +133,14 @@ class ActaConstitucionController extends Controller
                     'departamaneto_director' =>$request->input('departamaneto_director'),
                     'codigo_proyecto'=>$request->input('codigo_proyecto'),
 
-                    'check_pendienteAsignacion'=>$request->has('check_pendienteAsignacion')) ? true : false ,
-                    'check_contrato'=> $request->has('check_contrato')) ? true : false ,
+                    'check_pendienteAsignacion'=>$request->has('check_pendienteAsignacion') ? true : false ,
+                    'check_contrato'=> $request->has('check_contrato') ? true : false ,
                     'check_casoNegocio'=> ($request->has('check_casoNegocio')) ? true : false ,
                             
-                    'check_Enunciado'=> $request->has('check_Enunciado')) ? true : false ,
+                    'check_Enunciado'=> $request->has('check_Enunciado') ? true : false ,
                      'vision_estrategica'=> $request->input('vision_estrategica'),
                     'descripcion_del_proyecto'=> $request->input('descripcion_del_proyecto'),
-                    'analisis_previo_viabilidad'=> request->input('analisis_previo_viabilidad'),
+                    'analisis_previo_viabilidad'=> $request->input('analisis_previo_viabilidad'),
 
                     'requisitos_generales'=>$request->input('requisitos_generales'),
                      'alcance_objetivos'=>$request->input('alcance_objetivos'),
@@ -199,7 +199,7 @@ class ActaConstitucionController extends Controller
                             'nivel_superior_desicion_persona'=> $request->input('nivel_superior_desicion_persona'),
                             'nivel_superior_desicion_departamento'=> $request->input('nivel_superior_desicion_departamento'),
                             
-                            'firma_director'=> $request->input('firma_director')
+                            'firma_director'=> $request->input('firma_director'),
                     
                    
                     'project_id'=>$project_id

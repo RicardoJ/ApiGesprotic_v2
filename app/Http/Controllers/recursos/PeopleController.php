@@ -41,7 +41,7 @@ class PeopleController extends Controller
         }else{
         $project_team=Project_team::findOrFail($project_team_id);
         if (!$project_team) {
-            return response()->json(['No existe proyecto'],404);
+            return response()->json(['No existe equipo'],404);
         }else{
         $people = new People([
             'nombre' =>$request->input('nombre'),
@@ -71,7 +71,7 @@ class PeopleController extends Controller
         $project_team =Project_team::find($project_team_id);
        
         if (!$project_team) {
-            return response()->json(['No existe el proyecto'],404);
+            return response()->json(['No existe el equipo'],404);
         }
         $people = $project_team->people;
         return response()->json(['integrantes del equipo proyecto'=>$people],202);
