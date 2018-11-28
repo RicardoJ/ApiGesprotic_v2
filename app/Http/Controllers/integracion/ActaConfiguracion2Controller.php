@@ -15,7 +15,7 @@ class ActaConfiguracion2Controller extends Controller
      */
     public function index()
     {
-        return response()->json(PlanProject::all());
+        return response()->json( ActaConfiguracion2::all());
     }
 
 
@@ -59,11 +59,11 @@ class ActaConfiguracion2Controller extends Controller
             if (!$project) {
                 return response()->json(['No existe proyecto'],404);
             }else{
-                $planProject = $project->planProject;
-                if ($planProject) {
+                $actaConfiguracion2 = $project->actaConfiguracion2;
+                if ($actaConfiguracion2) {
                     return response()->json(['ya tiene plan este proyecto'],404);
                 } else {
-                $planProject = new PlanProject([
+                $actaConfiguracion2 = new ActaConfiguracion2([
                     
                     'objetivos_y_alcance'=>$request->input('objetivos_y_alcance'),
                     'rol_a_desempeñar'=>$request->input('rol_a_desempeñar'),
@@ -87,8 +87,8 @@ class ActaConfiguracion2Controller extends Controller
                     'descripcion_resumen'=>$request->input('descripcion_resumen'),
                     'project_id'=>$project_id
                 ]);
-                $planProject->save();
-                return response()->json($planProject);
+                $actaConfiguracion2->save();
+                return response()->json($actaConfiguracion2);
         
                 }
             }
@@ -100,9 +100,9 @@ class ActaConfiguracion2Controller extends Controller
      * @param  \App\planProject  $planProject
      * @return \Illuminate\Http\Response
      */
-    public function show(planProject $planProject)
+    public function show(planProject $actaConfiguracion2)
     {
-        return response()->json($planProject);
+        return response()->json($actaConfiguracion2);
     }
 
 
@@ -114,7 +114,7 @@ class ActaConfiguracion2Controller extends Controller
      * @param  \App\planProject  $planProject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, planProject $planProject)
+    public function update(Request $request, planProject $actaConfiguracion2)
     {
         $validator = Validator::make($request->all(),[
             'objetivos_y_alcance'=> 'required',
@@ -143,38 +143,38 @@ class ActaConfiguracion2Controller extends Controller
             return response()->json(['Error'],404);
 
         }else{
-        $planProject->objetivos_y_alcance = $request->objetivos_y_alcance;
-        $planProject->rol_a_desempeñar = $request->rol_a_desempeñar;
-        $planProject->funciones_y_responsabilidades = $request->funciones_y_responsabilidades;
-        $planProject ->elemento_entregables =$request->elemento_entregables;
-        $planProject ->normas_identificacion_elementos =$request->normas_identificacion_elementos;
-        $planProject ->responsable_elementos =$request->responsable_elementos;
-        $planProject ->documento =$request->documento;
-        $planProject ->norma_identificacion_documento =$request->norma_identificacion_documento;
-        $planProject ->responsable_documento =$request->responsable_documento;
-        $planProject ->sistema_procedimiento =$request->sistema_procedimiento;
-        $planProject ->codigo_documento =$request->codigo_documento;
-        $planProject ->fecha_aprobacion =$request->fecha_aprobacion;
-        $planProject ->procedimiento_comunicacion =$request->procedimiento_comunicacion;
-        $planProject ->procedimiento_y_niveles_de_aprobacion =$request->procedimiento_y_niveles_de_aprobacion;
-        $planProject ->procedimiento_de_auditoria_en_la_gestion =$request->procedimiento_de_auditoria_en_la_gestion;
-        $planProject ->documento_lineaBase =$request->documento_lineaBase;
-        $planProject ->descripcion_resumen =$request->descripcion_resumen;
+        $actaConfiguracion2->objetivos_y_alcance = $request->objetivos_y_alcance;
+        $actaConfiguracion2->rol_a_desempeñar = $request->rol_a_desempeñar;
+        $actaConfiguracion2->funciones_y_responsabilidades = $request->funciones_y_responsabilidades;
+        $actaConfiguracion2 ->elemento_entregables =$request->elemento_entregables;
+        $actaConfiguracion2 ->normas_identificacion_elementos =$request->normas_identificacion_elementos;
+        $actaConfiguracion2 ->responsable_elementos =$request->responsable_elementos;
+        $actaConfiguracion2 ->documento =$request->documento;
+        $actaConfiguracion2 ->norma_identificacion_documento =$request->norma_identificacion_documento;
+        $actaConfiguracion2 ->responsable_documento =$request->responsable_documento;
+        $actaConfiguracion2 ->sistema_procedimiento =$request->sistema_procedimiento;
+        $actaConfiguracion2 ->codigo_documento =$request->codigo_documento;
+        $actaConfiguracion2 ->fecha_aprobacion =$request->fecha_aprobacion;
+        $actaConfiguracion2 ->procedimiento_comunicacion =$request->procedimiento_comunicacion;
+        $actaConfiguracion2 ->procedimiento_y_niveles_de_aprobacion =$request->procedimiento_y_niveles_de_aprobacion;
+        $actaConfiguracion2 ->procedimiento_de_auditoria_en_la_gestion =$request->procedimiento_de_auditoria_en_la_gestion;
+        $actaConfiguracion2 ->documento_lineaBase =$request->documento_lineaBase;
+        $actaConfiguracion2 ->descripcion_resumen =$request->descripcion_resumen;
         
-        $planProject->save();
-        return response()->json($planProject);
+        $actaConfiguracion2->save();
+        return response()->json($actaConfiguracion2);
     }
     }
 
     
-    public function listaplanPorProyecto($project_id){
+    public function listaActaConfiguracionPorProyecto($project_id){
         $project =Project::find($project_id);
 
         if (!$project) {
             return response()->json(['No existe el proyecto'],404);
         }
-        $planProject = $project->planProject;
-        return response()->json(['Plan del proyecto'=>$planProject],202);
+        $actaConfiguracion2 = $project->actaConfiguracion2;
+        return response()->json(['Plan del proyecto'=>$actaConfiguracion2],202);
     }
 
     /**
@@ -183,9 +183,9 @@ class ActaConfiguracion2Controller extends Controller
      * @param  \App\planProject  $planProject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(planProject $planProject)
+    public function destroy(planProject $actaConfiguracion2)
     {
-        $planProject->delete();
+        $actaConfiguracion2->delete();
         return response()->json(['success' => 'borrado correctamente']);
     }
 

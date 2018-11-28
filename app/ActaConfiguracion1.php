@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActaConfiguracion1 extends Model
 {
-    protected $table = 'actaConfiguracion';
+    protected $table = 'actaConfiguracion1';
     public $timestamps = false;
     protected $fillable = [
     'aprobacion_persona',

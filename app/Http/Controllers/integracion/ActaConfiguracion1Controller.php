@@ -15,7 +15,7 @@ class ActaConfiguracion1Controller extends Controller
      */
     public function index()
     {
-        return response()->json(ActaConfiguracion::all());
+        return response()->json(ActaConfiguracion1::all());
     }
 
 
@@ -62,11 +62,11 @@ class ActaConfiguracion1Controller extends Controller
             return response()->json(['No existe proyecto'],404);
         }else{
             
-            $actaConfiguracion = $project->actaConfiguracion;
-            if ($actaConfiguracion) {
+            $actaConfiguracion1 = $project->actaConfiguracion1;
+            if ($actaConfiguracion1) {
               return response()->json(['ya tiene acta de configuracion  este proyecto'],404);
           } else {
-            $actaConfiguracion = new ActaConfiguracion([
+            $actaConfiguracion1 = new ActaConfiguracion1([
                 'aprobacion_persona'=>$request->input('aprobacion_persona'),
                 'aprobacion_firma'=>$request->input('aprobacion_firma'),
                 
@@ -93,8 +93,8 @@ class ActaConfiguracion1Controller extends Controller
                 'verificacion_y_auditoria'=>$request->input('verificacion_y_auditoria'),
                 'project_id'=>$project_id
             ]);
-            $actaConfiguracion->save();
-            return response()->json($actaConfiguracion);
+            $actaConfiguracion1->save();
+            return response()->json($actaConfiguracion1);
 
 
     }
@@ -107,9 +107,9 @@ class ActaConfiguracion1Controller extends Controller
      * @param  \App\ActaConfiguracion  $actaConfiguracion
      * @return \Illuminate\Http\Response
      */
-    public function show(ActaConfiguracion $actaConfiguracion)
+    public function show(ActaConfiguracion $actaConfiguracion1)
     {
-        return response()->json($actaConfiguracion);
+        return response()->json($actaConfiguracion1);
     }
 
     public function listaActaConfiguracionPorProyecto($project_id){
@@ -118,8 +118,8 @@ class ActaConfiguracion1Controller extends Controller
         if (!$project) {
             return response()->json(['No existe el proyecto'],404);
         }
-        $actaConfiguracion = $project->actaConfiguracion;
-        return response()->json(['Acta de Configuracion del proyecto'=>$actaConfiguracion],202);
+        $actaConfiguracion1 = $project->actaConfiguracion1;
+        return response()->json(['Acta de Configuracion del proyecto'=>$actaConfiguracion1],202);
     }
 
     /**
@@ -129,7 +129,7 @@ class ActaConfiguracion1Controller extends Controller
      * @param  \App\ActaConfiguracion  $actaConfiguracion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ActaConfiguracion $actaConfiguracion)
+    public function update(Request $request, ActaConfiguracion $actaConfiguracion1)
     {
         $validator = Validator::make($request->all(),[
             'aprobacion_persona'=> 'required',
@@ -162,31 +162,31 @@ class ActaConfiguracion1Controller extends Controller
             return response()->json(['Error'],404);
 
         }else{
-        $actaConfiguracion->aprobacion_persona = $request->aprobacion_persona;
-        $actaConfiguracion->aprobacion_firma = $request->aprobacion_firma;
-        $actaConfiguracion->nombre_rol = $request->nombre_rol;
-        $actaConfiguracion->persona_asignada = $request->persona_asignada;
-        $actaConfiguracion->responsabilidades = $request->responsabilidades;
-        $actaConfiguracion->nivel_autoridad = $request->nivel_autoridad;
-        $actaConfiguracion->documentos = $request->documentos;
-        $actaConfiguracion->formato = $request->formato;
-        $actaConfiguracion->acceso_rapido = $request->acceso_rapido;
-        $actaConfiguracion->disponibilidad_amplia = $request->disponibilidad_amplia;
-        $actaConfiguracion->seguridad_acceso = $request->seguridad_acceso;
-        $actaConfiguracion->recuperacion_informacion = $request->recuperacion_informacion;
-        $actaConfiguracion->retencion_informacion = $request->retencion_informacion;
-        $actaConfiguracion->codigo_item = $request->codigo_item;
-        $actaConfiguracion->nombre_item = $request->nombre_item;
-        $actaConfiguracion->categoria = $request->categoria;
-        $actaConfiguracion->fuente = $request->fuente;
-        $actaConfiguracion->formato_software1 = $request->formato_software1;
-        $actaConfiguracion->formato_software2 = $request->formato_software2;
-        $actaConfiguracion->gestion_del_cambio = $request->gestion_del_cambio;
-        $actaConfiguracion->contabilidad_de_estado = $request->contabilidad_de_estado;
-        $actaConfiguracion->verificacion_y_auditoria = $request->verificacion_y_auditoria;
+        $actaConfiguracion1->aprobacion_persona = $request->aprobacion_persona;
+        $actaConfiguracion1->aprobacion_firma = $request->aprobacion_firma;
+        $actaConfiguracion1->nombre_rol = $request->nombre_rol;
+        $actaConfiguracion1->persona_asignada = $request->persona_asignada;
+        $actaConfiguracion1->responsabilidades = $request->responsabilidades;
+        $actaConfiguracion1->nivel_autoridad = $request->nivel_autoridad;
+        $actaConfiguracion1->documentos = $request->documentos;
+        $actaConfiguracion1->formato = $request->formato;
+        $actaConfiguracion1->acceso_rapido = $request->acceso_rapido;
+        $actaConfiguracion1->disponibilidad_amplia = $request->disponibilidad_amplia;
+        $actaConfiguracion1->seguridad_acceso = $request->seguridad_acceso;
+        $actaConfiguracion1->recuperacion_informacion = $request->recuperacion_informacion;
+        $actaConfiguracion1->retencion_informacion = $request->retencion_informacion;
+        $actaConfiguracion1->codigo_item = $request->codigo_item;
+        $actaConfiguracion1->nombre_item = $request->nombre_item;
+        $actaConfiguracion1->categoria = $request->categoria;
+        $actaConfiguracion1->fuente = $request->fuente;
+        $actaConfiguracion1->formato_software1 = $request->formato_software1;
+        $actaConfiguracion1->formato_software2 = $request->formato_software2;
+        $actaConfiguracion1->gestion_del_cambio = $request->gestion_del_cambio;
+        $actaConfiguracion1->contabilidad_de_estado = $request->contabilidad_de_estado;
+        $actaConfiguracion1->verificacion_y_auditoria = $request->verificacion_y_auditoria;
 
-        $actaConfiguracion->save();
-        return response()->json($actaConfiguracion);
+        $actaConfiguracion1->save();
+        return response()->json($actaConfiguracion1);
     }
     }
     /**
@@ -195,9 +195,9 @@ class ActaConfiguracion1Controller extends Controller
      * @param  \App\ActaConfiguracion  $actaConfiguracion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ActaConfiguracion $actaConfiguracion)
+    public function destroy(ActaConfiguracion $actaConfiguracion1)
     {
-        $actaConfiguracion->delete();
+        $actaConfiguracion1->delete();
         return response()->json(['success' => 'borrado correctamente']);
     }
 }

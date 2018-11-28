@@ -10,8 +10,11 @@ class Project extends Model
     public $timestamps = false;
     protected $fillable = ['director','nombre','plan','completed'];
     
-    public function actaconfiguracion(){
-        return $this->hasOne('App\ActaConfiguracion');
+    public function actaconfiguracion1(){
+        return $this->hasOne('App\ActaConfiguracion1');
+    }
+    public function actaconfiguracion2(){
+        return $this->hasOne('App\ActaConfiguracion2');
     }
     public function actariesgo(){
         return $this->hasOne('App\ActaRiesgo');
@@ -40,8 +43,15 @@ class Project extends Model
     public function acquisition(){
         return  $this->belongsToMany('App\Acquisition');
     }
-    public function planProject(){
-        return $this->hasOne('App\PlanProject');
-    }
+ 
     
+    public function ProjectOrganization(){
+        return $this->hasOne('App\ProjectOrganization');
+    }
+    public function TeamDevelopment(){
+        return $this->hasOne('App\TeamDevelopment');
+    }
+    public function TeamManagement(){
+        return $this->hasOne('App\TeamManagement');
+    }
 }

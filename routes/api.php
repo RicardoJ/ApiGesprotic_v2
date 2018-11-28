@@ -65,17 +65,31 @@ Route::prefix('actaConstitucion')->group(function(){
     Route::get('/project/{project}/actaConstitucion', 'ActaConstitucionController@listaActaConstitucionPorProyecto')->name('listaActaConstitucionPorProyecto');
 });
 */
+
 /*
-Route::prefix('actaConfiguracion')->group(function(){
-    Route::get('/', 'ActaConfiguracionController@index')->name('index');
-    Route::get('/{actaConfiguracion}', 'ActaConfiguracionController@show')->name('show');
-    Route::post('/{project}', 'ActaConfiguracionController@store')->name('store');
-    Route::put('/{actaConfiguracion}', 'ActaConfiguracionController@update')->name('update');
-    Route::delete('/{actaConfiguracion}', 'ActaConfiguracionController@destroy')->name('delete');
-    Route::get('/project/{project}/actaConfiguracion', 'ActaConfiguracionController@listaActaConfiguracionPorProyecto')->name('listaActaConfiguracionPorProyecto');
+Route::prefix('actaConfiguracion1')->group(function(){
+    Route::get('/', 'ActaConfiguracion1Controller@index')->name('index');
+    Route::get('/{actaConfiguracion1}', 'ActaConfiguracion1Controller@show')->name('show');
+    Route::post('/{project}', 'ActaConfiguracion1Controller@store')->name('store');
+    Route::put('/{actaConfiguracion1}', 'ActaConfiguracion1Controller@update')->name('update');
+    Route::delete('/{actaConfiguracion1}', 'ActaConfiguracion1Controller@destroy')->name('delete');
+    Route::get('/project/{project}/actaConfiguracion', 'ActaConfiguracion1Controller@listaActaConfiguracionPorProyecto')->name('listaActaConfiguracionPorProyecto');
     
 });
 */
+/*
+Route::prefix('actaConfiguracion2')->group(function(){
+    Route::get('/', 'ActaConfiguracion2Controller@index')->name('index');
+    Route::get('/{actaConfiguracion2}', 'ActaConfiguracion2Controller@show')->name('show');
+    Route::post('/{project}', 'ActaConfiguracion2Controller@store')->name('store');
+    Route::put('/{actaConfiguracion2}', 'ActaConfiguracion2Controller@update')->name('update');
+    Route::delete('/{actaConfiguracion2}', 'ActaConfiguracion2Controller@destroy')->name('delete');
+    Route::get('/project/{project}/actaConfiguracion', 'ActaConfiguracion2Controller@listaActaConfiguracionPorProyecto')->name('listaActaConfiguracionPorProyecto');
+    
+}); 
+*/
+
+
 /*
 Route::prefix('actaPlanDirector')->group(function(){
     Route::get('/', 'ActaPlanDirectorController@index')->name('index');
@@ -179,5 +193,16 @@ Route::prefix('acquisition')->group(function(){
     Route::delete('/{acquisition}', 'AcquisitionController@destroy')->name('delete');
    
 
+});
+*/
+/*
+Route::prefix('projectOrganization')->group(function(){
+    Route::get('/', 'ProjectOrganizationController@index')->name('index');
+    Route::get('/{projectOrganization}', 'ProjectOrganizationController@show')->name('show');
+    Route::post('/{project}', 'ProjectOrganizationController@store')->name('store');
+    Route::put('/{projectOrganization}', 'ProjectOrganizationController@update')->name('update');
+    Route::delete('/{projectOrganization}', 'ProjectOrganizationController@destroy')->name('delete');
+   
+    
 });
 */

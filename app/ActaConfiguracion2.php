@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActaConfiguracion2 extends Model
 {
-    protected $table = 'planProject';
+    protected $table = 'actaConfiguracion2';
     public $timestamps = false;
     protected $fillable = [
-        'objetivos_y_alcance',
+'objetivos_y_alcance',
 'rol_a_desempeñar',
 'funciones_y_responsabilidades',
 
