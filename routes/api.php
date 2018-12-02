@@ -146,7 +146,7 @@ Route::prefix('agreement')->group(function(){
     Route::get('/provider/{provider}/agreement', 'AgreementController@listaContratoPorProveedor')->name('listaContratoPorProveedor');
 });
 */
-
+/* probado
 Route::prefix('activitie')->group(function(){
     Route::get('/', 'ActivitiesController@index')->name('index');
     Route::get('/{activities}', 'ActivitiesController@show')->name('show');
@@ -157,7 +157,7 @@ Route::prefix('activitie')->group(function(){
     Route::patch('project_team/{project_team}/activitie/{activities}/completed', 'ActivitiesController@completed')->name('completed');
 
 });
-
+*/
 /*
 Route::prefix('planProject')->group(function(){
     Route::get('/', 'PlanProjectController@index')->name('index');

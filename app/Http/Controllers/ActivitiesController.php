@@ -29,7 +29,7 @@ class ActivitiesController extends Controller
             'fecha' => 'required',
             'codigo_Actividad'=> 'required',
             'actividad'=> 'required',
-         /*   'descripcion_trabajo'=> 'required',
+            'descripcion_trabajo'=> 'required',
            ' actividad_predecesora'=> 'required',
             'relaciones_logicas_predecesora'=> 'required',
             'adelantos_o_atrasos_predecesora'=> 'required',
@@ -41,7 +41,7 @@ class ActivitiesController extends Controller
             'otros_recursos_requerido'=> 'required',
             'nivel_esfuerzo'=> 'required',
             'supuesto'=> 'required'
-            */
+            
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -54,7 +54,7 @@ class ActivitiesController extends Controller
             'fecha' =>$request->input('fecha'),
             'codigo_Actividad' =>$request->input('codigo_Actividad'),
             'actividad'=>$request->input('actividad'),
-          /*  'descripcion_trabajo' =>$request->input('descripcion_trabajo'),
+            'descripcion_trabajo' =>$request->input('descripcion_trabajo'),
             'actividad_predecesora' =>$request->input('actividad_predecesora'),
             'relaciones_logicas_predecesora'=>$request->input('relaciones_logicas_predecesora'),
             'adelantos_o_atrasos_predecesora' =>$request->input('adelantos_o_atrasos_predecesora'),
@@ -65,16 +65,12 @@ class ActivitiesController extends Controller
             'habilidades'=>$request->input('habilidades'),
             'otros_recursos_requerido' =>$request->input('otros_recursos_requerido'),
             'nivel_esfuerzo' =>$request->input('nivel_esfuerzo'),
-            'supuesto'=>$request->input('supuesto'),*/
+            'supuesto'=>$request->input('supuesto'),
             'project_team_id'=>$project_team_id
         ]);
         $activities->save();
         return response()->json($activities);
-        /*
-        $activities = new Activities();
-        $activities->fill($request->all());
-        $activities->save();
-        */
+      
         }
     }
 }
@@ -111,7 +107,7 @@ class ActivitiesController extends Controller
             'fecha' => 'required',
             'codigo_Actividad'=> 'required',
             'actividad'=> 'required',
-         /*   'descripcion_trabajo'=> 'required',
+            'descripcion_trabajo'=> 'required',
            ' actividad_predecesora'=> 'required',
             'relaciones_logicas_predecesora'=> 'required',
             'adelantos_o_atrasos_predecesora'=> 'required',
@@ -122,7 +118,7 @@ class ActivitiesController extends Controller
            ' habilidades'=> 'required',
             'otros_recursos_requerido'=> 'required',
             'nivel_esfuerzo'=> 'required',
-            'supuesto'=> 'required'*/
+            'supuesto'=> 'required'
            
         ]);
         if ($validator->fails()) {
@@ -131,7 +127,7 @@ class ActivitiesController extends Controller
         $activities->fecha = $request->fecha;
         $activities->codigo_Actividad = $request->codigo_Actividad;
         $activities->actividad =$request->actividad;
-     /*   $activities->descripcion_trabajo =$request->descripcion_trabajo;
+        $activities->descripcion_trabajo =$request->descripcion_trabajo;
         $activities->actividad_predecesora =$request->actividad_predecesora;
         $activities->relaciones_logicas_predecesora =$request->relaciones_logicas_predecesora;
         $activities->adelantos_o_atrasos_predecesora =$request->adelantos_o_atrasos_predecesora;
@@ -142,7 +138,7 @@ class ActivitiesController extends Controller
         $activities->habilidades =$request->habilidades;
         $activities->otros_recursos_requerido =$request->otros_recursos_requerido;
         $activities->nivel_esfuerzo =$request->nivel_esfuerzo;
-        $activities->supuesto =$request->supuesto;*/
+        $activities->supuesto =$request->supuesto;
         $activities->save();
         return response()->json($activities);
     }
