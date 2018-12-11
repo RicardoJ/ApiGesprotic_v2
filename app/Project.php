@@ -43,5 +43,10 @@ class Project extends Model
     public function planProject(){
         return $this->hasOne('App\PlanProject');
     }
+
+    public function projectOrganization(){
+        return $this->hasOne('App\ProjectOrganization');
+    }
+    
     
 }

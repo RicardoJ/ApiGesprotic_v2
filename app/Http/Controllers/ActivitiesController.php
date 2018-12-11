@@ -71,7 +71,7 @@ class ActivitiesController extends Controller
         $activities->save();
         return response()->json($activities);
       
-        }
+        } 
     }
 }
     /**

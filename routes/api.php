@@ -181,3 +181,33 @@ Route::prefix('acquisition')->group(function(){
     Route::delete('/{acquisition}', 'AcquisitionController@destroy')->name('delete');
 });
 */
+/* probado
+Route::prefix('projectOrganization')->group(function(){
+    Route::get('/', 'ProjectOrganizationController@index')->name('index');
+    Route::get('/{projectOrganization}', 'ProjectOrganizationController@show')->name('show');
+    Route::post('/{project}', 'ProjectOrganizationController@store')->name('store');
+    Route::put('/{projectOrganization}', 'ProjectOrganizationController@update')->name('update');
+    Route::delete('/{projectOrganization}', 'ProjectOrganizationController@destroy')->name('delete');
+});
+*/
+/*  probado
+Route::prefix('teamDevelopment')->group(function(){
+    Route::get('/', 'TeamDevelopmentController@index')->name('index');
+    Route::get('/{teamDevelopment}', 'TeamDevelopmentController@show')->name('show');
+    Route::post('/{project_team}', 'TeamDevelopmentController@store')->name('store');
+    Route::put('/{teamDevelopment}', 'TeamDevelopmentController@update')->name('update');
+    Route::delete('/{teamDevelopment}', 'TeamDevelopmentController@destroy')->name('delete');
+    Route::get('/project_team/{project_team}/teamDevelopment', 'TeamDevelopmentController@listarTeamDev')->name('listarTeamDev');
+   
+    
+});
+*/
+
+Route::prefix('teamManagement')->group(function(){
+    Route::get('/', 'TeamManagementController@index')->name('index');
+    Route::get('/{teamManagement}', 'TeamManagementController@show')->name('show');
+    Route::post('/{project_team}', 'TeamManagementController@store')->name('store');
+    Route::put('/{teamManagement}', 'TeamManagementController@update')->name('update');
+    Route::delete('/{teamManagement}', 'TeamManagementController@destroy')->name('delete');
+    Route::get('/project_team/{project_team}/teamManagement', 'TeamManagementController@listarTeamMan')->name('listarTeamMan');
+});

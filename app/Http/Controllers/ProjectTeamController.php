@@ -165,6 +165,7 @@ class ProjectTeamController extends Controller
         return response()->json(['Imagen Equipo del proyecto Editado'=>$project_team],202);
     }
 }
+
     /**
      * Remove the specified resource from storage.
      *

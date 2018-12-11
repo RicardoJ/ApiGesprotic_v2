@@ -31,4 +31,11 @@ class Project_team extends Model
     public function activities(){
         return $this->hasMany('App\Activities');
     }
+
+    public function teamDevelopment(){
+        return $this->hasMany('App\TeamDevelopment');
+    }
+    public function teamManagement(){
+        return $this->hasOne('App\TeamManagement');
+    }
 }
