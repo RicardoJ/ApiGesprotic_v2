@@ -10,8 +10,11 @@ class Project extends Model
     public $timestamps = false;
     protected $fillable = ['director','nombre','departamento','completed'];
     
-    public function actaconfiguracion(){
-        return $this->hasOne('App\ActaConfiguracion');
+    public function actaconfiguracion1(){
+        return $this->hasOne('App\ActaConfiguracion1');
+    }
+    public function actaconfiguracion2(){
+        return $this->hasOne('App\ActaConfiguracion2');
     }
     public function actariesgo(){
         return $this->hasOne('App\ActaRiesgo');

@@ -56,7 +56,7 @@ Route::prefix('lessonLearned')->group(function(){
     Route::delete('/acta/{acta}', 'ActaController@destroy')->name('delete');
 });
 */
-/*
+/* probado
 Route::prefix('actaConstitucion')->group(function(){
     Route::get('/', 'ActaConstitucionController@index')->name('index');
     Route::get('/{actaConstitucion}', 'ActaConstitucionController@show')->name('show');
@@ -66,25 +66,39 @@ Route::prefix('actaConstitucion')->group(function(){
     Route::get('/project/{project}/actaConstitucion', 'ActaConstitucionController@listaActaConstitucionPorProyecto')->name('listaActaConstitucionPorProyecto');
 });
 */
-/*
-Route::prefix('actaConfiguracion')->group(function(){
-    Route::get('/', 'ActaConfiguracionController@index')->name('index');
-    Route::get('/{actaConfiguracion}', 'ActaConfiguracionController@show')->name('show');
-    Route::post('/{project}', 'ActaConfiguracionController@store')->name('store');
-    Route::put('/{actaConfiguracion}', 'ActaConfiguracionController@update')->name('update');
-    Route::delete('/{actaConfiguracion}', 'ActaConfiguracionController@destroy')->name('delete');
-    Route::get('/project/{project}/actaConfiguracion', 'ActaConfiguracionController@listaActaConfiguracionPorProyecto')->name('listaActaConfiguracionPorProyecto');
+
+/* probado
+Route::prefix('actaConfiguracion1')->group(function(){
+    Route::get('/', 'ActaConfiguracion1Controller@index')->name('index');
+    Route::get('/{actaConfiguracion1}', 'ActaConfiguracion1Controller@show')->name('show');
+    Route::post('/{project}', 'ActaConfiguracion1Controller@store')->name('store');
+    Route::put('/{actaConfiguracion1}', 'ActaConfiguracion1Controller@update')->name('update');
+    Route::delete('/{actaConfiguracion1}', 'ActaConfiguracion1Controller@destroy')->name('delete');
+    Route::get('/project/{project}/actaConfiguracion', 'ActaConfiguracion1Controller@listaActaConfiguracionPorProyecto')->name('listaActaConfiguracionPorProyecto');
     
 });
 */
-/*
+
+Route::prefix('actaConfiguracion2')->group(function(){
+    Route::get('/', 'ActaConfiguracion2Controller@index')->name('index');
+    Route::get('/{actaConfiguracion2}', 'ActaConfiguracion2Controller@show')->name('show');
+    Route::post('/{project}', 'ActaConfiguracion2Controller@store')->name('store');
+    Route::put('/{actaConfiguracion2}', 'ActaConfiguracion2Controller@update')->name('update');
+    Route::delete('/{actaConfiguracion2}', 'ActaConfiguracion2Controller@destroy')->name('delete');
+    Route::get('/project/{project}/actaConfiguracion2', 'ActaConfiguracion2Controller@listaActaConfiguracionPorProyecto')->name('listaActaConfiguracionPorProyecto');
+    
+}); 
+
+
+
+/* probado
 Route::prefix('actaPlanDirector')->group(function(){
     Route::get('/', 'ActaPlanDirectorController@index')->name('index');
     Route::get('/{actaPlanDirector}', 'ActaPlanDirectorController@show')->name('show');
     Route::post('/{project}', 'ActaPlanDirectorController@store')->name('store');
     Route::put('/{actaPlanDirector}', 'ActaPlanDirectorController@update')->name('update');
     Route::delete('/{actaPlanDirector}', 'ActaPlanDirectorController@destroy')->name('delete');
-    Route::get('/project/{project}/actaPlanDirector', 'ActaPlanDirectorController@listaActaPlanDirectorPorProyecto')->name('listaActaPlanDirectorPorProyecto');
+   
 });
 */
 /*
@@ -97,7 +111,7 @@ Route::prefix('actaRiesgo')->group(function(){
     Route::get('/project/{project}/actaRiesgo', 'ActaRiesgoController@listaActaRiesgoPorProyecto')->name('listaActaRiesgoPorProyecto');
 });
 */
-/*
+/*probado
 Route::prefix('change')->group(function(){
     Route::get('/', 'ChangeController@index')->name('index');
     Route::get('/{change}', 'ChangeController@show')->name('show');
@@ -202,7 +216,7 @@ Route::prefix('teamDevelopment')->group(function(){
     
 });
 */
-
+/* probado
 Route::prefix('teamManagement')->group(function(){
     Route::get('/', 'TeamManagementController@index')->name('index');
     Route::get('/{teamManagement}', 'TeamManagementController@show')->name('show');
@@ -211,3 +225,4 @@ Route::prefix('teamManagement')->group(function(){
     Route::delete('/{teamManagement}', 'TeamManagementController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/teamManagement', 'TeamManagementController@listarTeamMan')->name('listarTeamMan');
 });
+*/
