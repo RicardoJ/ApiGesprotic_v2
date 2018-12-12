@@ -27,7 +27,7 @@ class ActaConfiguracion2Controller extends Controller
             
             'objetivos_y_alcance'=> 'required',
             'rol_a_desempeñar'=> 'required',
-         /*   'funciones_y_responsabilidades'=> 'required',
+            'funciones_y_responsabilidades'=> 'required',
             
             'elemento_entregables'=> 'required',
             'normas_identificacion_elementos'=> 'required',
@@ -44,7 +44,7 @@ class ActaConfiguracion2Controller extends Controller
             'procedimiento_y_niveles_de_aprobacion'=> 'required',
             'procedimiento_de_auditoria_en_la_gestion'=> 'required',
             'documento_lineaBase'=> 'required',
-            'descripcion_resumen'=> 'required'*/
+            'descripcion_resumen'=> 'required'
            
         ]);
         if ($validator->fails()) {
@@ -62,7 +62,7 @@ class ActaConfiguracion2Controller extends Controller
                     
                     'objetivos_y_alcance'=>$request->input('objetivos_y_alcance'),
                     'rol_a_desempeñar'=>$request->input('rol_a_desempeñar'),
-             /*       'funciones_y_responsabilidades'=>$request->input('funciones_y_responsabilidades'),
+                    'funciones_y_responsabilidades'=>$request->input('funciones_y_responsabilidades'),
                     
                     'elemento_entregables'=>$request->input('elemento_entregables'),
                     'normas_identificacion_elementos'=>$request->input('normas_identificacion_elementos'),
@@ -79,7 +79,7 @@ class ActaConfiguracion2Controller extends Controller
                     'procedimiento_y_niveles_de_aprobacion'=>$request->input('procedimiento_y_niveles_de_aprobacion'),
                     'procedimiento_de_auditoria_en_la_gestion'=>$request->input('procedimiento_de_auditoria_en_la_gestion'),
                     'documento_lineaBase'=>$request->input('documento_lineaBase'),
-                    'descripcion_resumen'=>$request->input('descripcion_resumen'), */
+                    'descripcion_resumen'=>$request->input('descripcion_resumen'), 
                     'project_id'=>$project_id
                 ]);
                 $actaConfiguracion2->save();
@@ -111,7 +111,7 @@ class ActaConfiguracion2Controller extends Controller
         $validator = Validator::make($request->all(),[
             'objetivos_y_alcance'=> 'required',
             'rol_a_desempeñar'=> 'required',
-         /*   'funciones_y_responsabilidades'=> 'required',
+            'funciones_y_responsabilidades'=> 'required',
             
             'elemento_entregables'=> 'required',
             'normas_identificacion_elementos'=> 'required',
@@ -129,14 +129,14 @@ class ActaConfiguracion2Controller extends Controller
             'procedimiento_de_auditoria_en_la_gestion'=> 'required',
             'documento_lineaBase'=> 'required',
             'descripcion_resumen'=> 'required'
-           */
+           
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
         }else{
         $actaConfiguracion2->objetivos_y_alcance = $request->objetivos_y_alcance;
         $actaConfiguracion2->rol_a_desempeñar = $request->rol_a_desempeñar;
-     /*   $actaConfiguracion2->funciones_y_responsabilidades = $request->funciones_y_responsabilidades;
+        $actaConfiguracion2->funciones_y_responsabilidades = $request->funciones_y_responsabilidades;
         $actaConfiguracion2 ->elemento_entregables =$request->elemento_entregables;
         $actaConfiguracion2 ->normas_identificacion_elementos =$request->normas_identificacion_elementos;
         $actaConfiguracion2 ->responsable_elementos =$request->responsable_elementos;
@@ -150,7 +150,7 @@ class ActaConfiguracion2Controller extends Controller
         $actaConfiguracion2 ->procedimiento_y_niveles_de_aprobacion =$request->procedimiento_y_niveles_de_aprobacion;
         $actaConfiguracion2 ->procedimiento_de_auditoria_en_la_gestion =$request->procedimiento_de_auditoria_en_la_gestion;
         $actaConfiguracion2 ->documento_lineaBase =$request->documento_lineaBase;
-        $actaConfiguracion2 ->descripcion_resumen =$request->descripcion_resumen; */
+        $actaConfiguracion2 ->descripcion_resumen =$request->descripcion_resumen; 
         
         $actaConfiguracion2->save();
         return response()->json($actaConfiguracion2);

@@ -64,11 +64,7 @@ class AgreementController extends Controller
                 }
             }
         }
-        /*
-        $agreement->create(
-        $request->only(['contenido', 'fecha_Entrega', 'fecha_Contrato','fecha_Contrato','metodo_pago','nombre_Empresa','persona_Encargada'])
-        );
-        return response()->json($agreement); */
+        
     }
     /**
      * Display the specified resource.

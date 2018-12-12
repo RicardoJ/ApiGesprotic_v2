@@ -29,7 +29,7 @@ class ActaConfiguracion1Controller extends Controller
                             'aprobacion_firma'=> 'required',
                             
                             'nombre_rol'=> 'required',
-                       /*     'persona_asignada'=> 'required',
+                            'persona_asignada'=> 'required',
                             'responsabilidades'=> 'required',
                             'nivel_autoridad'=> 'required',
                             
@@ -48,7 +48,7 @@ class ActaConfiguracion1Controller extends Controller
                             'formato_software2'=> 'required',
                             'gestion_del_cambio'=> 'required',
                             'contabilidad_de_estado'=> 'required',
-                            'verificacion_y_auditoria'=> 'required'*/
+                            'verificacion_y_auditoria'=> 'required'
                                                             ]);
         if ($validator->fails()) {
          return response()->json(['Error'],404);
@@ -67,7 +67,7 @@ class ActaConfiguracion1Controller extends Controller
                 'aprobacion_firma'=>$request->input('aprobacion_firma'),
                 
                 'nombre_rol'=>$request->input('nombre_rol'),
-             /*   'persona_asignada'=>$request->input('persona_asignada'),
+               'persona_asignada'=>$request->input('persona_asignada'),
                 'responsabilidades'=>$request->input('responsabilidades'),
                 'nivel_autoridad'=>$request->input('nivel_autoridad'),
                 
@@ -86,7 +86,7 @@ class ActaConfiguracion1Controller extends Controller
                 'formato_software2'=>$request->input('formato_software2'),
                 'gestion_del_cambio'=>$request->input('gestion_del_cambio'),
                 'contabilidad_de_estado'=>$request->input('contabilidad_de_estado'),
-                'verificacion_y_auditoria'=>$request->input('verificacion_y_auditoria'),*/
+                'verificacion_y_auditoria'=>$request->input('verificacion_y_auditoria'),
                 'project_id'=>$project_id
             ]);
             $actaConfiguracion1->save();
@@ -128,7 +128,7 @@ class ActaConfiguracion1Controller extends Controller
             'aprobacion_firma'=> 'required',
             
             'nombre_rol'=> 'required',
-         /*   'persona_asignada'=> 'required',
+           'persona_asignada'=> 'required',
             'responsabilidades'=> 'required',
             'nivel_autoridad'=> 'required',
             
@@ -147,7 +147,7 @@ class ActaConfiguracion1Controller extends Controller
             'formato_software2'=> 'required',
             'gestion_del_cambio'=> 'required',
             'contabilidad_de_estado'=> 'required',
-            'verificacion_y_auditoria'=> 'required' */
+            'verificacion_y_auditoria'=> 'required' 
             
         ]);
         if ($validator->fails()) {
@@ -156,7 +156,7 @@ class ActaConfiguracion1Controller extends Controller
         $actaConfiguracion1->aprobacion_persona = $request->aprobacion_persona;
         $actaConfiguracion1->aprobacion_firma = $request->aprobacion_firma;
         $actaConfiguracion1->nombre_rol = $request->nombre_rol;
-   /*     $actaConfiguracion1->persona_asignada = $request->persona_asignada;
+       $actaConfiguracion1->persona_asignada = $request->persona_asignada;
         $actaConfiguracion1->responsabilidades = $request->responsabilidades;
         $actaConfiguracion1->nivel_autoridad = $request->nivel_autoridad;
         $actaConfiguracion1->documentos = $request->documentos;
@@ -174,7 +174,7 @@ class ActaConfiguracion1Controller extends Controller
         $actaConfiguracion1->formato_software2 = $request->formato_software2;
         $actaConfiguracion1->gestion_del_cambio = $request->gestion_del_cambio;
         $actaConfiguracion1->contabilidad_de_estado = $request->contabilidad_de_estado;
-        $actaConfiguracion1->verificacion_y_auditoria = $request->verificacion_y_auditoria; */
+        $actaConfiguracion1->verificacion_y_auditoria = $request->verificacion_y_auditoria; 
         $actaConfiguracion1->save();
         return response()->json($actaConfiguracion1);
     }

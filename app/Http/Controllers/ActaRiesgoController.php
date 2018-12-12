@@ -228,7 +228,7 @@ if (!$project) {
             'edicion_revisada'=>'required',
             
             'fecha_edicion_previa'=>'required',
-         /*   'fecha_revision'=>'required',
+           'fecha_revision'=>'required',
             'descripcion_del_proceso'=>'required',
             'herramientas_tecnicas_identificacion'=>'required',
             'tarea_trabajo_actividad'=>'required',
@@ -297,7 +297,7 @@ if (!$project) {
             'protocolo_contigencia'=>'required',
             'protocolo_control_riesgo'=>'required',
             'protocolo_comunicacion_riesgos'=>'required',
-            'protocolo_auditoria_planRiesgo'=>'required'*/
+            'protocolo_auditoria_planRiesgo'=>'required'
                     
                 ]);
                 if ($validator->fails()) {
@@ -307,7 +307,7 @@ if (!$project) {
                 $actaRiesgo->edicion_previa = $request->edicion_previa;
                 $actaRiesgo->edicion_revisada = $request->edicion_revisada;
                 $actaRiesgo->fecha_edicion_previa = $request->fecha_edicion_previa;
-            /*    $actaRiesgo->fecha_revision = $request->fecha_revision;
+               $actaRiesgo->fecha_revision = $request->fecha_revision;
                 $actaRiesgo->descripcion_del_proceso = $request->descripcion_del_proceso;
                 $actaRiesgo->herramientas_tecnicas_identificacion = $request->herramientas_tecnicas_identificacion;
                 $actaRiesgo->tarea_trabajo_actividad = $request->tarea_trabajo_actividad;
@@ -370,7 +370,7 @@ if (!$project) {
                 $actaRiesgo->protocolo_contigencia = $request->protocolo_contigencia;
                 $actaRiesgo->protocolo_control_riesgo = $request->protocolo_control_riesgo;
                 $actaRiesgo->protocolo_comunicacion_riesgos = $request->protocolo_comunicacion_riesgos;
-                $actaRiesgo->protocolo_auditoria_planRiesgo = $request->protocolo_auditoria_planRiesgo;*/
+                $actaRiesgo->protocolo_auditoria_planRiesgo = $request->protocolo_auditoria_planRiesgo;
         
                 $actaRiesgo->save();
                 return response()->json($actaRiesgo);

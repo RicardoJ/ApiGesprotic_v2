@@ -166,7 +166,7 @@ return response()->json($actaPlanDirector);
             'revision_persona1'=> 'required',
             'revision_firma'=> 'required',
             'aprobacion_persona2'=> 'required',
-        /*    'aprobacion_firma'=> 'required',
+            'aprobacion_firma'=> 'required',
             
             'ciclo_vida_fases'=> 'required',
             'ciclo_vida_procesos'=> 'required',
@@ -210,7 +210,7 @@ return response()->json($actaPlanDirector);
             'aspectos_claves'=> 'required',
             'procesos_revision'=> 'required',
             'documento'=> 'required',
-            'resumen_documento'=> 'required' */
+            'resumen_documento'=> 'required' 
                 ]);
                 if ($validator->fails()) {
                     return response()->json(['Error'],404);
@@ -219,7 +219,7 @@ return response()->json($actaPlanDirector);
                 $actaPlanDirector->revision_persona1 = $request->revision_persona1;
                 $actaPlanDirector->revision_firma = $request->revision_firma;
                 $actaPlanDirector->aprobacion_persona2 = $request->aprobacion_persona2;
-             /*   $actaPlanDirector->aprobacion_firma = $request->aprobacion_firma;
+                $actaPlanDirector->aprobacion_firma = $request->aprobacion_firma;
                 
                 $actaPlanDirector->ciclo_vida_fases = $request->ciclo_vida_fases;
                 $actaPlanDirector->ciclo_vida_procesos = $request->ciclo_vida_procesos;
@@ -258,7 +258,7 @@ return response()->json($actaPlanDirector);
                 $actaPlanDirector->procesos_revision = $request->procesos_revision;
                 $actaPlanDirector->documento = $request->documento;
                 $actaPlanDirector->resumen_documento = $request->resumen_documento;
-            */
+            
                 $actaPlanDirector->save();
                 return response()->json($actaPlanDirector);
     }

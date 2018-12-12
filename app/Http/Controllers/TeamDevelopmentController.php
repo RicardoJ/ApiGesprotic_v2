@@ -29,7 +29,7 @@ class TeamDevelopmentController extends Controller
             'miembro_equipo_rol'=>'required',
             'desde'=>'required',
             'hasta'=>'required',
-        /*    'fecha_estado'=>'required',
+            'fecha_estado'=>'required',
             'informe_id'=>'required',
             'actividades_planificadas'=>'required',
             'check_realizada'=>'required',
@@ -56,7 +56,7 @@ class TeamDevelopmentController extends Controller
             'fondos_y_presupuesto'=>'required',
             'nuevos_riesgos'=>'required',
             'problemas_y_dificultades'=>'required',
-            'otros_comentarios'=>'required' */
+            'otros_comentarios'=>'required' 
 ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -71,7 +71,7 @@ class TeamDevelopmentController extends Controller
         'miembro_equipo_rol'=>$request->input('miembro_equipo_rol'),
         'desde'=>$request->input('desde'),
         'hasta'=>$request->input('hasta'),
- /*       'fecha_estado'=>$request->input('fecha_estado'),
+        'fecha_estado'=>$request->input('fecha_estado'),
         'informe_id'=>$request->input('informe_id'),
         'actividades_planificadas'=>$request->input('actividades_planificadas'),
         'check_realizada'=>$request->has('check_realizada') ? true : false ,
@@ -98,7 +98,7 @@ class TeamDevelopmentController extends Controller
         'fondos_y_presupuesto'=>$request->input('fondos_y_presupuesto'),
         'nuevos_riesgos'=>$request->input('nuevos_riesgos'),
         'problemas_y_dificultades'=>$request->input('problemas_y_dificultades'),
-        'otros_comentarios'=>$request->input('otros_comentarios'), */
+        'otros_comentarios'=>$request->input('otros_comentarios'), 
         'project_team_id'=>$project_team_id
         
         ]);
@@ -141,7 +141,7 @@ class TeamDevelopmentController extends Controller
             'miembro_equipo_rol'=>'required',
             'desde'=>'required',
             'hasta'=>'required',
-        /*    'fecha_estado'=>'required',
+           'fecha_estado'=>'required',
             'informe_id'=>'required',
             'actividades_planificadas'=>'required',
             'check_realizada'=>'required',
@@ -168,7 +168,7 @@ class TeamDevelopmentController extends Controller
             'fondos_y_presupuesto'=>'required',
             'nuevos_riesgos'=>'required',
             'problemas_y_dificultades'=>'required',
-            'otros_comentarios'=>'required' */
+            'otros_comentarios'=>'required' 
           
         ]);
         if ($validator->fails()) {
@@ -178,7 +178,7 @@ class TeamDevelopmentController extends Controller
         $teamDevelopment->miembro_equipo_rol = $request->miembro_equipo_rol;
         $teamDevelopment->desde = $request->desde;
         $teamDevelopment->hasta = $request->hasta;
-  /*      $teamDevelopment->fecha_estado = $request->fecha_estado;
+       $teamDevelopment->fecha_estado = $request->fecha_estado;
         $teamDevelopment->informe_id = $request->informe_id;
         $teamDevelopment->actividades_planificadas = $request->actividades_planificadas;
         $teamDevelopment->check_realizada = $request->check_realizada;
@@ -210,7 +210,7 @@ class TeamDevelopmentController extends Controller
         $teamDevelopment->nuevos_riesgos = $request->nuevos_riesgos;
         $teamDevelopment->problemas_y_dificultades = $request->problemas_y_dificultades;
         $teamDevelopment->otros_comentarios = $request->otros_comentarios;
-        */
+        
         $teamDevelopment->save();
         return response()->json($teamDevelopment);
     }

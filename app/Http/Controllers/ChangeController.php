@@ -125,7 +125,7 @@ class ChangeController extends Controller
             'fecha' => 'required',
             'director_persona' => 'required',
             'director_departamento' => 'required',
-         /*   'propuesta_persona' => 'required',
+            'propuesta_persona' => 'required',
             'propuesta_departamento' => 'required',
             
             'check_alcance' => 'required',
@@ -152,7 +152,7 @@ class ChangeController extends Controller
             'rol' => 'required',
             'firma' => 'required',
             'fecha' => 'required'
-        */
+        
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -160,7 +160,7 @@ class ChangeController extends Controller
         $change->fecha = $request->fecha;
         $change->director_persona = $request->director_persona;
         $change->director_departamento = $request->director_departamento;
-       /* $change->propuesta_persona = $request->propuesta_departamento;
+        $change->propuesta_persona = $request->propuesta_departamento;
         $change->check_alcance = $request->check_alcance;
         $change->check_costo = $request->check_costo;
         $change->check_plazo = $request->check_plazo;
@@ -180,7 +180,7 @@ class ChangeController extends Controller
         $change->nombre_persona_notificada = $request->nombre_persona_notificada;
         $change->rol = $request->rol;
         $change->firma = $request->firma;
-        $change->fecha = $request->fecha; */
+        $change->fecha = $request->fecha; 
         $change->save();
         return response()->json($change);
     }

@@ -27,7 +27,7 @@ class ActaConstitucionController extends Controller
                             'fecha' => 'required',
                             'CLIENTE_PETICIONARIO' => 'required',
                             'persona_Rpble_Cliente' => 'required', 
-                        /*    'departamento_cliente' => 'required',
+                            'departamento_cliente' => 'required',
                             'sponsor' => 'required',
                             'persona_sponsor' => 'required',
                             'departamento_sponsor' => 'required',
@@ -99,7 +99,7 @@ class ActaConstitucionController extends Controller
                             'nivel_superior_desicion_persona'=> 'required',
                             'nivel_superior_desicion_departamento'=> 'required',
                             
-                            'firma_director'=> 'required' */
+                            'firma_director'=> 'required' 
                            
         ]);
         if ($validator->fails()) {
@@ -117,7 +117,7 @@ class ActaConstitucionController extends Controller
                     'fecha'=>$request->input('fecha'),
                     'CLIENTE_PETICIONARIO' =>$request->input('CLIENTE_PETICIONARIO'),
                     'persona_Rpble_Cliente'=>$request->input('persona_Rpble_Cliente'),
-                  /*  'departamento_cliente' =>$request->input('departamento_cliente'),
+                    'departamento_cliente' =>$request->input('departamento_cliente'),
                     'sponsor'=>$request->input('sponsor'),
                     'persona_sponsor' =>$request->input('persona_sponsor'),
                     'departamento_sponsor'=>$request->input('departamento_sponsor'),
@@ -191,7 +191,7 @@ class ActaConstitucionController extends Controller
                             
                             'firma_director'=> $request->input('firma_director'),
                     
-                   */
+                   
                     'project_id'=>$project_id
                 ]);
                 $actaConstitucion->save();
@@ -234,7 +234,7 @@ class ActaConstitucionController extends Controller
             'fecha' => 'required',
             'CLIENTE_PETICIONARIO' => 'required',
             'persona_Rpble_Cliente' => 'required', 
-          /*  'departamento_cliente' => 'required',
+            'departamento_cliente' => 'required',
             'sponsor' => 'required',
             'persona_sponsor' => 'required',
             'departamento_sponsor' => 'required',
@@ -306,7 +306,7 @@ class ActaConstitucionController extends Controller
             'nivel_superior_desicion_persona'=> 'required',
             'nivel_superior_desicion_departamento'=> 'required',
             
-            'firma_director'=> 'required' */
+            'firma_director'=> 'required' 
 
         ]);
         if ($validator->fails()) {
@@ -317,7 +317,7 @@ class ActaConstitucionController extends Controller
        
         
         $actaConstitucion->persona_Rpble_Cliente = $request->persona_Rpble_Cliente; 
-   /*     $actaConstitucion->departamento_cliente = $request->departamento_cliente;
+        $actaConstitucion->departamento_cliente = $request->departamento_cliente;
         $actaConstitucion->sponsor = $request->sponsor;
         $actaConstitucion->persona_sponsor = $request->persona_sponsor;
         $actaConstitucion->departamento_sponsor = $request->departamento_sponsor;
@@ -378,7 +378,7 @@ class ActaConstitucionController extends Controller
         $actaConstitucion->volumen_contratacion = $request->volumen_contratacion;
         $actaConstitucion->nivel_superior_desicion_persona = $request->nivel_superior_desicion_persona;
         $actaConstitucion->nivel_superior_desicion_departamento = $request->nivel_superior_desicion_departamento;
-        $actaConstitucion->firma_director = $request->firma_director; */
+        $actaConstitucion->firma_director = $request->firma_director; 
         $actaConstitucion->save();
         return response()->json($actaConstitucion);
     }

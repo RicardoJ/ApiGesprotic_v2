@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-/*
+//probado
 Route::name('project.')->group(function(){
     Route::get('/project', 'ProjectController@index')->name('index');
     Route::post('/project', 'ProjectController@store')->name('store');
@@ -22,8 +22,8 @@ Route::name('project.')->group(function(){
     Route::put('/project/{project}/completed', 'ProjectController@completed')->name('completed');
 
 });
-*/
-/* probado
+
+// probado
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
     Route::get('/{resource}', 'ResourceController@show')->name('show');
@@ -36,8 +36,8 @@ Route::prefix('resource')->group(function(){
     Route::get('/provider/{provider}/resource', 'ResourceController@listarRecursoPorProveedor')->name('listarRecursoPorProveedor');
 });
 
-*/
-/*
+
+//probado
 Route::prefix('lessonLearned')->group(function(){
     Route::get('/', 'LessonLearnedController@index')->name('index');
     Route::get('/{lessonLearned}', 'LessonLearnedController@show')->name('show');
@@ -46,8 +46,8 @@ Route::prefix('lessonLearned')->group(function(){
     Route::delete('/{lessonLearned}', 'LessonLearnedController@destroy')->name('delete');
     Route::get('/project/{project}/lessonLearned', 'LessonLearnedController@listaLeccionPorProyecto')->name('listaLeccionPorProyecto');
 });
-*/
-/*
+
+//probado
     Route::prefix('acta.')->group(function(){
     Route::get('/actas', 'ActaController@index')->name('index');
     Route::get('/acta/{acta}', 'ActaController@show')->name('show');
@@ -55,8 +55,8 @@ Route::prefix('lessonLearned')->group(function(){
     Route::put('/acta/{acta}', 'ActaController@update')->name('update');
     Route::delete('/acta/{acta}', 'ActaController@destroy')->name('delete');
 });
-*/
-/* probado
+
+//probado
 Route::prefix('actaConstitucion')->group(function(){
     Route::get('/', 'ActaConstitucionController@index')->name('index');
     Route::get('/{actaConstitucion}', 'ActaConstitucionController@show')->name('show');
@@ -65,9 +65,9 @@ Route::prefix('actaConstitucion')->group(function(){
     Route::delete('/{actaConstitucion}', 'ActaConstitucionController@destroy')->name('delete');
     Route::get('/project/{project}/actaConstitucion', 'ActaConstitucionController@listaActaConstitucionPorProyecto')->name('listaActaConstitucionPorProyecto');
 });
-*/
 
-/* probado
+
+// probado
 Route::prefix('actaConfiguracion1')->group(function(){
     Route::get('/', 'ActaConfiguracion1Controller@index')->name('index');
     Route::get('/{actaConfiguracion1}', 'ActaConfiguracion1Controller@show')->name('show');
@@ -77,8 +77,8 @@ Route::prefix('actaConfiguracion1')->group(function(){
     Route::get('/project/{project}/actaConfiguracion', 'ActaConfiguracion1Controller@listaActaConfiguracionPorProyecto')->name('listaActaConfiguracionPorProyecto');
     
 });
-*/
 
+//probado
 Route::prefix('actaConfiguracion2')->group(function(){
     Route::get('/', 'ActaConfiguracion2Controller@index')->name('index');
     Route::get('/{actaConfiguracion2}', 'ActaConfiguracion2Controller@show')->name('show');
@@ -91,7 +91,7 @@ Route::prefix('actaConfiguracion2')->group(function(){
 
 
 
-/* probado
+// probado
 Route::prefix('actaPlanDirector')->group(function(){
     Route::get('/', 'ActaPlanDirectorController@index')->name('index');
     Route::get('/{actaPlanDirector}', 'ActaPlanDirectorController@show')->name('show');
@@ -100,8 +100,8 @@ Route::prefix('actaPlanDirector')->group(function(){
     Route::delete('/{actaPlanDirector}', 'ActaPlanDirectorController@destroy')->name('delete');
    
 });
-*/
-/*
+
+// probado
 Route::prefix('actaRiesgo')->group(function(){
     Route::get('/', 'ActaRiesgoController@index')->name('index');
     Route::get('/{actaRiesgo}', 'ActaRiesgoController@show')->name('show');
@@ -110,8 +110,8 @@ Route::prefix('actaRiesgo')->group(function(){
     Route::delete('/{actaRiesgo}', 'ActaRiesgoController@destroy')->name('delete');
     Route::get('/project/{project}/actaRiesgo', 'ActaRiesgoController@listaActaRiesgoPorProyecto')->name('listaActaRiesgoPorProyecto');
 });
-*/
-/*probado
+
+//probado
 Route::prefix('change')->group(function(){
     Route::get('/', 'ChangeController@index')->name('index');
     Route::get('/{change}', 'ChangeController@show')->name('show');
@@ -119,8 +119,8 @@ Route::prefix('change')->group(function(){
     Route::put('/{change}', 'ChangeController@update')->name('update');
     Route::delete('/{change}', 'ChangeController@destroy')->name('delete');
 });
-*/
-/* probado
+
+// probado
 Route::prefix('project_team')->group(function(){
     Route::get('/', 'ProjectTeamController@index')->name('index');
     Route::get('/{project_team}', 'ProjectTeamController@show')->name('show');
@@ -130,8 +130,8 @@ Route::prefix('project_team')->group(function(){
     Route::delete('/{project_team}', 'ProjectTeamController@destroy')->name('delete');
     Route::get('/project/{project}/project_team', 'ProjectTeamController@listaProjectTeamPorProyecto')->name('listaProjectTeamPorProyecto');
 });
-*/
-/* probado
+
+// probado
 Route::prefix('people')->group(function(){
     Route::get('/', 'PeopleController@index')->name('index');
     Route::get('/{people}', 'PeopleController@show')->name('show');
@@ -140,8 +140,8 @@ Route::prefix('people')->group(function(){
     Route::delete('/{people}', 'PeopleController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/people', 'PeopleController@listarPersonasDeEquipo')->name('listarPersonasDeEquipo');
 });
- */
-/* probado
+ 
+// probado
 Route::prefix('provider')->group(function(){
     Route::get('/', 'ProviderController@index')->name('index');
     Route::get('/{provider}', 'ProviderController@show')->name('show');
@@ -149,8 +149,8 @@ Route::prefix('provider')->group(function(){
     Route::put('/{provider}', 'ProviderController@update')->name('update');
     Route::delete('/{provider}', 'ProviderController@destroy')->name('delete');
 });
-*/
-/* probado
+
+// probado
 Route::prefix('agreement')->group(function(){
     Route::get('/', 'AgreementController@index')->name('index');
     Route::get('/{agreement}', 'AgreementController@show')->name('show');
@@ -159,8 +159,8 @@ Route::prefix('agreement')->group(function(){
     Route::delete('/{agreement}', 'AgreementController@destroy')->name('delete');
     Route::get('/provider/{provider}/agreement', 'AgreementController@listaContratoPorProveedor')->name('listaContratoPorProveedor');
 });
-*/
-/* probado
+
+// probado
 Route::prefix('activitie')->group(function(){
     Route::get('/', 'ActivitiesController@index')->name('index');
     Route::get('/{activities}', 'ActivitiesController@show')->name('show');
@@ -171,22 +171,11 @@ Route::prefix('activitie')->group(function(){
     Route::patch('project_team/{project_team}/activitie/{activities}/completed', 'ActivitiesController@completed')->name('completed');
 
 });
-*/
-/*
-Route::prefix('planProject')->group(function(){
-    Route::get('/', 'PlanProjectController@index')->name('index');
-    Route::get('/{planProject}', 'PlanProjectController@show')->name('show');
-    Route::post('/{project}', 'PlanProjectController@store')->name('store');
-    Route::put('/{planProject}', 'PlanProjectController@update')->name('update');
-    Route::delete('/{planProject}', 'PlanProjectController@destroy')->name('delete');
-    Route::patch('project_team/{project_team}/planProject/{planProject}/completed', 'PlanProjectController@completed')->name('completed');
-    Route::get('/project/{project}/planProject', 'PlanProjectController@listaplanPorProyecto')->name('listaplanPorProyecto');
-    
-});
-*/
 
 
-  /*  probado
+
+
+  //  probado
 Route::prefix('acquisition')->group(function(){
     Route::get('/', 'AcquisitionController@index')->name('index');
     Route::get('/{acquisition}', 'AcquisitionController@show')->name('show');
@@ -194,8 +183,8 @@ Route::prefix('acquisition')->group(function(){
     Route::put('/{acquisition}', 'AcquisitionController@update')->name('update');
     Route::delete('/{acquisition}', 'AcquisitionController@destroy')->name('delete');
 });
-*/
-/* probado
+
+//probado
 Route::prefix('projectOrganization')->group(function(){
     Route::get('/', 'ProjectOrganizationController@index')->name('index');
     Route::get('/{projectOrganization}', 'ProjectOrganizationController@show')->name('show');
@@ -203,8 +192,8 @@ Route::prefix('projectOrganization')->group(function(){
     Route::put('/{projectOrganization}', 'ProjectOrganizationController@update')->name('update');
     Route::delete('/{projectOrganization}', 'ProjectOrganizationController@destroy')->name('delete');
 });
-*/
-/*  probado
+
+//  probado
 Route::prefix('teamDevelopment')->group(function(){
     Route::get('/', 'TeamDevelopmentController@index')->name('index');
     Route::get('/{teamDevelopment}', 'TeamDevelopmentController@show')->name('show');
@@ -215,8 +204,8 @@ Route::prefix('teamDevelopment')->group(function(){
    
     
 });
-*/
-/* probado
+
+// probado
 Route::prefix('teamManagement')->group(function(){
     Route::get('/', 'TeamManagementController@index')->name('index');
     Route::get('/{teamManagement}', 'TeamManagementController@show')->name('show');
@@ -225,4 +214,3 @@ Route::prefix('teamManagement')->group(function(){
     Route::delete('/{teamManagement}', 'TeamManagementController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/teamManagement', 'TeamManagementController@listarTeamMan')->name('listarTeamMan');
 });
-*/

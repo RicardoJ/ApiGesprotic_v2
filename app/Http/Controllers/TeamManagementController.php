@@ -28,7 +28,7 @@ class TeamManagementController extends Controller
             'miembroDelEquipo_rol'=>'required',
             'periodo_desde'=>'required',
             'periodo_hasta'=>'required',
-        /*    'fecha_de_estado'=>'required',
+           'fecha_de_estado'=>'required',
             
             'objetivo_alcance_indicadores'=>'required',
             'comentarios_alcance'=>'required',
@@ -99,7 +99,7 @@ class TeamManagementController extends Controller
             
             'justificacion_proyecto'=>'required',
             
-            'comentarios_adicionales'=>'required' */
+            'comentarios_adicionales'=>'required' 
             
 ]);
         if ($validator->fails()) {
@@ -118,7 +118,7 @@ class TeamManagementController extends Controller
             'miembroDelEquipo_rol'=>$request->input('miembroDelEquipo_rol'),
             'periodo_desde'=>$request->input('periodo_desde'),
             'periodo_hasta'=>$request->input('periodo_hasta'),
-      /*      'fecha_de_estado'=>$request->input('fecha_de_estado'),
+           'fecha_de_estado'=>$request->input('fecha_de_estado'),
             
             'objetivo_alcance_indicadores'=>$request->input('objetivo_alcance_indicadores'),
             'comentarios_alcance'=>$request->input('comentarios_alcance'),
@@ -189,7 +189,7 @@ class TeamManagementController extends Controller
             
             'justificacion_proyecto'=>$request->input('justificacion_proyecto'),
             
-            'comentarios_adicionales'=>$request->input('comentarios_adicionales'), */
+            'comentarios_adicionales'=>$request->input('comentarios_adicionales'), 
             'project_team_id'=>$project_team_id
        
         ]);
@@ -232,7 +232,7 @@ class TeamManagementController extends Controller
             'miembroDelEquipo_rol'=>'required',
             'periodo_desde'=>'required',
             'periodo_hasta'=>'required',
-         /*   'fecha_de_estado'=>'required',
+            'fecha_de_estado'=>'required',
             
             'objetivo_alcance_indicadores'=>'required',
             'comentarios_alcance'=>'required',
@@ -303,7 +303,7 @@ class TeamManagementController extends Controller
             
             'justificacion_proyecto'=>'required',
             
-            'comentarios_adicionales'=>'required'  */
+            'comentarios_adicionales'=>'required'  
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -312,7 +312,7 @@ class TeamManagementController extends Controller
         $teamManagement->miembroDelEquipo_rol = $request->miembroDelEquipo_rol;
         $teamManagement->periodo_desde = $request->periodo_desde;
         $teamManagement->periodo_hasta = $request->periodo_hasta;
-    /*    $teamManagement->fecha_de_estado = $request->fecha_de_estado;
+        $teamManagement->fecha_de_estado = $request->fecha_de_estado;
         $teamManagement->objetivo_alcance_indicadores = $request->objetivo_alcance_indicadores;
         $teamManagement->comentarios_alcance = $request->comentarios_alcance;
         $teamManagement->check_superadas_alcance = $request->check_superadas_alcance;
@@ -369,7 +369,7 @@ class TeamManagementController extends Controller
          $teamManagement->accion_desarrollo = $request->accion_desarrollo;
          $teamManagement->plazo = $request->plazo;
          $teamManagement->justificacion_proyecto = $request->justificacion_proyecto;
-         $teamManagement->comentarios_adicionales = $request->comentarios_adicionales;*/
+         $teamManagement->comentarios_adicionales = $request->comentarios_adicionales;
       
         $teamManagement->save();
         return response()->json($teamManagement);
