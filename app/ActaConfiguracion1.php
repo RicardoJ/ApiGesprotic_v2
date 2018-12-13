@@ -10,7 +10,7 @@ class ActaConfiguracion1 extends Model
     'aprobacion_firma',
     
     'nombre_rol',
- /*   'persona_asignada',
+    'persona_asignada',
     'responsabilidades',
     'nivel_autoridad',
     
@@ -29,7 +29,7 @@ class ActaConfiguracion1 extends Model
     'formato_software2',
     'gestion_del_cambio',
     'contabilidad_de_estado',
-    'verificacion_y_auditoria',*/
+    'verificacion_y_auditoria',
                             'project_id'
                             ];
     public function project(){

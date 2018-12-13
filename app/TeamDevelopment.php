@@ -10,7 +10,7 @@ class TeamDevelopment extends Model
         'miembro_equipo_rol',
         'desde',
         'hasta',
-     /*   'fecha_estado',
+       'fecha_estado',
         'informe_id',
         'actividades_planificadas',
         'check_realizada',
@@ -37,7 +37,7 @@ class TeamDevelopment extends Model
         'fondos_y_presupuesto',
         'nuevos_riesgos',
         'problemas_y_dificultades',
-        'otros_comentarios',*/
+        'otros_comentarios',
         'project_team_id'];
         public function project_team(){
             return $this->BelongsTo('App\Project_team', 'project_team_id');

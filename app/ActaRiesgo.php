@@ -10,7 +10,7 @@ class ActaRiesgo extends Model
     'edicion_revisada',
     
     'fecha_edicion_previa',
-   /* 'fecha_revision',
+    'fecha_revision',
     'descripcion_del_proceso',
     'herramientas_tecnicas_identificacion',
     'tarea_trabajo_actividad',
@@ -79,7 +79,7 @@ class ActaRiesgo extends Model
     'protocolo_contigencia',
     'protocolo_control_riesgo',
     'protocolo_comunicacion_riesgos',
-    'protocolo_auditoria_planRiesgo',*/
+    'protocolo_auditoria_planRiesgo',
                             'project_id'
                             
                             ];

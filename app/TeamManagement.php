@@ -10,7 +10,7 @@ class TeamManagement extends Model
 'miembroDelEquipo_rol',
 'periodo_desde',
 'periodo_hasta',
-/*'fecha_de_estado',
+'fecha_de_estado',
 'objetivo_alcance_indicadores',
 'comentarios_alcance',
 'check_superadas_alcance',
@@ -67,7 +67,7 @@ class TeamManagement extends Model
 'accion_desarrollo',
 'plazo',
 'justificacion_proyecto',
-'comentarios_adicionales', */
+'comentarios_adicionales', 
 'project_team_id'];
 public function project_team(){
     return $this->BelongsTo('App\Project_team', 'project_team_id');

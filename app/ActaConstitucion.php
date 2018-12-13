@@ -9,8 +9,8 @@ class ActaConstitucion extends Model
         'fecha',
         'CLIENTE_PETICIONARIO' ,
         'persona_Rpble_Cliente', 
-    /*    'departamento_cliente' ,
-        'sponsor' =,
+        'departamento_cliente' ,
+        'sponsor' ,
         'persona_sponsor' ,
         'departamento_sponsor' ,
         'director',
@@ -78,10 +78,10 @@ class ActaConstitucion extends Model
         'umbral_de_riesgo',
        ' capacidad_tecnica',
        ' volumen_contratacion',
-        'nivel_superior_desicion_persona'=> ,
+        'nivel_superior_desicion_persona' ,
         'nivel_superior_desicion_departamento',
         
-        'firma_director',*/
+        'firma_director',
                             'project_id'
                             ];
                             

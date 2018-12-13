@@ -9,7 +9,7 @@ class ActaPlanDirector extends Model
         'revision_persona1',
         'revision_firma',
         'aprobacion_persona2',
-       /* 'aprobacion_firma',
+        'aprobacion_firma',
         
         'ciclo_vida_fases',
         'ciclo_vida_procesos',
@@ -53,7 +53,7 @@ class ActaPlanDirector extends Model
         'aspectos_claves',
         'procesos_revision',
         'documento'=> 'required',
-        'resumen_documento', */
+        'resumen_documento', 
                             'project_id'
                             ];
                             

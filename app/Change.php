@@ -9,7 +9,7 @@ class Change extends Model
         'fecha',
 'director_persona',
 'director_departamento',
-/*'propuesta_persona',
+'propuesta_persona',
 'propuesta_departamento',
 'check_alcance',
 'check_costo',
@@ -30,7 +30,7 @@ class Change extends Model
 'nombre_persona_notificada',
 'rol',
 'firma',
-'fecha',*/
+'fecha',
         
         'project_id'];
     public function project(){

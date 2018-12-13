@@ -8,7 +8,7 @@ class ActaConfiguracion2 extends Model
     protected $fillable = [
 'objetivos_y_alcance',
 'rol_a_desempeñar',
-/*'funciones_y_responsabilidades',
+'funciones_y_responsabilidades',
 'elemento_entregables',
 'normas_identificacion_elementos',
 'responsable_elementos',
@@ -22,7 +22,7 @@ class ActaConfiguracion2 extends Model
 'procedimiento_y_niveles_de_aprobacion',
 'procedimiento_de_auditoria_en_la_gestion',
 'documento_lineaBase',
-'descripcion_resumen',*/
+'descripcion_resumen',
         'project_id'];
     public function project(){
         return $this->BelongsTo('App\Project', 'project_id');
