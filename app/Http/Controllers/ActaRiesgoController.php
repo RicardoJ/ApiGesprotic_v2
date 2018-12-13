@@ -28,7 +28,7 @@ class ActaRiesgoController extends Controller
             'edicion_revisada'=>'required',
             
             'fecha_edicion_previa'=>'required',
-         /*   'fecha_revision'=>'required',
+            'fecha_revision'=>'required',
             'descripcion_del_proceso'=>'required',
             'herramientas_tecnicas_identificacion'=>'required',
             'tarea_trabajo_actividad'=>'required',
@@ -97,7 +97,7 @@ class ActaRiesgoController extends Controller
             'protocolo_contigencia'=>'required',
             'protocolo_control_riesgo'=>'required',
             'protocolo_comunicacion_riesgos'=>'required',
-            'protocolo_auditoria_planRiesgo'=>'required' */
+            'protocolo_auditoria_planRiesgo'=>'required' 
                                             ]);
                            if ($validator->fails()) {
                           return response()->json(['Error'],404);
@@ -116,7 +116,7 @@ if (!$project) {
             'edicion_revisada'=>$request->input('edicion_revisada'),
             
             'fecha_edicion_previa'=>$request->input('fecha_edicion_previa'),
-         /*   'fecha_revision'=>$request->input('fecha_revision'),
+            'fecha_revision'=>$request->input('fecha_revision'),
             'descripcion_del_proceso'=>$request->input('descripcion_del_proceso'),
             'herramientas_tecnicas_identificacion'=>$request->input('herramientas_tecnicas_identificacion'),
             'tarea_trabajo_actividad'=>$request->input('tarea_trabajo_actividad'),
@@ -185,7 +185,7 @@ if (!$project) {
             'protocolo_contigencia'=>$request->input('protocolo_contigencia'),
             'protocolo_control_riesgo'=>$request->input('protocolo_control_riesgo'),
             'protocolo_comunicacion_riesgos'=>$request->input('protocolo_comunicacion_riesgos'),
-            'protocolo_auditoria_planRiesgo'=>$request->input('protocolo_auditoria_planRiesgo'),*/
+            'protocolo_auditoria_planRiesgo'=>$request->input('protocolo_auditoria_planRiesgo'),
             'project_id'=>$project_id
         ]);
         $actaRiesgo->save();

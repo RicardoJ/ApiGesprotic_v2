@@ -27,7 +27,7 @@ class ActaPlanDirectorController extends Controller
                             'revision_persona1'=> 'required',
                             'revision_firma'=> 'required',
                             'aprobacion_persona2'=> 'required',
-                        /*    'aprobacion_firma'=> 'required',
+                            'aprobacion_firma'=> 'required',
                             
                             'ciclo_vida_fases'=> 'required',
                             'ciclo_vida_procesos'=> 'required',
@@ -71,7 +71,7 @@ class ActaPlanDirectorController extends Controller
                             'aspectos_claves'=> 'required',
                             'procesos_revision'=> 'required',
                             'documento'=> 'required',
-                            'resumen_documento'=> 'required'*/
+                            'resumen_documento'=> 'required'
             
                                             ]);
                            if ($validator->fails()) {
@@ -89,7 +89,7 @@ $actaPlanDirector = new ActaPlanDirector([
     'revision_persona1' =>$request->input('revision_persona1'),
     'revision_firma'=>$request->input('revision_firma'),
     'aprobacion_persona2'=> $request->input('aprobacion_persona2'),
-                        /*    'aprobacion_firma'=> $request->input('aprobacion_firma'),
+                           'aprobacion_firma'=> $request->input('aprobacion_firma'),
                             
                             'ciclo_vida_fases'=>$request->input('ciclo_vida_fases'),
                             'ciclo_vida_procesos'=>$request->input('ciclo_vida_procesos'),
@@ -133,7 +133,7 @@ $actaPlanDirector = new ActaPlanDirector([
                             'aspectos_claves'=>  $request->input('aspectos_claves'),
                             'procesos_revision'=>  $request->input('procesos_revision'),
                             'documento'=>  $request->input('documento'),
-                            'resumen_documento'=>  $request->input('resumen_documento'), */
+                            'resumen_documento'=>  $request->input('resumen_documento'), 
     'project_id'=>$project_id
 ]);
 $actaPlanDirector->save();

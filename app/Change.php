@@ -21,7 +21,7 @@ class Change extends Model
 'descripcion_otro',
 'check_relacionValorada',
 'check_plano',
-'check_otro',
+'check_Documentacionotro',
 'documentacion_adjunta',
 'check_aprueba',
 'check_aplaza',

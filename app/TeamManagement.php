@@ -6,7 +6,7 @@ class TeamManagement extends Model
     protected $table = 'teamManagement';
     public $timestamps = false;
     protected $fillable = [
-        'miembroDelEquipo_persona',
+'miembroDelEquipo_persona',
 'miembroDelEquipo_rol',
 'periodo_desde',
 'periodo_hasta',

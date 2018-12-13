@@ -27,7 +27,7 @@ class ChangeController extends Controller
             'fecha' => 'required',
             'director_persona' => 'required',
             'director_departamento' => 'required',
-          /*  'propuesta_persona' => 'required',
+            'propuesta_persona' => 'required',
             'propuesta_departamento' => 'required',
             
             'check_alcance' => 'required',
@@ -42,7 +42,7 @@ class ChangeController extends Controller
             
             'check_relacionValorada' => 'required',
             'check_plano' => 'required',
-            'check_otro' => 'required',
+            'check_Documentacionotro' => 'required',
             'documentacion_adjunta' => 'required',
             
             'check_aprueba' => 'required',
@@ -53,7 +53,7 @@ class ChangeController extends Controller
             'nombre_persona_notificada' => 'required',
             'rol' => 'required',
             'firma' => 'required',
-            'fecha' => 'required', */
+            'fecha' => 'required'
         
         ]);
         if ($validator->fails()) {
@@ -68,7 +68,7 @@ class ChangeController extends Controller
             'fecha'=>$request->input('fecha'),
             'director_persona'=>$request->input('director_persona'),
             'director_departamento'=>$request->input('director_departamento'),
-         /*   'propuesta_persona'=>$request->input('propuesta_persona'),
+           'propuesta_persona'=>$request->input('propuesta_persona'),
             'propuesta_departamento'=>$request->input('propuesta_departamento'),
             
             'check_alcance'=> $request->has('check_alcance') ? true : false ,
@@ -83,7 +83,7 @@ class ChangeController extends Controller
             
             'check_relacionValorada'=> $request->has('check_relacionValorada') ? true : false ,
             'check_plano'=> $request->has('check_plano') ? true : false ,
-            'check_otro'=> $request->has('check_otro') ? true : false ,
+            'check_Documentacionotro'=> $request->has('check_Documentacionotro') ? true : false ,
             'documentacion_adjunta'=>$request->input('documentacion_adjunta'),
             
             'check_aprueba'=> $request->has('check_aprueba') ? true : false ,
@@ -94,7 +94,7 @@ class ChangeController extends Controller
             'nombre_persona_notificada'=>$request->input('nombre_persona_notificada'),
             'rol'=>$request->input('rol'),
             'firma'=>$request->input('firma'),
-            'fecha'=>$request->input('fecha'), */
+            'fecha'=>$request->input('fecha'), 
             'project_id'=>$project_id
         ]);
          $change->save();
@@ -140,7 +140,7 @@ class ChangeController extends Controller
             
             'check_relacionValorada' => 'required',
             'check_plano' => 'required',
-            'check_otro' => 'required',
+            'check_Documentacionotro' => 'required',
             'documentacion_adjunta' => 'required',
             
             'check_aprueba' => 'required',
@@ -171,7 +171,7 @@ class ChangeController extends Controller
         $change->descripcion_otro = $request->descripcion_otro;
         $change->check_relacionValorada = $request->check_relacionValorada;
         $change->check_plano = $request->check_plano;
-        $change->check_otro = $request->check_otro;
+        $change->check_Documentacionotro = $request->check_Documentacionotro;
         $change->documentacion_adjunta = $request->documentacion_adjunta;
         $change->check_aprueba = $request->check_aprueba;
         $change->check_aplaza = $request->check_aplaza;

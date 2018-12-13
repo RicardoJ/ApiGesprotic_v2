@@ -52,7 +52,7 @@ class ActaPlanDirector extends Model
         'medidas_adaptacion',
         'aspectos_claves',
         'procesos_revision',
-        'documento'=> 'required',
+        'documento',
         'resumen_documento', 
                             'project_id'
                             ];
