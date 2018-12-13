@@ -90,7 +90,7 @@ class ActaConstitucionController extends Controller
                             'departamentos_implicados'=> 'required',
                             'factores_criticos_de_exito'=> 'required',
                             'observaciones_adicionales'=> 'required',
-                            'vision_estrategica'=> 'required',
+                            'vision_justificacion_estrategica'=> 'required',
                             
                             'maxima_desviacion'=> 'required',
                             'umbral_de_riesgo'=> 'required',
@@ -180,7 +180,7 @@ class ActaConstitucionController extends Controller
                             'departamentos_implicados'=> $request->input('departamentos_implicados'),
                             'factores_criticos_de_exito'=> $request->input('factores_criticos_de_exito'),
                             'observaciones_adicionales'=> $request->input('observaciones_adicionales'),
-                            'vision_estrategica'=> $request->input('vision_estrategica'),
+                            'vision_justificacion_estrategica'=> $request->input('vision_justificacion_estrategica'),
                             
                             'maxima_desviacion'=> $request->input('maxima_desviacion'),
                             'umbral_de_riesgo'=> $request->input('umbral_de_riesgo'),
@@ -297,7 +297,7 @@ class ActaConstitucionController extends Controller
             'departamentos_implicados'=> 'required',
             'factores_criticos_de_exito'=> 'required',
             'observaciones_adicionales'=> 'required',
-            'vision_estrategica'=> 'required',
+            'vision_justificacion_estrategica'=> 'required',
             
             'maxima_desviacion'=> 'required',
             'umbral_de_riesgo'=> 'required',
@@ -371,7 +371,7 @@ class ActaConstitucionController extends Controller
         $actaConstitucion->departamentos_implicados = $request->departamentos_implicados;
         $actaConstitucion->factores_criticos_de_exito = $request->factores_criticos_de_exito;
         $actaConstitucion->observaciones_adicionales = $request->observaciones_adicionales;
-        $actaConstitucion->vision_estrategica = $request->vision_estrategica;
+        $actaConstitucion->vision_justificacion_estrategica = $request->vision_justificacion_estrategica;
         $actaConstitucion->maxima_desviacion = $request->maxima_desviacion;
         $actaConstitucion->umbral_de_riesgo = $request->umbral_de_riesgo;
         $actaConstitucion->capacidad_tecnica = $request->capacidad_tecnica;
