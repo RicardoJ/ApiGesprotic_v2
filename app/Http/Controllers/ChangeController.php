@@ -53,7 +53,7 @@ class ChangeController extends Controller
             'nombre_persona_notificada' => 'required',
             'rol' => 'required',
             'firma' => 'required',
-            'fecha' => 'required'
+            'Comunicacion_fecha' => 'required'
         
         ]);
         if ($validator->fails()) {
@@ -94,7 +94,7 @@ class ChangeController extends Controller
             'nombre_persona_notificada'=>$request->input('nombre_persona_notificada'),
             'rol'=>$request->input('rol'),
             'firma'=>$request->input('firma'),
-            'fecha'=>$request->input('fecha'), 
+            'Comunicacion_fecha'=>$request->input('Comunicacion_fecha'), 
             'project_id'=>$project_id
         ]);
          $change->save();
@@ -151,7 +151,7 @@ class ChangeController extends Controller
             'nombre_persona_notificada' => 'required',
             'rol' => 'required',
             'firma' => 'required',
-            'fecha' => 'required'
+            'Comunicacion_fecha' => 'required'
         
         ]);
         if ($validator->fails()) {
@@ -180,7 +180,7 @@ class ChangeController extends Controller
         $change->nombre_persona_notificada = $request->nombre_persona_notificada;
         $change->rol = $request->rol;
         $change->firma = $request->firma;
-        $change->fecha = $request->fecha; 
+        $change->Comunicacion_fecha = $request->Comunicacion_fecha; 
         $change->save();
         return response()->json($change);
     }
