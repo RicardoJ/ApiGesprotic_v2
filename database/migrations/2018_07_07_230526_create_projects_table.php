@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('director');
             $table->string('nombre');
             $table->string('departamento');
-            $table->boolean('completed')->default(false);
+            $table->boolean('completado')->default(false);
             $table->timestamps();
         });
     }
