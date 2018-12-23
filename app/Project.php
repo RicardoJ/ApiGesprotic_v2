@@ -8,7 +8,7 @@ class Project extends Model
 {
     protected $table = 'project';
     public $timestamps = false;
-    protected $fillable = ['director','nombre','departamento','completed'];
+    protected $fillable = ['director','nombre','departamento'];
     
     public function actaconfiguracion1(){
         return $this->hasOne('App\ActaConfiguracion1');

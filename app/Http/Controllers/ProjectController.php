@@ -37,8 +37,8 @@ class ProjectController extends Controller
         $validator = Validator::make($request->all(),[
             'director' => 'required',
             'nombre' => 'required',
-            'departamento' => 'required',
-            'completed' => 'required'
+            'departamento' => 'required'
+            
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -47,8 +47,7 @@ class ProjectController extends Controller
 $project = new Project ([
     'director' => $request->input('director'),
     'nombre' => $request->input('nombre'),
-    'departamento' => $request->input('departamento'),
-    'completed' => $request->input('completed')
+    'departamento' => $request->input('departamento')
     
 ]);
 
@@ -83,8 +82,8 @@ $project->save();
         $validator = Validator::make($request->all(),[
             'director' => 'required',
             'nombre' => 'required',
-            'plan' => 'required',
-            'completed' => 'required'
+            'departamento' => 'required'
+            
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
