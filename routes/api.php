@@ -22,7 +22,7 @@ Route::prefix('project')->group(function(){
     Route::put('/project/{project}/completed', 'ProjectController@completed')->name('completed');
 
 });
-/*
+
 // probado
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
@@ -214,4 +214,3 @@ Route::prefix('teamManagement')->group(function(){
     Route::delete('/{teamManagement}', 'TeamManagementController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/teamManagement', 'TeamManagementController@listarTeamMan')->name('listarTeamMan');
 });
-*/
