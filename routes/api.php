@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 //probado
-Route::name('project.')->group(function(){
-    Route::get('/project', 'ProjectController@index')->name('index');
+Route::prefix('project')->group(function(){
+    Route::get('/', 'ProjectController@index')->name('index');
     Route::post('/project', 'ProjectController@store')->name('store');
     Route::get('/{project}', 'ProjectController@show')->name('show');
     Route::put('/{project}', 'ProjectController@update')->name('update');
@@ -22,7 +22,7 @@ Route::name('project.')->group(function(){
     Route::put('/project/{project}/completed', 'ProjectController@completed')->name('completed');
 
 });
-
+/*
 // probado
 Route::prefix('resource')->group(function(){
     Route::get('/', 'ResourceController@index')->name('index');
@@ -214,3 +214,4 @@ Route::prefix('teamManagement')->group(function(){
     Route::delete('/{teamManagement}', 'TeamManagementController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/teamManagement', 'TeamManagementController@listarTeamMan')->name('listarTeamMan');
 });
+*/
