@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActaConfiguracionsTable extends Migration
+class CreateLimitacionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateActaConfiguracionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('acta_configuracions', function (Blueprint $table) {
+        Schema::create('limitacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('nombre');
+           $table->integer('lesson_learned_id')->unsigned();            
+            $table->foreign('lesson_learned_id')->references('id')->on('lesson_learneds');
+           // $table->timestamps();
         });
     }
 
@@ -26,6 +29,6 @@ class CreateActaConfiguracionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acta_configuracions');
+        Schema::dropIfExists('limitacions');
     }
 }

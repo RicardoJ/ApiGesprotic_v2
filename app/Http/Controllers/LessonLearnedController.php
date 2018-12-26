@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Validator;
 use App\LessonLearned;
 use App\Project;
+use App\limitacion;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 class LessonLearnedController extends Controller
@@ -31,9 +33,11 @@ class LessonLearnedController extends Controller
         $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'descripcion' => 'required',
-            'objetivo' => 'required',
-            'informe' => 'required'
+            'limitaciones'=>'required'
         ]);
+
+    
+
         if ($validator->fails()) {
             return response()->json(['Error'],404);
 
@@ -47,17 +51,32 @@ class LessonLearnedController extends Controller
                 if ($lessonLearned) {
                     return response()->json(['ya tiene leccion este proyecto'],404);
                 } else {
-                $lessonLearned = new LessonLearned([
-                    'nombre' =>$request->input('nombre'),
-                    'descripcion'=>$request->input('descripcion'),
-                    'objetivo'=>$request->input('objetivo'),
-                    'informe'=>$request->input('informe'),
-                    'project_id'=>$project_id
-                ]);
-                $lessonLearned->save();
-                return response()->json($lessonLearned);
+
+        
+                 $data= [  'nombre' =>$request->input('nombre'),
+                 'descripcion'=>$request->input('descripcion'),
+                 'project_id'=>$project_id]
+                 ;   
+                  
+    
+             $result = LessonLearned::create($data);
+
+            $posts = $request->input('limitaciones');
+             foreach ($posts as $value) {
+                $data = [
+                    'lesson_learned_id' => $result->id,
+                    'nombre'=>$value['nombre']
+                ];
+
+               limitacion::create($data);
             }
+            return response()->json([ 'Se prendió el carnaval'],200);
+            
+
+
+            } 
         }
+       
         
     }
     }

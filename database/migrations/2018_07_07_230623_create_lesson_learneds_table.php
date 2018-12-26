@@ -15,7 +15,11 @@ class CreateLessonLearnedsTable extends Migration
     {
         Schema::create('lesson_learneds', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table ->string('nombre');
+            $table ->string('descripcion');
+            $table->integer('project_id')->unsigned();            
+            $table->foreign('project_id')->references('id')->on('projects');
+            //$table->timestamps();
         });
     }
 

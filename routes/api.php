@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 /*
-Route::name('project.')->group(function(){
+Route::prefix('project')->group(function(){
     Route::get('/project', 'ProjectController@index')->name('index');
     Route::post('/project', 'ProjectController@store')->name('store');
     Route::get('/{project}', 'ProjectController@show')->name('show');
@@ -36,8 +36,8 @@ Route::prefix('resource')->group(function(){
 });
 */
 
-/*
-Route::prefix('lessonLearned')->group(function(){
+
+Route::prefix('lesson_learneds')->group(function(){
     Route::get('/', 'LessonLearnedController@index')->name('index');
     Route::get('/{lessonLearned}', 'LessonLearnedController@show')->name('show');
     Route::post('/{project}', 'LessonLearnedController@store')->name('store');
@@ -45,7 +45,7 @@ Route::prefix('lessonLearned')->group(function(){
     Route::delete('/{lessonLearned}', 'LessonLearnedController@destroy')->name('delete');
     Route::get('/project/{project}/lessonLearned', 'LessonLearnedController@listaLeccionPorProyecto')->name('listaLeccionPorProyecto');
 });
-*/
+
 /*
     Route::prefix('acta.')->group(function(){
     Route::get('/actas', 'ActaController@index')->name('index');
