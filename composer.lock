@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6dc0e96a4df5fc40ea304409aaecee93",
+    "content-hash": "661d722fc9af007ca2d39ae39a9955c6",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -853,6 +853,58 @@
                 "storage"
             ],
             "time": "2018-11-23T23:41:29+00:00"
+        },
+        {
+            "name": "mateusjatenee/php-json-feed",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mateusjatenee/php-json-feed.git",
+                "reference": "07281c090894e892be5b762b8fd93eda5a082033"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mateusjatenee/php-json-feed/zipball/07281c090894e892be5b762b8fd93eda5a082033",
+                "reference": "07281c090894e892be5b762b8fd93eda5a082033",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "~1.20",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "illuminate/support": "~5.2",
+                "orchestra/testbench": "~3.2",
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mateusjatenee\\JsonFeed\\JsonFeedServiceProvider"
+                    ],
+                    "aliases": {
+                        "Cart": "Mateusjatenee\\JsonFeed\\Facades\\JsonFeed"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mateusjatenee\\JsonFeed\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateus Guimarães",
+                    "email": "mateus.jatene@gmail.com"
+                }
+            ],
+            "description": "PHP project.",
+            "time": "2017-06-04T19:58:19+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -17,7 +17,10 @@ class CreateLimitacionsTable extends Migration
             $table->increments('id');
             $table->string('nombre');
            $table->integer('lesson_learned_id')->unsigned();            
-            $table->foreign('lesson_learned_id')->references('id')->on('lesson_learneds');
+            $table->foreign('lesson_learned_id')
+            ->references('id')
+            ->on('lesson_learneds')
+            ->onDelete('cascade');
            // $table->timestamps();
         });
     }

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class LessonLearnedController extends Controller
 {
+   
+  /*  public  function __construct() {
+        $this->aux = 30;
+    }
+*/
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,21 @@ class LessonLearnedController extends Controller
      */
     public function index()
     {
-        return response()->json(LessonLearned::all());
+
+        $lessons = LessonLearned::all();
+        $save = array();
+        foreach ($lessons as $lesson) {
+            
+             $l = limitacion::where('lesson_learned_id', $lesson['id'])->get();
+
+ 
+                $lesson->limitaciones = $l;
+              array_push($save,$lesson);  
+
+        }
+        
+      
+        return response()->json(['Leccion',$save],200);
     }
 
 
@@ -35,9 +55,6 @@ class LessonLearnedController extends Controller
             'descripcion' => 'required',
             'limitaciones'=>'required'
         ]);
-
-    
-
         if ($validator->fails()) {
             return response()->json(['Error'],404);
 
@@ -53,24 +70,31 @@ class LessonLearnedController extends Controller
                 } else {
 
         
-                 $data= [  'nombre' =>$request->input('nombre'),
+                 $data1= [  
+                     
+                'nombre' =>$request->input('nombre'),
                  'descripcion'=>$request->input('descripcion'),
                  'project_id'=>$project_id]
                  ;   
                   
     
-             $result = LessonLearned::create($data);
+            $result = LessonLearned::create($data1);
 
-            $posts = $request->input('limitaciones');
-             foreach ($posts as $value) {
+            $limitaciones = $request->input('limitaciones');
+            $save = array();
+             foreach ($limitaciones as $value) {
                 $data = [
                     'lesson_learned_id' => $result->id,
                     'nombre'=>$value['nombre']
                 ];
 
-               limitacion::create($data);
+             $limitacion =  limitacion::create($data);
+          
+            array_push($save, $limitacion);
             }
-            return response()->json([ 'Se prendió el carnaval'],200);
+            $result->limitaciones = $save;
+            
+            return response()->json(['Guardado',$result],200);
             
 
 
@@ -88,8 +112,16 @@ class LessonLearnedController extends Controller
      */
     public function show(LessonLearned $lessonLearned)
     {
+
+        $l = limitacion::where('lesson_learned_id', $lessonLearned['id'])->get();
+
+ 
+        $lessonLearned->limitaciones = $l;
         return response()->json($lessonLearned);
     }
+
+
+
     public function listaLeccionPorProyecto($project_id){
         $project =Project::find($project_id);
         

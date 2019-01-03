@@ -8,14 +8,14 @@ class LessonLearned extends Model
 {
     protected $table = 'lesson_learneds';
     public $timestamps = false;
-    protected $fillable = ['nombre','descripcion','limitaciones','project_id'];
+    protected $fillable = ['nombre','descripcion','project_id'];
     
     public function project(){
         return $this->BelongsTo('App\project', 'project_id');
         
     }
     public function limitacion(){
-        return $this->hasOne('App\limitacion');
+        return $this->hasMany('App\limitacion');
     }
     
 }
