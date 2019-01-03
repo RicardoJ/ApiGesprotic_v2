@@ -12,7 +12,7 @@ class Project extends Model
     
    
     public function lessonLearned(){
-        return $this->hasOne('App\LessonLearned');
+        return $this->hasMany('App\LessonLearned');
     }
 
 }

@@ -122,14 +122,26 @@ class LessonLearnedController extends Controller
 
 
 
-    public function listaLeccionPorProyecto($project_id){
+    public function listaLeccionPorProyecto($project_id)
+    {
+
         $project =Project::find($project_id);
         
         if (!$project) {
             return response()->json(['No existe el proyecto'],404);
         }
-        $lessonLearned = $project->lessonLearned;
-        return response()->json(['leccion del proyecto'=>$lessonLearned],202);
+        $save = array();
+        $lessons = $project->lessonLearned;
+      foreach ($lessons as $lesson) {
+            
+        $l = limitacion::where('lesson_learned_id', $lesson['id'])->get();
+
+
+           $lesson->limitaciones = $l;
+         array_push($save,$lesson);  
+
+   }
+        return response()->json(['leccion del proyecto'=>$save],202);
     }
 
     
@@ -145,10 +157,7 @@ class LessonLearnedController extends Controller
         $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'descripcion' => 'required',
-            'objetivo' => 'required',
-            'informe' => 'required'
-            
-        
+            'limitaciones'=>'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['Error'],404);
@@ -157,7 +166,7 @@ class LessonLearnedController extends Controller
         $lessonLearned->nombre = $request->nombre;
         $lessonLearned->descripcion = $request->descripcion;
         $lessonLearned->objetivo = $request->objetivo;
-        $lessonLearned->informe = $request->informe;
+        $lessonLearned->limitaciones->nombre = $request->limitaciones->nombre;
         $lessonLearned->save();
         return response()->json($lessonLearned);
     }
@@ -168,9 +177,12 @@ class LessonLearnedController extends Controller
      * @param  \App\LessonLearned  $lessonLearned
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LessonLearned $lessonLearned)
+    public function destroy($id)
     {
+        $lessonLearned = LessonLearned::find($id);
+        $lessonLearned->limitacion()->delete();
         $lessonLearned->delete();
+        
         return response()->json(['success' => 'borrado correctamente']);
     }
 }
