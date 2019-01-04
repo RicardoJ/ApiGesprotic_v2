@@ -7,7 +7,7 @@ use App\Project;
 use App\limitacion;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-
+//https://medium.com/@hemnys25/de-0-a-100-con-eloquent-de-laravel-parte-1-8d9cc0de9364
 class LessonLearnedController extends Controller
 {
    
@@ -53,10 +53,12 @@ class LessonLearnedController extends Controller
         $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'descripcion' => 'required',
+           
             'limitaciones'=>'required'
         ]);
         if ($validator->fails()) {
-            return response()->json(['Error'],404);
+            $errors=$validator->messages();
+            return response()->json(['Error' => $errors],404);
 
         }else{
         $project=Project::findOrFail($project_id);
@@ -64,19 +66,18 @@ class LessonLearnedController extends Controller
             if (!$project) {
                 return response()->json(['No existe proyecto'],404);
             }else{
-                $lessonLearned = $project->lessonLearned;
-                if ($lessonLearned) {
-                    return response()->json(['ya tiene leccion este proyecto'],404);
-                } else {
+               // $lessonLearned = $project->lessonLearned;
+                //if ($lessonLearned) {
+                  //  return response()->json(['ya tiene leccion este proyecto'],404);
+                //} else {
 
         
                  $data1= [  
-                     
                 'nombre' =>$request->input('nombre'),
                  'descripcion'=>$request->input('descripcion'),
                  'project_id'=>$project_id]
                  ;   
-                  
+                 
     
             $result = LessonLearned::create($data1);
 
@@ -95,10 +96,7 @@ class LessonLearnedController extends Controller
             $result->limitaciones = $save;
             
             return response()->json(['Guardado',$result],200);
-            
-
-
-            } 
+ 
         }
        
         
@@ -119,9 +117,6 @@ class LessonLearnedController extends Controller
         $lessonLearned->limitaciones = $l;
         return response()->json($lessonLearned);
     }
-
-
-
     public function listaLeccionPorProyecto($project_id)
     {
 
@@ -144,7 +139,6 @@ class LessonLearnedController extends Controller
         return response()->json(['leccion del proyecto'=>$save],202);
     }
 
-    
     /**
      * Update the specified resource in storage.
      *
@@ -163,12 +157,16 @@ class LessonLearnedController extends Controller
             return response()->json(['Error'],404);
 
         }else{
-        $lessonLearned->nombre = $request->nombre;
+        $lessonLearned->update($request->all());
+        /*$lessonLearned->nombre = $request->nombre;
         $lessonLearned->descripcion = $request->descripcion;
-        $lessonLearned->objetivo = $request->objetivo;
-        $lessonLearned->limitaciones->nombre = $request->limitaciones->nombre;
+  
+        
         $lessonLearned->save();
+        */
         return response()->json($lessonLearned);
+
+        
     }
     }
     /**
