@@ -164,6 +164,7 @@ class LessonLearnedController extends Controller
         
         $lessonLearned->save();
         */
+        $lessonLearned->save();
         return response()->json($lessonLearned);
 
         

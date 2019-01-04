@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\limitacion;
 use Illuminate\Http\Request;
 
@@ -49,16 +49,7 @@ class LimitacionController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\limitacion  $limitacion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(limitacion $limitacion)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -69,8 +60,19 @@ class LimitacionController extends Controller
      */
     public function update(Request $request, limitacion $limitacion)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nombre' => 'required'
+            
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['Error'],404);
+
+        }else{
+        $limitacion->update($request->all());   
+        $limitacion->save();
+        return response()->json($limitacion);
     }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +82,7 @@ class LimitacionController extends Controller
      */
     public function destroy(limitacion $limitacion)
     {
-        //
+        $limitacion->delete();
+        return response()->json(['success' => 'borrado correctamente']);
     }
 }

@@ -46,6 +46,13 @@ Route::prefix('lesson_learneds')->group(function(){
     Route::get('/project/{project}/lessonLearned', 'LessonLearnedController@listaLeccionPorProyecto')->name('listaLeccionPorProyecto');
 });
 
+Route::prefix('limitacion')->group(function(){
+   
+    Route::put('/{limitacion}', 'LimitacionController@update')->name('update');
+    Route::delete('/{limitacion}', 'LimitacionController@destroy')->name('delete');
+
+});
+
 /*
     Route::prefix('acta.')->group(function(){
     Route::get('/actas', 'ActaController@index')->name('index');
