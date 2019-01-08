@@ -52,7 +52,12 @@ Route::prefix('limitacion')->group(function(){
     Route::delete('/{limitacion}', 'LimitacionController@destroy')->name('delete');
 
 });
+Route::prefix('fase')->group(function(){
+   
+    Route::put('/{fase}', 'FaseController@update')->name('update');
+    Route::delete('/{fase}', 'FaseController@destroy')->name('delete');
 
+});
 /*
     Route::prefix('acta.')->group(function(){
     Route::get('/actas', 'ActaController@index')->name('index');

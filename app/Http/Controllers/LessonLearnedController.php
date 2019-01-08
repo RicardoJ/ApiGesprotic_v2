@@ -5,16 +5,12 @@ use Validator;
 use App\LessonLearned;
 use App\Project;
 use App\limitacion;
+use App\Fase;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 //https://medium.com/@hemnys25/de-0-a-100-con-eloquent-de-laravel-parte-1-8d9cc0de9364
 class LessonLearnedController extends Controller
 {
-   
-  /*  public  function __construct() {
-        $this->aux = 30;
-    }
-*/
     
     /**
      * Display a listing of the resource.
@@ -29,9 +25,10 @@ class LessonLearnedController extends Controller
         foreach ($lessons as $lesson) {
             
              $l = limitacion::where('lesson_learned_id', $lesson['id'])->get();
-
+             $e =  fase::where('lesson_learned_id', $lesson['id'])->get();
  
                 $lesson->limitaciones = $l;
+                $lesson->fase = $e;
               array_push($save,$lesson);  
 
         }
@@ -40,7 +37,7 @@ class LessonLearnedController extends Controller
         return response()->json(['Leccion',$save],200);
     }
 
-
+//creacion del recurso debe validar la creacion de los subrecursos
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +51,8 @@ class LessonLearnedController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required',
            
-            'limitaciones'=>'required'
+            'limitaciones'=>'required',
+            'fases'=>'required'
         ]);
         if ($validator->fails()) {
             $errors=$validator->messages();
@@ -94,6 +92,21 @@ class LessonLearnedController extends Controller
             array_push($save, $limitacion);
             }
             $result->limitaciones = $save;
+
+           //fase
+           $fases = $request->input('fases');
+            $save = array();
+             foreach ($fases as $value) {
+                $dataFase = [
+                    'lesson_learned_id' => $result->id,
+                    'fase'=>$value['fase']
+                ];
+
+             $fase =  fase::create($dataFase);
+          
+            array_push($save, $fase);
+            }
+            $result->fases = $save;     
             
             return response()->json(['Guardado',$result],200);
  
@@ -112,9 +125,11 @@ class LessonLearnedController extends Controller
     {
 
         $l = limitacion::where('lesson_learned_id', $lessonLearned['id'])->get();
+        $e =  fase::where('lesson_learned_id', $lessonLearned['id'])->get();
 
  
         $lessonLearned->limitaciones = $l;
+        $lessonLearned->fase = $e;
         return response()->json($lessonLearned);
     }
     public function listaLeccionPorProyecto($project_id)
@@ -180,6 +195,7 @@ class LessonLearnedController extends Controller
     {
         $lessonLearned = LessonLearned::find($id);
         $lessonLearned->limitacion()->delete();
+        $lessonLearned->fase()->delete();
         $lessonLearned->delete();
         
         return response()->json(['success' => 'borrado correctamente']);

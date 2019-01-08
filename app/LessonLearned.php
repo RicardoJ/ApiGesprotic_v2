@@ -17,5 +17,9 @@ class LessonLearned extends Model
     public function limitacion(){
         return $this->hasMany('App\limitacion');
     }
+
+    public function fase(){
+        return $this->hasMany('App\fase');
+    }
     
 }
