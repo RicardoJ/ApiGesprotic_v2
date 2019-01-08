@@ -6,6 +6,7 @@ use App\LessonLearned;
 use App\Project;
 use App\limitacion;
 use App\Fase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 //https://medium.com/@hemnys25/de-0-a-100-con-eloquent-de-laravel-parte-1-8d9cc0de9364
@@ -47,12 +48,15 @@ class LessonLearnedController extends Controller
      */
     public function store(Request $request, $project_id)
     {
-        $validator = Validator::make($request->all(),[
+         try{
+                     $error = null;
+                         DB::beginTransaction();
+                 $validator = Validator::make($request->all(),[
             'nombre' => 'required',
             'descripcion' => 'required',
            
-            'limitaciones'=>'required',
-            'fases'=>'required'
+            'limitaciones'=>'required|array|min:1',
+            'fases'=>'required|array|min:1'
         ]);
         if ($validator->fails()) {
             $errors=$validator->messages();
@@ -64,55 +68,62 @@ class LessonLearnedController extends Controller
             if (!$project) {
                 return response()->json(['No existe proyecto'],404);
             }else{
-               // $lessonLearned = $project->lessonLearned;
-                //if ($lessonLearned) {
-                  //  return response()->json(['ya tiene leccion este proyecto'],404);
-                //} else {
-
-        
+              
                  $data1= [  
                 'nombre' =>$request->input('nombre'),
                  'descripcion'=>$request->input('descripcion'),
-                 'project_id'=>$project_id]
-                 ;   
+                 'project_id'=>$project_id
+                ];   
                  
-    
+               
             $result = LessonLearned::create($data1);
-
+            
+          
             $limitaciones = $request->input('limitaciones');
             $save = array();
              foreach ($limitaciones as $value) {
+                
+                   
                 $data = [
                     'lesson_learned_id' => $result->id,
                     'nombre'=>$value['nombre']
                 ];
-
-             $limitacion =  limitacion::create($data);
+    
+                $limitacion =  limitacion::create($data);
           
             array_push($save, $limitacion);
-            }
+     
+                       
+            }       
             $result->limitaciones = $save;
-
            //fase
            $fases = $request->input('fases');
             $save = array();
              foreach ($fases as $value) {
+             
                 $dataFase = [
                     'lesson_learned_id' => $result->id,
                     'fase'=>$value['fase']
                 ];
 
              $fase =  fase::create($dataFase);
-          
-            array_push($save, $fase);
-            }
-            $result->fases = $save;     
-            
+             array_push($save, $fase);
+         
+             }
+               
+                $result->fases = $save; 
+           
+           DB::commit();
             return response()->json(['Guardado',$result],200);
- 
-        }
-       
-        
+     
+      
+        } 
+    }
+} catch (\Exception $e) {
+           
+    $error = $e->getMessage();
+    DB::rollback();
+    return response()->json(['Error , falta campos por llenar'],404);
     }
     }
     /**

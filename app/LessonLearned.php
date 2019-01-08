@@ -8,7 +8,7 @@ class LessonLearned extends Model
 {
     protected $table = 'lesson_learneds';
     public $timestamps = false;
-    protected $fillable = ['nombre','descripcion','project_id'];
+    protected $fillable = ['nombre','descripcion','limitaciones','fases','project_id'];
     
     public function project(){
         return $this->BelongsTo('App\project', 'project_id');

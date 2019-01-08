@@ -15,7 +15,7 @@ class CreateLimitacionsTable extends Migration
     {
         Schema::create('limitacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('nombre')->nullable($value = false);
            $table->integer('lesson_learned_id')->unsigned();            
             $table->foreign('lesson_learned_id')
             ->references('id')

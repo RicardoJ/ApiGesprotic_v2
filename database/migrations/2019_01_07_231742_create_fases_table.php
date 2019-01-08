@@ -15,7 +15,7 @@ class CreateFasesTable extends Migration
     {
         Schema::create('fases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('fase');
+            $table->string('fase')->nullable($value = false);
             $table->integer('lesson_learned_id')->unsigned();            
              $table->foreign('lesson_learned_id')
              ->references('id')
