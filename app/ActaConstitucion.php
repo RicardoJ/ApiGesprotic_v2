@@ -3,90 +3,49 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class ActaConstitucion extends Model
 {
-    protected $table = 'actaConstitucion';
+    protected $table = 'acta_constitucions';
     public $timestamps = false;
     protected $fillable = [
-        'fecha',
-        'CLIENTE_PETICIONARIO' ,
-        'persona_Rpble_Cliente', 
-        'departamento_cliente' ,
-        'sponsor' ,
-        'persona_sponsor' ,
-        'departamento_sponsor' ,
-        'director',
-        'persona_director',
-        'departamaneto_director',
-        'codigo_proyecto',
-        'check_pendienteAsignacion' ,
-        'check_contrato',
-        'check_casoNegocio',
+        'cliente_peticionario' ,
+        'responsable_de_cliente' , 
+        'fecha' ,
+        'sponsor_nombre' ,
+        'sponsor_departamento' ,
+        'justificacion_del_proyecto' ,
+        'descripcion_del_proyecto' ,
+        'analisis_previo_de_viabilidad',
+        'requisitos_generales_del_proyecto',
+        'alcances_objetivos_del_proyecto',
+        'alcances_criterios_de_aceptacion',
+        'alcances_aprobacion_persona' ,
+        'alcances_aprobacion_departamento',
+        'tiempo_objetivos_del_proyecto',
         
-        'check_Enunciado',
-        'vision_estrategica',
-        'descripcion_del_proyecto',
-        'analisis_previo_viabilidad',
-        'requisitos_generales',
-        'alcance_objetivos',
-        'alcance_metrica',
-        'alcance_aprobacion_persona',
-        'alcance_aprobacion_departamento',
-        'tiempo_objetivos',
-        'tiempo_metrica',
+        'tiempo_criterios_de_aceptacion',
         'tiempo_aprobacion_persona',
         'tiempo_aprobacion_departamento',
         'presupuesto_objetivos',
-        'presupuesto_metrica',
+        'presupuesto_criterios_de_aceptacion',
         'presupuesto_aprobacion_persona',
-        'presupuesto_aprobacion_departamento',
+        'presupuesto_aprovacion_departamento',
         'calidad_objetivos',
-        
-      '  calidad_metrica',
+        'calidad_criterios_de_aceptacion',
         'calidad_aprobacion_persona',
         'calidad_aprobacion_departamento',
-        
+        'otros_aprobacion_departamento',
         'otros_objetivos',
-        'otros_metrica',
+        'otros_criterios_de_aceptacion',
         'otros_aprobacion_persona',
-       ' otros_aprobacion_departamento',
-        
-        'fase',
-        'hito_fase',
-        'duracion_fase',
-        
-        'hito',
-        'entregable',
-        'fecha_hito',
-        
-        'otrosRequisitos_nombre',
-        'otrosRequisitos_cargo',
-        
-        'limitacion',
-        'afecta_a',
-       ' valoracion',
-        
-        'riesgo',
-        'probabilidad',
-        'impacta_sobre',
-        'valoracion_riesgo',
-        
-        'departamentos_implicados',
+        'departamentos_implicados_y_recursos_preasignados',
         'factores_criticos_de_exito',
-        'observaciones_adicionales',
-        'vision_estrategica',
-        
-        'maxima_desviacion',
-        'umbral_de_riesgo',
-       ' capacidad_tecnica',
-       ' volumen_contratacion',
-        'nivel_superior_desicion_persona' ,
-        'nivel_superior_desicion_departamento',
-        
-        'firma_director',
                             'project_id'
                             ];
                             
     public function project(){
         return $this->BelongsTo('App\project', 'project_id');
         
+    }
+    public function limitaciones_de_partida(){
+        return $this->hasOne('App\Limitaciones_de_partida');
     }
 }
