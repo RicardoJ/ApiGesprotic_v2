@@ -38,6 +38,8 @@ class ActaConstitucion extends Model
         'otros_aprobacion_persona',
         'departamentos_implicados_y_recursos_preasignados',
         'factores_criticos_de_exito',
+        'limitaciones_de_partida',
+        'fases_de_proyectos',
                             'project_id'
                             ];
                             
@@ -46,6 +48,10 @@ class ActaConstitucion extends Model
         
     }
     public function limitaciones_de_partida(){
-        return $this->hasOne('App\Limitaciones_de_partida');
+        return $this->hasMany('App\LimitacionesDePartida');
+    }
+
+    public function fases_de_proyectos(){
+        return $this->hasMany('App\FasesDeProyectos');
     }
 }

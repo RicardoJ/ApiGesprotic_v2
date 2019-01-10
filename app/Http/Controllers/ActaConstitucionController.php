@@ -5,6 +5,7 @@ use App\ActaConstitucion;
 use App\Project;
 use Illuminate\Support\Facades\DB;
 use App\LimitacionesDePartida;
+use App\FasesDeProyectos;
 
 use Illuminate\Http\Request;
 class ActaConstitucionController extends Controller
@@ -21,10 +22,10 @@ class ActaConstitucionController extends Controller
         foreach ($actaConstitucions as $actaConstitucion) {
             
              $limitacionesPartida = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
-             //$e =  fase::where('lesson_learned_id', $actaConstitucions['id'])->get();
+             $faseProyecto =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
  
-                $actaConstitucion->limitacionesDePartida = $limitacionesPartida;
-               // $actaConstitucion->fase = $e;
+                $actaConstitucion->limitaciones_de_partida = $limitacionesPartida;
+                $actaConstitucion->fases_de_proyectos = $faseProyecto;
               array_push($save,$actaConstitucion);  
         }
         
@@ -45,7 +46,7 @@ class ActaConstitucionController extends Controller
     {
         try{
             $error = null;
-                DB::beginTransaction();
+         DB::beginTransaction();
         $validator = Validator::make($request->all(),[
                             
                             'cliente_peticionario' => 'required',
@@ -81,6 +82,7 @@ class ActaConstitucionController extends Controller
                             'departamentos_implicados_y_recursos_preasignados'=> 'required',
                             'factores_criticos_de_exito'=> 'required',
                             'limitaciones_de_partida'=>'required|array|min:1',
+                            'fases_de_proyectos'=>'required|array|min:1',
                            
                            
         ]);
@@ -154,7 +156,26 @@ class ActaConstitucionController extends Controller
                        
             }       
             $result->limitacionesDePartida = $save;
-////////////////////////////////////////
+///////   Fases de proyectos
+$fases = $request->input('fases_de_proyectos');
+$save = array();
+ foreach ($fases as $value) {
+ 
+    $dataFase = [
+        'actaConstitucion_id' => $result->id,
+        'fecha_de_inicio'=>$value['fecha_de_inicio'],
+        'fecha_fin'=>$value['fecha_fin'],
+        'nombre_de_hito'=>$value['nombre_de_hito'],
+        'entregable_principal'=>$value['entregable_principal'],
+        'fecha_hito'=>$value['fecha_hito']
+    ];
+ $fase =  FasesDeProyectos::create($dataFase);
+ array_push($save, $fase);
+
+ }
+   
+    $result->fases = $save; 
+    ////
 
 DB::commit();
 return response()->json(['Guardado',$result],200);
@@ -182,24 +203,35 @@ return response()->json(['Guardado',$result],200);
     public function show(ActaConstitucion $actaConstitucion)
     {
         $l = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
-
+        $f =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
  
-        $actaConstitucion->limitacionesDePartida = $l;
-        
+        $actaConstitucion->limitaciones_de_partida = $l;
+        $actaConstitucion->fases_de_proyectos = $f;
         return response()->json($actaConstitucion);
 
 
-        return response()->json($actaConstitucion);
     }  
 
-    //funcion obsoleta
+  
     public function listaActaConstitucionPorProyecto($project_id){
         $project =Project::find($project_id);
         if (!$project) {
             return response()->json(['No existe el proyecto'],404);
         }
+        $save = array();
         $actaConstitucion = $project->actaConstitucion;
-        return response()->json(['Acta de Constitucion del proyecto'=>$actaConstitucion],202);
+      foreach ($actaConstitucion as $actaConst) {
+            
+        $limitacionesPartida = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $faseProyecto =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+          
+           $actaConst->limitaciones_de_partida = $limitacionesPartida;
+           $actaConst->fases_de_proyectos = $faseProyecto;
+
+         array_push($save,$actaConst);  
+   }
+       
+        return response()->json(['Acta de Constitucion del proyecto'=>$save],202);
     }
     /**
      * Update the specified resource in storage.
@@ -262,7 +294,7 @@ return response()->json(['Guardado',$result],200);
     {
         $actaConstitucion = ActaConstitucion::find($id);
         $actaConstitucion->limitacionDePartida()->delete();
-      
+      $actaConstitucion->fasesDeProyectos()->delete();
         $actaConstitucion->delete();
         
         return response()->json(['success' => 'borrado correctamente']);

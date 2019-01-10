@@ -4,15 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Limitaciones_de_partida extends Model
+class fases_de_proyectos extends Model
 {
-    protected $table = 'limitaciones_de_partidas';
+    protected $table = 'fases_de_proyectos';
     public $timestamps = false;
     protected $fillable = [
-            'nombre', 
-            'afecta_a',
-            'valoracion',
-            'actaConstitucion_id'
+        'fecha_de_inicio',
+        'fecha_fin',
+        'nombre_de_hito',
+        'entregable_principal',
+        'fecha_hito',
+        'actaConstitucion_id'
+            
            
     ];
 
