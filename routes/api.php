@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+/*
 //probado
 Route::prefix('project')->group(function(){
     Route::get('/', 'ProjectController@index')->name('index');
@@ -56,6 +58,7 @@ Route::prefix('lessonLearned')->group(function(){
     Route::delete('/acta/{acta}', 'ActaController@destroy')->name('delete');
 });
 
+*/
 //probado
 Route::prefix('actaConstitucion')->group(function(){
     Route::get('/', 'ActaConstitucionController@index')->name('index');
@@ -67,6 +70,27 @@ Route::prefix('actaConstitucion')->group(function(){
 });
 
 
+Route::prefix('limitacionDePartida')->group(function(){
+   
+    Route::put('/{limitacionDePartida}', 'LimitacionesDePartidaController@update')->name('update');
+    Route::delete('/{limitacionDePartida}', 'LimitacionesDePartidaController@destroy')->name('delete');
+});
+Route::prefix('faseDeProyecto')->group(function(){
+   
+    Route::put('/{faseDeProyecto}', 'FaseDeProyectosController@update')->name('update');
+    Route::delete('/{faseDeProyecto}', 'FaseDeProyectosController@destroy')->name('delete');
+});
+Route::prefix('riesgosIniciales')->group(function(){
+   
+    Route::put('/{riesgosIniciales}', 'RiesgosInicialesIdentificadosController@update')->name('update');
+    Route::delete('/{riesgosIniciales}', 'RiesgosInicialesIdentificadosController@destroy')->name('delete');
+});
+Route::prefix('otrosRequisitos')->group(function(){
+   
+    Route::put('/{otrosRequisitos}', 'OtrosRequisitosDeProyectoController@update')->name('update');
+    Route::delete('/{otrosRequisitos}', 'OtrosRequisitosDeProyectoController@destroy')->name('delete');
+});
+/*
 // probado
 Route::prefix('actaConfiguracion1')->group(function(){
     Route::get('/', 'ActaConfiguracion1Controller@index')->name('index');
@@ -214,3 +238,4 @@ Route::prefix('teamManagement')->group(function(){
     Route::delete('/{teamManagement}', 'TeamManagementController@destroy')->name('delete');
     Route::get('/project_team/{project_team}/teamManagement', 'TeamManagementController@listarTeamMan')->name('listarTeamMan');
 });
+*/
