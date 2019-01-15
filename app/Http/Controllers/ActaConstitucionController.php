@@ -6,6 +6,8 @@ use App\Project;
 use Illuminate\Support\Facades\DB;
 use App\LimitacionesDePartida;
 use App\FasesDeProyectos;
+use App\ Riesgos_iniciales_identificados;
+use App\Otros_requisitos_de_proyecto;
 
 use Illuminate\Http\Request;
 class ActaConstitucionController extends Controller
@@ -23,9 +25,14 @@ class ActaConstitucionController extends Controller
             
              $limitacionesPartida = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
              $faseProyecto =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+             $riesgosIniciales = Riesgos_iniciales_identificados::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+             $otrosrequisitos = Otros_requisitos_de_proyecto::where('actaConstitucion_id', $actaConstitucion['id'])->get();
  
                 $actaConstitucion->limitaciones_de_partida = $limitacionesPartida;
                 $actaConstitucion->fases_de_proyectos = $faseProyecto;
+                $actaConstitucion->riesgos_iniciales_identificados = $riesgosIniciales;
+                $actaConstitucion->otros_requisitos_de_proyecto = $otrosrequisitos;
+
               array_push($save,$actaConstitucion);  
         }
         
@@ -83,6 +90,7 @@ class ActaConstitucionController extends Controller
                             'factores_criticos_de_exito'=> 'required',
                             'limitaciones_de_partida'=>'required|array|min:1',
                             'fases_de_proyectos'=>'required|array|min:1',
+                            'riesgos_iniciales_identificados'=>'required|array|min:1',
                            
                            
         ]);
@@ -175,7 +183,46 @@ $save = array();
  }
    
     $result->fases = $save; 
-    ////
+    ////riesgos iniciales
+    $riesgosIniciales = $request->input('riesgos_iniciales_identificados');
+    $save = array();
+     foreach ($riesgosIniciales as $value) {
+     
+        $dataRiesgos = [
+            'actaConstitucion_id' => $result->id,
+            'nombre'=>$value['nombre'],
+            'probabilidad'=>$value['probabilidad'],
+            'impacta_sobre'=>$value['impacta_sobre'],
+            'valoracion'=>$value['valoracion']
+           
+        ];
+     $riesgosInicial =  Riesgos_iniciales_identificados::create($dataRiesgos);
+     array_push($save, $riesgosInicial);
+    
+     }
+       
+        $result->riesgos_iniciales_identificados = $save; 
+
+
+    //////otros requisitos
+    $otrosrequisitos = $request->input('otros_requisitos_de_proyecto');
+    $save = array();
+     foreach ($otrosrequisitos as $value) {
+     
+        $dataOtroReq = [
+            'actaConstitucion_id' => $result->id,
+            'nombre'=>$value['nombre'],
+            'cargo_departamento'=>$value['cargo_departamento'],
+            
+           
+        ];
+     $otrorequisito =  Otros_requisitos_de_proyecto::create($dataOtroReq);
+     array_push($save, $otrorequisito);
+    
+     }
+       
+        $result->riesgos_iniciales_identificados = $save; 
+    /////////////
 
 DB::commit();
 return response()->json(['Guardado',$result],200);
@@ -204,9 +251,11 @@ return response()->json(['Guardado',$result],200);
     {
         $l = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
         $f =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $riesgosIniciales = Riesgos_iniciales_identificados::where('actaConstitucion_id', $actaConstitucion['id'])->get();
  
         $actaConstitucion->limitaciones_de_partida = $l;
         $actaConstitucion->fases_de_proyectos = $f;
+        $actaConstitucion->riesgos_iniciales_identificados = $riesgosIniciales;
         return response()->json($actaConstitucion);
 
 
@@ -224,9 +273,14 @@ return response()->json(['Guardado',$result],200);
             
         $limitacionesPartida = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
         $faseProyecto =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
-          
+        $riesgosIniciales = Riesgos_iniciales_identificados::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $otrosrequisitos = Otros_requisitos_de_proyecto::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+ 
            $actaConst->limitaciones_de_partida = $limitacionesPartida;
            $actaConst->fases_de_proyectos = $faseProyecto;
+           $actaConst->riesgos_iniciales_identificados = $riesgosIniciales;
+           $actaConst->otros_requisitos_de_proyecto = $otrosrequisitos;
+        
 
          array_push($save,$actaConst);  
    }
@@ -294,7 +348,10 @@ return response()->json(['Guardado',$result],200);
     {
         $actaConstitucion = ActaConstitucion::find($id);
         $actaConstitucion->limitacionDePartida()->delete();
-      $actaConstitucion->fasesDeProyectos()->delete();
+        $actaConstitucion->fasesDeProyectos()->delete();
+        $actaConstitucion->riesgos_iniciales_identificados()->delete();
+        $actaConstitucion->riesgos_iniciales_identificados()->delete();
+        $actaConstitucion->otros_requisitos_de_proyecto()->delete();
         $actaConstitucion->delete();
         
         return response()->json(['success' => 'borrado correctamente']);

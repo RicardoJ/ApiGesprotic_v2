@@ -40,6 +40,8 @@ class ActaConstitucion extends Model
         'factores_criticos_de_exito',
         'limitaciones_de_partida',
         'fases_de_proyectos',
+        'riesgos_iniciales_identificados',
+        'otros_requisitos_de_proyecto',
                             'project_id'
                             ];
                             
@@ -53,5 +55,12 @@ class ActaConstitucion extends Model
 
     public function fases_de_proyectos(){
         return $this->hasMany('App\FasesDeProyectos');
+    }
+
+    public function RiesgosInicialesIdentificados(){
+        return $this->hasMany('App\Riesgos_iniciales_identificados');
+    }
+    public function OtrosRequisitos(){
+        return $this->hasMany('App\Otros_requisitos_de_proyecto');
     }
 }
