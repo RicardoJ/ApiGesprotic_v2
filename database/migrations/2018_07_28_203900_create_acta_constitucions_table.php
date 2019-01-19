@@ -49,7 +49,10 @@ class CreateActaConstitucionsTable extends Migration
             $table->text('factores_criticos_de_exito');
 
             $table->integer('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')
+            ->references('id')
+            ->on('projects')
+            ->onDelete('cascade');
         
         });
     }

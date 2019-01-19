@@ -77,8 +77,8 @@ Route::prefix('limitacionDePartida')->group(function(){
 });
 Route::prefix('faseDeProyecto')->group(function(){
    
-    Route::put('/{faseDeProyecto}', 'FaseDeProyectosController@update')->name('update');
-    Route::delete('/{faseDeProyecto}', 'FaseDeProyectosController@destroy')->name('delete');
+    Route::put('/{faseDeProyecto}', 'FasesDeProyectosController@update')->name('update');
+    Route::delete('/{faseDeProyecto}', 'FasesDeProyectosController@destroy')->name('delete');
 });
 Route::prefix('riesgosIniciales')->group(function(){
    

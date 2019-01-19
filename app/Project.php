@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $table = 'project';
+    protected $table = 'projects';
     public $timestamps = false;
-    protected $fillable = ['director','nombre','departamento'];
+    protected $fillable = ['director','nombre','departamento, completado'];
     
     public function actaconfiguracion1(){
         return $this->hasOne('App\ActaConfiguracion1');

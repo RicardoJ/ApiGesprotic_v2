@@ -38,6 +38,7 @@ class ActaConstitucion extends Model
         'otros_aprobacion_persona',
         'departamentos_implicados_y_recursos_preasignados',
         'factores_criticos_de_exito',
+        
         'limitaciones_de_partida',
         'fases_de_proyectos',
         'riesgos_iniciales_identificados',
