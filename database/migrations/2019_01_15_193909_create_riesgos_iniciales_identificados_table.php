@@ -19,10 +19,10 @@ class CreateRiesgosInicialesIdentificadosTable extends Migration
             $table->float('probabilidad') ;
             $table->string('impacta_sobre') ;
             $table->integer('valoracion') ;
-            
+            $table->integer('actaConstitucion_id')->unsigned();  
             $table->foreign('actaConstitucion_id')
             ->references('id')
-            ->on('actaConstitucions')
+            ->on('acta_constitucions')
             ->onDelete('cascade');
         });
     }

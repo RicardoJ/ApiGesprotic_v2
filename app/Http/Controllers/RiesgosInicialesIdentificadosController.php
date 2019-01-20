@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Riesgos_iniciales_identificados;
 use Illuminate\Http\Request;
 
@@ -80,7 +80,8 @@ class RiesgosInicialesIdentificadosController extends Controller
                 
             ]);
             if ($validator->fails()) {
-                return response()->json(['Error'],404);
+                $errors=$validator->messages();
+                return response()->json(['Error' => $errors],404);
             }else{
             $riesgos_iniciales_identificados->update($request->all());   
             $riesgos_iniciales_identificados->save();

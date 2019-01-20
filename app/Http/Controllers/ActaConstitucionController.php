@@ -4,9 +4,9 @@ use Validator;
 use App\ActaConstitucion;
 use App\Project;
 use Illuminate\Support\Facades\DB;
-use App\LimitacionesDePartida;
-use App\FasesDeProyectos;
-use App\ Riesgos_iniciales_identificados;
+use App\Limitaciones_de_partida;
+use App\fases_de_proyectos;
+use App\Riesgos_iniciales_identificados;
 use App\Otros_requisitos_de_proyecto;
 
 use Illuminate\Http\Request;
@@ -23,8 +23,8 @@ class ActaConstitucionController extends Controller
         $save = array();
         foreach ($actaConstitucions as $actaConstitucion) {
             
-             $limitacionesPartida = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
-             $faseProyecto =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+             $limitacionesPartida = Limitaciones_de_partida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+             $faseProyecto =  fases_de_proyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
              $riesgosIniciales = Riesgos_iniciales_identificados::where('actaConstitucion_id', $actaConstitucion['id'])->get();
              $otrosrequisitos = Otros_requisitos_de_proyecto::where('actaConstitucion_id', $actaConstitucion['id'])->get();
  
@@ -91,11 +91,13 @@ class ActaConstitucionController extends Controller
                             'limitaciones_de_partida'=>'required|array|min:1',
                             'fases_de_proyectos'=>'required|array|min:1',
                             'riesgos_iniciales_identificados'=>'required|array|min:1',
+                            'otros_requisitos_de_proyecto' =>'required|array|min:1'
                            
                            
         ]);
         if ($validator->fails()) {
-            return response()->json(['Error'],404);
+            $errors=$validator->messages();
+            return response()->json(['Error' => $errors],404);
         }else{
         $project=Project::findOrFail($project_id);
             if (!$project) {
@@ -153,11 +155,11 @@ class ActaConstitucionController extends Controller
                 $data = [
                     'actaConstitucion_id' => $result->id,
                     'nombre'=>$value['nombre'],
-                    'nombre'=>$value['afecta_a'],
-                    'nombre'=>$value['valoracion'],
+                    'afecta_a'=>$value['afecta_a'],
+                    'valoracion'=>$value['valoracion'],
                 ];
     
-                $limitacionPartida =  LimitacionesDePartida::create($data);
+                $limitacionPartida =  Limitaciones_de_partida::create($data);
           
             array_push($save, $limitacionPartida);
      
@@ -177,7 +179,7 @@ $save = array();
         'entregable_principal'=>$value['entregable_principal'],
         'fecha_hito'=>$value['fecha_hito']
     ];
- $fase =  FasesDeProyectos::create($dataFase);
+ $fase =  fases_de_proyectos::create($dataFase);
  array_push($save, $fase);
 
  }
@@ -237,7 +239,8 @@ return response()->json(['Guardado',$result],200);
            
     $error = $e->getMessage();
     DB::rollback();
-    return response()->json(['Error , falta campos por llenar'],404);
+    return response()->json(['Error , falta campos por llenar' => $error],404);
+    
     }
 }
    
@@ -249,13 +252,16 @@ return response()->json(['Guardado',$result],200);
      */
     public function show(ActaConstitucion $actaConstitucion)
     {
-        $l = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
-        $f =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $l = Limitaciones_de_partida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $f =  fases_de_proyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
         $riesgosIniciales = Riesgos_iniciales_identificados::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $otrosrequisitos = Otros_requisitos_de_proyecto::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+ 
  
         $actaConstitucion->limitaciones_de_partida = $l;
         $actaConstitucion->fases_de_proyectos = $f;
         $actaConstitucion->riesgos_iniciales_identificados = $riesgosIniciales;
+        $actaConstitucion->otros_requisitos_de_proyecto = $otrosrequisitos;
         return response()->json($actaConstitucion);
 
 
@@ -271,8 +277,8 @@ return response()->json(['Guardado',$result],200);
         $actaConstitucion = $project->actaConstitucion;
       foreach ($actaConstitucion as $actaConst) {
             
-        $limitacionesPartida = LimitacionesDePartida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
-        $faseProyecto =  FasesDeProyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $limitacionesPartida = Limitaciones_de_partida::where('actaConstitucion_id', $actaConstitucion['id'])->get();
+        $faseProyecto =  fases_de_proyectos::where('actaConstitucion_id', $actaConstitucion['id'])->get();
         $riesgosIniciales = Riesgos_iniciales_identificados::where('actaConstitucion_id', $actaConstitucion['id'])->get();
         $otrosrequisitos = Otros_requisitos_de_proyecto::where('actaConstitucion_id', $actaConstitucion['id'])->get();
  
@@ -331,7 +337,8 @@ return response()->json(['Guardado',$result],200);
             'factores_criticos_de_exito'=> 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['Error'],404);
+            $errors=$validator->messages();
+            return response()->json(['Error' => $errors],404);
         }else{
         $actaConstitucion->update($request->all());
         $actaConstitucion->save();

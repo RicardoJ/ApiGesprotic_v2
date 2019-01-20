@@ -12,7 +12,8 @@ class Riesgos_iniciales_identificados extends Model
             'nombre', 
             'probabilidad',
             'impacta_sobre',
-            'valoracion'
+            'valoracion',
+            'actaConstitucion_id'
            
     ];
 

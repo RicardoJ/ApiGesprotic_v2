@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Limitaciones_de_partida;
 use Illuminate\Http\Request;
 
@@ -67,8 +67,10 @@ class LimitacionesDePartidaController extends Controller
             'valoracion' => 'required'
             
         ]);
+     
         if ($validator->fails()) {
-            return response()->json(['Error'],404);
+            $errors=$validator->messages();
+            return response()->json(['Error' => $errors],404);
         }else{
         $limitaciones_de_partida->update($request->all());   
         $limitaciones_de_partida->save();

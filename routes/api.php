@@ -69,26 +69,29 @@ Route::prefix('actaConstitucion')->group(function(){
     Route::get('/project/{project}/actaConstitucion', 'ActaConstitucionController@listaActaConstitucionPorProyecto')->name('listaActaConstitucionPorProyecto');
 });
 
-
+//check
 Route::prefix('limitacionDePartida')->group(function(){
    
-    Route::put('/{limitacionDePartida}', 'LimitacionesDePartidaController@update')->name('update');
-    Route::delete('/{limitacionDePartida}', 'LimitacionesDePartidaController@destroy')->name('delete');
+    Route::put('/{limitaciones_de_partida}', 'LimitacionesDePartidaController@update')->name('update');
+    Route::delete('/{limitaciones_de_partida}', 'LimitacionesDePartidaController@destroy')->name('delete');
 });
+//check
 Route::prefix('faseDeProyecto')->group(function(){
    
-    Route::put('/{faseDeProyecto}', 'FasesDeProyectosController@update')->name('update');
-    Route::delete('/{faseDeProyecto}', 'FasesDeProyectosController@destroy')->name('delete');
+    Route::put('/{fases_de_proyectos}', 'FasesDeProyectosController@update')->name('update');
+    Route::delete('/{fases_de_proyectos}', 'FasesDeProyectosController@destroy')->name('delete');
 });
+//check
 Route::prefix('riesgosIniciales')->group(function(){
    
-    Route::put('/{riesgosIniciales}', 'RiesgosInicialesIdentificadosController@update')->name('update');
-    Route::delete('/{riesgosIniciales}', 'RiesgosInicialesIdentificadosController@destroy')->name('delete');
+    Route::put('/{riesgos_iniciales_identificados}', 'RiesgosInicialesIdentificadosController@update')->name('update');
+    Route::delete('/{riesgos_iniciales_identificados}', 'RiesgosInicialesIdentificadosController@destroy')->name('delete');
 });
+//check
 Route::prefix('otrosRequisitos')->group(function(){
    
-    Route::put('/{otrosRequisitos}', 'OtrosRequisitosDeProyectoController@update')->name('update');
-    Route::delete('/{otrosRequisitos}', 'OtrosRequisitosDeProyectoController@destroy')->name('delete');
+    Route::put('/{otros_requisitos_de_proyecto}', 'OtrosRequisitosDeProyectoController@update')->name('update');
+    Route::delete('/{otros_requisitos_de_proyecto}', 'OtrosRequisitosDeProyectoController@destroy')->name('delete');
 });
 /*
 // probado

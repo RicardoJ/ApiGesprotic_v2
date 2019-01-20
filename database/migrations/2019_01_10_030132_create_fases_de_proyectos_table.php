@@ -21,10 +21,10 @@ class CreateFasesDeProyectosTable extends Migration
             $table->string('nombre_de_hito');
             $table->date('entregable_principal');
             $table->date('fecha_hito');
-
+            $table->integer('actaConstitucion_id')->unsigned();  
             $table->foreign('actaConstitucion_id')
             ->references('id')
-            ->on('actaConstitucions')
+            ->on('acta_constitucions')
             ->onDelete('cascade');
         });
     }

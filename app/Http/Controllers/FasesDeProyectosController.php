@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\fases_de_proyectos;
 use Illuminate\Http\Request;
 
@@ -80,7 +80,8 @@ class FasesDeProyectosController extends Controller
             
         ]);
         if ($validator->fails()) {
-            return response()->json(['Error'],404);
+            $errors=$validator->messages();
+            return response()->json(['Error' => $errors],404);
         }else{
         $fases_de_proyectos->update($request->all());   
         $fases_de_proyectos->save();

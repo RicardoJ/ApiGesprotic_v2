@@ -18,10 +18,10 @@ class CreateOtrosRequisitosDeProyectosTable extends Migration
             $table->string('nombre') ;
             $table->string('cargo_departamento') ;
 
-
+            $table->integer('actaConstitucion_id')->unsigned();  
             $table->foreign('actaConstitucion_id')
             ->references('id')
-            ->on('actaConstitucions')
+            ->on('acta_constitucions')
             ->onDelete('cascade');
         });
     }

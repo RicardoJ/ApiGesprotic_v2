@@ -11,6 +11,7 @@ class Otros_requisitos_de_proyecto extends Model
     protected $fillable = [
             'nombre', 
             'cargo_departamento',
+            'actaConstitucion_id'
            
            
     ];

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\Otros_requisitos_de_proyecto;
 use Illuminate\Http\Request;
 
@@ -72,14 +72,13 @@ class OtrosRequisitosDeProyectoController extends Controller
         $validator = Validator::make($request->all(),[
             
             'nombre'=>'required',
-            'cargo_departamento'=>'required',
-          
+            'cargo_departamento'=>'required'
 
-           
-                
             ]);
+        
             if ($validator->fails()) {
-                return response()->json(['Error'],404);
+                $errors=$validator->messages();
+                return response()->json(['Error' => $errors],404);
             }else{
             $otros_requisitos_de_proyecto->update($request->all());   
             $otros_requisitos_de_proyecto->save();

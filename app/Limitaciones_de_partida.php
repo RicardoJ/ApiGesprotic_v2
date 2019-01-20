@@ -17,7 +17,7 @@ class Limitaciones_de_partida extends Model
     ];
 
     public function actaConstitucion(){
-        return $this->BelongsTo('App\actaConstitucion', 'actaConstitucion_id');
+        return $this->BelongsTo('App\ActaConstitucion', 'actaConstitucion_id');
         
     }
 }

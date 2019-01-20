@@ -3,7 +3,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Provider extends Model
 {
-    protected $table = 'provider';
+    protected $table = 'providers';
     public $timestamps = false;
     protected $fillable = [
             'nombre', 
