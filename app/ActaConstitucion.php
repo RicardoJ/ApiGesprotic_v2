@@ -6,8 +6,6 @@ class ActaConstitucion extends Model
     protected $table = 'acta_constitucions';
     public $timestamps = false;
     protected $fillable = [
-        'cliente_peticionario' ,
-        'responsable_de_cliente' , 
         'fecha' ,
         'sponsor_nombre' ,
         'sponsor_departamento' ,
@@ -27,7 +25,7 @@ class ActaConstitucion extends Model
         'presupuesto_objetivos',
         'presupuesto_criterios_de_aceptacion',
         'presupuesto_aprobacion_persona',
-        'presupuesto_aprovacion_departamento',
+        'presupuesto_aprobacion_departamento',
         'calidad_objetivos',
         'calidad_criterios_de_aceptacion',
         'calidad_aprobacion_persona',
@@ -38,6 +36,21 @@ class ActaConstitucion extends Model
         'otros_aprobacion_persona',
         'departamentos_implicados_y_recursos_preasignados',
         'factores_criticos_de_exito',
+
+        'cliente_peticionario_nombre' ,
+        'cliente_representante_legal_departamento', 
+        'cliente_representante_legal_nombre',
+        'documentacion_adjunta_enunciado_trabajo', 
+        'documentacion_adjunta_caso_negocio',
+        'documentacion_adjunta_contrato',
+        'observaciones_adicionales',
+        'maxima_desviacion',
+        'umbral_de_riesgo', 
+        'capacidad_tecnica', 
+        'volumen_de_contratacion', 
+        'nivel_superior_decision_persona', 
+        'nivel_superior_decision_departamento', 
+        'firma',
         
         'limitaciones_de_partida',
         'fases_de_proyectos',

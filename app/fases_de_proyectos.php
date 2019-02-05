@@ -12,6 +12,7 @@ class fases_de_proyectos extends Model
         'fecha_de_inicio',
         'fecha_fin',
         'nombre_de_hito',
+        'nombre_de_fase',
         'entregable_principal',
         'fecha_hito',
         'actaConstitucion_id'

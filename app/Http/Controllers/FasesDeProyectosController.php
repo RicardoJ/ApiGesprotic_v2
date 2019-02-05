@@ -75,6 +75,7 @@ class FasesDeProyectosController extends Controller
         'fecha_de_inicio'=>'required',
         'fecha_fin'=>'required',
         'nombre_de_hito'=>'required',
+        'nombre_de_fase'=>'required',
         'entregable_principal'=>'required',
         'fecha_hito'=>'required'
             

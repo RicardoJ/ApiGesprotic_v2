@@ -19,6 +19,7 @@ class CreateFasesDeProyectosTable extends Migration
             $table->date('fecha_de_inicio');
             $table->date('fecha_fin');
             $table->string('nombre_de_hito');
+            $table->string('nombre_de_fase');
             $table->date('entregable_principal');
             $table->date('fecha_hito');
             $table->integer('actaConstitucion_id')->unsigned();  
